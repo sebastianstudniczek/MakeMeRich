@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
-    <RootNamespace>MakeMeRich.Application.IntegrationTests</RootNamespace>
-    <AssemblyName>MakeMerich.Application.IntegrationTests</AssemblyName>
+    <RootNamespace>MakeMeRich.Application.UnitTests</RootNamespace>
+    <AssemblyName>MakeMerich.Application.UnitTests</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Xunit;
 
-namespace MakeMeRich.Application.IntegrationTests.FinancialAccounts.Commands
+namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
 {
     public class CreateFinancialAccountCommandHandlerTests
     {

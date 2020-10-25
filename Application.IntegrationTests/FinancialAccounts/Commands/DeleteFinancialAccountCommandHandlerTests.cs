@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 
 using MakeMeRich.Application.FinancialAccounts.Commands.DeleteFinancialAccount;
-using MakeMeRich.Application.IntegrationTests.Helper;
+using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Infrastructure.Persistance;
 
@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Xunit;
 
-namespace MakeMeRich.Application.IntegrationTests.FinancialAccounts.Commands
+namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
 {
     public class DeleteFinancialAccountCommandHandlerTests
     {

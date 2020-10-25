@@ -5,7 +5,7 @@ using MakeMeRich.Infrastructure.Persistance;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace MakeMeRich.Application.IntegrationTests.Helper
+namespace MakeMeRich.Application.UnitTests.Helper
 {
     internal static class DataSeeder
     {
