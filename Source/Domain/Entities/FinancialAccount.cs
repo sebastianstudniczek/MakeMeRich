@@ -7,6 +7,6 @@ namespace MakeMeRich.Domain.Entities
         public string Title { get; set; }
         public double CurrentBalance { get; set; }
         public ICollection<FinancialTransaction> Transactions { get; set; }
-            = new HashSet<FinancialTransaction>();
+        = new HashSet<FinancialTransaction>();
     }
 }

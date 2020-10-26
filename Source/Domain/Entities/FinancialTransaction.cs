@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MakeMeRich.Domain.Entities
 {
-    public class FinancialTransaction : BaseEntity
+    public class FinancialTransaction
     {
 
     }

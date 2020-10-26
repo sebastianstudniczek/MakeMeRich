@@ -16,25 +16,21 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
 {
     public class DeleteFinancialAccountCommandHandlerTests
     {
-        public DeleteFinancialAccountCommandHandlerTests()
-        {
-            ContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "deleteFinancialAccountCommandHandlerTest")
-                .Options;
-
-            DataSeeder.Seed(ContextOptions);
-        }
-        public DbContextOptions<ApplicationDbContext> ContextOptions { get; set; }
-
         [Fact]
         public async Task ShouldDeleteFinancialAccount()
         {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "ShouldDeleteFinancialAccount")
+                .Options;
+
+            DataSeeder.Seed(options);
+
             var command = new DeleteFinancialAccountCommand
             {
                 Id = 1
             };
 
-            using (var context = new ApplicationDbContext(ContextOptions))
+            using (var context = new ApplicationDbContext(options))
             {
                 var commandHandler =
                     new DeleteFinancialAccountCommandHandler(context);
@@ -42,7 +38,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
                 await commandHandler.Handle(command, new CancellationToken());
             }
 
-            using (var context = new ApplicationDbContext(ContextOptions))
+            using (var context = new ApplicationDbContext(options))
             {
                 var financialAccount = await context.FindAsync<FinancialAccount>(command.Id);
 
