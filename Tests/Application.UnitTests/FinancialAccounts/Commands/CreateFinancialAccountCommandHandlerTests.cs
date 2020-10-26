@@ -19,7 +19,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
         public async Task ShouldCreateFinancialAccount()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "createFinancialAccountCommandHandlerTest")
+                .UseInMemoryDatabase(databaseName: "CreateFinancialAccountCommandHandlerTest")
                 .Options;
 
             var command = new CreateFinancialAccountCommand

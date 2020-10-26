@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using FluentAssertions;
 
 using MakeMeRich.Application.Common.Exceptions;
-using MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccount;
 using MakeMeRich.Application.FinancialAccounts.Commands.UpdateFinancialAccount;
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Infrastructure.Persistance;

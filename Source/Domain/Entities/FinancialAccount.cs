@@ -4,12 +4,9 @@ namespace MakeMeRich.Domain.Entities
 {
     public class FinancialAccount : BaseEntity
     {
-        public FinancialAccount()
-        {
-            Transactions = new List<FinancialTransaction>();
-        }
         public string Title { get; set; }
         public double CurrentBalance { get; set; }
-        public IList<FinancialTransaction> Transactions { get; set; }
+        public ICollection<FinancialTransaction> Transactions { get; set; }
+            = new HashSet<FinancialTransaction>();
     }
 }
