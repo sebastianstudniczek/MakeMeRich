@@ -4,6 +4,7 @@ namespace MakeMeRich.Domain.Entities
 {
     public class TransactionCategory
     {
+        public int Id { get; set; }
         public int FinancialTransactionId { get; set; }
         public int FinancialCategoryId { get; set; }
         public double Amount { get; set; }

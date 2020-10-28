@@ -31,7 +31,6 @@ namespace MakeMeRich.Application.UnitTests.Common.Mappings
 
         [Theory]
         [InlineData(typeof(FinancialAccount), typeof(FinancialAccountDto))]
-        [InlineData(typeof(FinancialTransaction), typeof(FinancialTransactionDto))]
         public void ShouldMapFromSourceToDestination(Type source, Type destination)
         {
             var instance = Activator.CreateInstance(source);

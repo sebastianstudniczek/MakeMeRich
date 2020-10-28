@@ -2,6 +2,7 @@
 
 using MakeMeRich.Application.Common.Interfaces;
 using MakeMeRich.Domain.Entities;
+using MakeMeRich.Domain.Entities.FinancialTransactions;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +17,7 @@ namespace MakeMeRich.Infrastructure.Persistance
         }
 
         public DbSet<FinancialAccount> FinancialAccounts { get; set; }
-        public DbSet<FinancialTransaction> FinancialTransactions { get; set; }
+        public DbSet<ExternalTransaction> ExternalTransactions { get; set; }
 
         public async Task<int> SaveChangesAsync()
         {

@@ -1,5 +1,4 @@
-﻿
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 using MakeMeRich.Application.Common.Interfaces;
@@ -9,7 +8,6 @@ using MediatR;
 
 namespace MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccount
 {
-
     public class CreateFinancialAccountCommandHandler : IRequestHandler<CreateFinancialAccountCommand, int>
     {
         private readonly IApplicationDbContext _context;

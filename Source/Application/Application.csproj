@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="FinancialTransactions\Incomes\**" />
+    <Compile Remove="FinancialTransactions\Transfers\**" />
+    <EmbeddedResource Remove="FinancialTransactions\Incomes\**" />
+    <EmbeddedResource Remove="FinancialTransactions\Transfers\**" />
+    <None Remove="FinancialTransactions\Incomes\**" />
+    <None Remove="FinancialTransactions\Transfers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="FluentValidation" Version="9.2.2" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.2.0" />
@@ -20,8 +29,6 @@
 
   <ItemGroup>
     <Folder Include="FinancialAccounts\Queries\GetFinancialAccounts\" />
-    <Folder Include="FinancialTransactions\Incomes\" />
-    <Folder Include="FinancialTransactions\Transfers\" />
   </ItemGroup>
 
 </Project>
