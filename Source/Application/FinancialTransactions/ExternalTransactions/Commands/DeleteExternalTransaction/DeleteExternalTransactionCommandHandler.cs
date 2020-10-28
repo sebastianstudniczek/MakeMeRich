@@ -1,10 +1,14 @@
-﻿using System;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.Common.Interfaces;
+using MakeMeRich.Domain.Entities.FinancialTransactions;
 
 using MediatR;
+
+using Microsoft.EntityFrameworkCore;
 
 namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Commands.DeleteExternalTransaction
 {
@@ -16,9 +20,21 @@ namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Comm
         {
             _context = context;
         }
-        public Task<Unit> Handle(DeleteExternalTransactionCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteExternalTransactionCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var entity = await _context.ExternalTransactions
+                .Where(transaction => transaction.Id == request.Id)
+                .SingleOrDefaultAsync(cancellationToken);
+
+            if (entity == null)
+            {
+                throw new NotFoundException(nameof(ExternalTransaction), request.Id);
+            }
+
+            _context.ExternalTransactions.Remove(entity);
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return Unit.Value;
         }
     }
 }
