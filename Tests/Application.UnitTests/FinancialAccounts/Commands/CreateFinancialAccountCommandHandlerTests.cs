@@ -19,6 +19,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
         [Fact]
         public async Task ShouldCreateFinancialAccount()
         {
+            int id;
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "ShouldCreateFinancialAccount")
                 .Options;
@@ -35,12 +36,17 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
                 var commandHandler =
                     new CreateFinancialAccountCommandHandler(context);
 
-                int id = await commandHandler.Handle(command, new CancellationToken());
+                id = await commandHandler.Handle(command, new CancellationToken());
+            }
+
+            using (var context = new ApplicationDbContext(options))
+            {
                 var financialAccount = await context.FindAsync<FinancialAccount>(id);
 
                 financialAccount.Should().NotBeNull();
                 financialAccount.Title.Should().Be(command.Title);
-                financialAccount.CurrentBalance.Should().Be(250);
+                financialAccount.CurrentBalance.Should().Be(command.CurrentBalance);
+                financialAccount.Type.Should().Be(command.Type);
             }
         }
     }

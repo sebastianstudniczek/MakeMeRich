@@ -73,6 +73,10 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
                     new UpdateFinancialAccountCommandHandler(context);
 
                 await commandHandler.Handle(updateCommand, new CancellationToken());
+            }
+
+            using (var context = new ApplicationDbContext(options))
+            {
                 var financialAccount = await context.FindAsync<FinancialAccount>(entity.Id);
 
                 financialAccount.Title.Should().Be(updateCommand.Title);
