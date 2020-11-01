@@ -10,7 +10,7 @@ namespace MakeMeRich.Domain.Entities.FinancialTransactions
         public string Description { get; set; }
         public int FinancialAccountId { get; set; }
         public FinancialAccount FinancialAccount { get; set; }
-        public ICollection<TransactionCategory> TransactionCategories { get; set; }
+        public ICollection<TransactionCategory> TransactionCategories { get; private set; }
             = new HashSet<TransactionCategory>();
     }
 }
