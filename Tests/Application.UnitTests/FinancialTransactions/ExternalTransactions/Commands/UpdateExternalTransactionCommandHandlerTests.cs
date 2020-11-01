@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using FluentAssertions;
 
+using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Commands.UpdateExternalTransaction;
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
@@ -12,18 +13,36 @@ using MakeMeRich.Infrastructure.Persistance;
 
 using Microsoft.EntityFrameworkCore;
 
+using Xunit;
+
 namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransactions.Commands
 {
     public class UpdateExternalTransactionCommandHandlerTests
     {
+        [Fact]
         public void ShouldRequireValidExternalTransactionId()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "ShouldRequireValidExternalTransactionId")
                 .Options;
 
+            var command = new UpdateExternalTransactionCommand
+            {
+                Id = 99,
+                TransactionSideName = "Lidl"
+            };
+
+            using (var context = new ApplicationDbContext(options))
+            {
+                var commandHandler = new UpdateExternalTransactionCommandHandler(context);
+
+                FluentActions.Invoking(() =>
+                    commandHandler.Handle(command, CancellationToken.None))
+                    .Should().Throw<NotFoundException>();
+            }
         }
 
+        [Fact]
         public async Task ShouldUpdateExternalTransaction()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
