@@ -15,15 +15,15 @@ namespace MakeMeRich.Application
             _context = context;
         }
 
-        public async Task<int> Handle(CreateInternalTransactionCommand command, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateInternalTransactionCommand request, CancellationToken cancellationToken)
         {
             var entity = new InternalTransaction
             {
-                TotalAmount = command.TotalAmount,
-                DueDate = command.DueDate,
-                Description = command.Description,
-                FinancialAccountId = command.FinancialAccountId,
-                ReceivingAccountId = command.ReceivingAccountId
+                TotalAmount = request.TotalAmount,
+                DueDate = request.DueDate,
+                Description = request.Description,
+                FinancialAccountId = request.FinancialAccountId,
+                ReceivingAccountId = request.ReceivingAccountId
                 // TODO: Categories
             };
 
