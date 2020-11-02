@@ -42,7 +42,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
         public async Task ShouldDeleteInternalTransaction()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldDeleteFinancialAccount")
+                .UseInMemoryDatabase(databaseName: nameof(ShouldDeleteInternalTransaction))
                 .Options;
 
             var entity = new InternalTransaction
