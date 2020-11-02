@@ -18,6 +18,7 @@ namespace MakeMeRich.Infrastructure.Persistance
 
         public DbSet<FinancialAccount> FinancialAccounts { get; set; }
         public DbSet<ExternalTransaction> ExternalTransactions { get; set; }
+        public DbSet<InternalTransaction> InternalTransactions { get; set; }
 
         public async Task<int> SaveChangesAsync()
         {

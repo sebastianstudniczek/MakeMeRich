@@ -12,6 +12,7 @@ namespace MakeMeRich.Application.Common.Interfaces
     {
         DbSet<FinancialAccount> FinancialAccounts { get; set; }
         DbSet<ExternalTransaction> ExternalTransactions { get; set; }
+        DbSet<InternalTransaction> InternalTransactions { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }
