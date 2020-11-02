@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using FluentAssertions;
 
+using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.FinancialTransactions.InternalTransactions.Commands.UpdateInternalTransaction;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Infrastructure.Persistance;
@@ -16,6 +17,29 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
 {
     public class UpdateInternalTransactionCommandHandlerTests
     {
+        [Fact]
+        public void ShouldRequireValidInternalTransactionId()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "ShouldRequireValidInternalTransactionId")
+                .Options;
+
+            var command = new UpdateInternalTransactionCommand
+            {
+                Id = 99,
+                TotalAmount = 100,
+            };
+
+            using (var context = new ApplicationDbContext(options))
+            {
+                var commandHandler = new UpdateInternalTransactionCommandHandler(context);
+
+                FluentActions.Invoking(() =>
+                    commandHandler.Handle(command, CancellationToken.None))
+                    .Should().Throw<NotFoundException>();
+            }
+        }
+
         [Fact]
         public async Task ShouldUpdateInternalTransaction()
         {
