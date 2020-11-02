@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using FluentAssertions;
 
+using MakeMeRich.Application.FinancialTransactions.InternalTransactions.Commands.UpdateInternalTransaction;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Infrastructure.Persistance;
 
@@ -39,6 +40,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
 
             var command = new UpdateInternalTransactionCommand
             {
+                Id = entity.Id,
                 TotalAmount = 300,
                 DueDate = new DateTime(2018, 4, 3),
                 Description = "Updated internal transaction",
