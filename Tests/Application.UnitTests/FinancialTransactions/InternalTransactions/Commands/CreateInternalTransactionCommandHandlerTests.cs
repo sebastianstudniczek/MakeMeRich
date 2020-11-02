@@ -20,7 +20,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
         {
             int id;
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldCreateInternalExpense")
+                .UseInMemoryDatabase(databaseName: nameof(ShouldCreateInternalTransaction))
                 .Options;
 
             var command = new CreateInternalTransactionCommand

@@ -21,7 +21,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
         public async Task ShouldDeleteExternalTransaction()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldDeleteFinancialAccount")
+                .UseInMemoryDatabase(databaseName: nameof(ShouldDeleteExternalTransaction))
                 .Options;
 
             var entity = new ExternalTransaction

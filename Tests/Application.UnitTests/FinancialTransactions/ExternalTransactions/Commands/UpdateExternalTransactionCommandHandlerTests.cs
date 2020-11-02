@@ -23,7 +23,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
         public void ShouldRequireValidExternalTransactionId()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldRequireValidExternalTransactionId")
+                .UseInMemoryDatabase(databaseName: nameof(ShouldRequireValidExternalTransactionId))
                 .Options;
 
             var command = new UpdateExternalTransactionCommand
@@ -46,7 +46,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
         public async Task ShouldUpdateExternalTransaction()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldUpdateExternalTransaction")
+                .UseInMemoryDatabase(databaseName: nameof(ShouldUpdateExternalTransaction))
                 .Options;
 
             var entity = new ExternalTransaction

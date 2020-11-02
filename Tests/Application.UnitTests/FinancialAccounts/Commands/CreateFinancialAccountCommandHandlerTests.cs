@@ -21,7 +21,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
         {
             int id;
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldCreateFinancialAccount")
+                .UseInMemoryDatabase(databaseName: nameof(ShouldCreateFinancialAccount))
                 .Options;
 
             var command = new CreateFinancialAccountCommand

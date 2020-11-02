@@ -32,7 +32,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
         public async Task ShouldReturnAllFinancialAccountsAndTransactions()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldReturnAllFinancialAccountsAndTransactions")
+                .UseInMemoryDatabase(databaseName: nameof(ShouldReturnAllFinancialAccountsAndTransactions))
                 .Options;
 
             DataSeeder.Seed(options);

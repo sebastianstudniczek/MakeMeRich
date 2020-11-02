@@ -20,7 +20,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
         public async Task ShouldDeleteFinancialAccount()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldDeleteFinancialAccount")
+                .UseInMemoryDatabase(databaseName: nameof(ShouldDeleteFinancialAccount))
                 .Options;
 
             DataSeeder.Seed(options);

@@ -21,7 +21,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
         public void ShouldRequireValidInternalTransactionId()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldRequireValidInternalTransactionId")
+                .UseInMemoryDatabase(databaseName: nameof(ShouldRequireValidInternalTransactionId))
                 .Options;
 
             var command = new UpdateInternalTransactionCommand
@@ -44,7 +44,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
         public async Task ShouldUpdateInternalTransaction()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldUpdateInternalTransaction")
+                .UseInMemoryDatabase(databaseName: nameof(ShouldUpdateInternalTransaction))
                 .Options;
 
             var entity = new InternalTransaction

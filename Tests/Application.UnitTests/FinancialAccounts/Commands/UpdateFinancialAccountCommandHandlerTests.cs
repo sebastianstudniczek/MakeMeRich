@@ -20,7 +20,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
         public void ShouldRequireValidFinancialAccountId()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldRequireValidFinancialAccountId")
+                .UseInMemoryDatabase(databaseName: nameof(ShouldRequireValidFinancialAccountId))
                 .Options;
 
             var command = new UpdateFinancialAccountCommand
@@ -44,7 +44,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
         public async Task ShouldUpdateFinancialAccount()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldUpdateFinancialAccount")
+                .UseInMemoryDatabase(databaseName: nameof(ShouldUpdateFinancialAccount))
                 .Options;
 
             var entity = new FinancialAccount

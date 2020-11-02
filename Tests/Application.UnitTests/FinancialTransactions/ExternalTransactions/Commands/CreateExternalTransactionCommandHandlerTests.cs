@@ -22,7 +22,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
         {
             int id;
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldCreateExpense")
+                .UseInMemoryDatabase(databaseName: nameof(ShouldCreateExpense))
                 .Options;
 
             var command = new CreateExternalTransactionCommand
