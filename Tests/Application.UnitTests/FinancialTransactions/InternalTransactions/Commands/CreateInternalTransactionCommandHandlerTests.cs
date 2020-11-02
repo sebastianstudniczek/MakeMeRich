@@ -25,11 +25,11 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
 
             var command = new CreateInternalTransactionCommand
             {
-                SendingAccountId = 1,
-                ReceivingAccountId = 2,
                 TotalAmount = 255,
                 Description = "Some internal transaction",
-                DueDate = new DateTime(2016, 7, 12)
+                DueDate = new DateTime(2016, 7, 12),
+                FinancialAccountId = 1,
+                ReceivingAccountId = 2
                 // TODO: Categories
             };
 
@@ -42,10 +42,14 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
 
             using (var context = new ApplicationDbContext(options))
             {
-                var internalTransaction = context.FindAsync<InternalTransaction>(id);
+                var internalTransaction = await context.FindAsync<InternalTransaction>(id);
 
                 internalTransaction.Should().NotBeNull();
-
+                internalTransaction.TotalAmount.Should().Be(command.TotalAmount);
+                internalTransaction.Description.Should().Be(command.Description);
+                internalTransaction.DueDate.Should().Be(command.DueDate);
+                internalTransaction.FinancialAccountId.Should().Be(command.FinancialAccountId);
+                internalTransaction.ReceivingAccountId.Should().Be(command.ReceivingAccountId);
             }
         }
     }

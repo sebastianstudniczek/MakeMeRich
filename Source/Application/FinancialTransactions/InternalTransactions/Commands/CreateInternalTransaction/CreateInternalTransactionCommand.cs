@@ -4,7 +4,7 @@ namespace MakeMeRich.Application
 {
     public class CreateInternalTransactionCommand : CreateFinancialTransactionCommand
     {
-        public int SendingAccountId { get; set; }
+        public int FinancialAccountId { get; set; }
         public int ReceivingAccountId { get; set; }
     }
 }
