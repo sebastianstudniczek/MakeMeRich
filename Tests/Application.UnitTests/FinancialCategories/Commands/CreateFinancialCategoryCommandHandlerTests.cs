@@ -4,31 +4,26 @@ using System.Threading.Tasks;
 using FluentAssertions;
 
 using MakeMeRich.Application.FinancialCategories.Commands.CreateFinancialCategories;
+using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Infrastructure.Persistance;
-
-using Microsoft.EntityFrameworkCore;
 
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialCategories.Commands
 {
-    public class CreateFinancialCategoryCommandHandlerTests
+    public class CreateFinancialCategoryCommandHandlerTests : CommandHandlerTestBase
     {
         [Fact]
         public async Task ShouldCreateFinancialCategory()
         {
             int id;
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: nameof(ShouldCreateFinancialCategory))
-                .Options;
-
             var command = new CreateFinancialCategoryCommand
             {
                 Name = "House"
             };
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var commandHandler =
                     new CreateFinancialCategoryCommandHandler(context);
@@ -36,7 +31,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialCategories.Commands
                 id = await commandHandler.Handle(command, CancellationToken.None);
             }
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var financialCategory = await context.FindAsync<FinancialCategory>(id);
 

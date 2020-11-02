@@ -5,26 +5,21 @@ using System.Threading.Tasks;
 using FluentAssertions;
 
 using MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Commands.CreateExternalTransaction;
+using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Domain.Enums;
 using MakeMeRich.Infrastructure.Persistance;
-
-using Microsoft.EntityFrameworkCore;
 
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransactions.Commands
 {
-    public class CreateExternalTransactionCommandHandlerTests
+    public class CreateExternalTransactionCommandHandlerTests : CommandHandlerTestBase
     {
         [Fact]
         public async Task ShouldCreateExpense()
         {
             int id;
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: nameof(ShouldCreateExpense))
-                .Options;
-
             var command = new CreateExternalTransactionCommand
             {
                 TransactionSideName = "Allegro",
@@ -35,14 +30,14 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
                 // TODO: Categories
             };
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var commandHandler = new CreateExternalTransactionCommandHandler(context);
 
-                id = await commandHandler.Handle(command, new CancellationToken());
+                id = await commandHandler.Handle(command, CancellationToken.None);
             }
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var externalTransaction = await context.FindAsync<ExternalTransaction>(id);
 

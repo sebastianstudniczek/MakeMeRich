@@ -7,16 +7,15 @@ using FluentAssertions;
 
 using MakeMeRich.Application.Common.Mappings;
 using MakeMeRich.Application.FinancialAccounts.Queries;
+using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Infrastructure.Persistance;
-
-using Microsoft.EntityFrameworkCore;
 
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
 {
-    public class GetFinancialAccountsCommandHandlerTests
+    public class GetFinancialAccountsCommandHandlerTests : CommandHandlerTestBase
     {
         private readonly IMapper _mapper;
         private readonly IConfigurationProvider _configuration;
@@ -31,17 +30,13 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
         [Fact]
         public async Task ShouldReturnAllFinancialAccountsAndTransactions()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: nameof(ShouldReturnAllFinancialAccountsAndTransactions))
-                .Options;
-
-            DataSeeder.SeedSampleData(options);
+            DataSeeder.SeedSampleData(DbContextOptions);
             var query = new GetFinancialAccountsQuery();
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var queryHandler = new GetFinancialAccountsQueryHandler(context, _mapper);
-                var result = await queryHandler.Handle(query, new CancellationToken());
+                var result = await queryHandler.Handle(query, CancellationToken.None);
 
                 result.FinancialAccounts.Should().HaveCount(3);
             }

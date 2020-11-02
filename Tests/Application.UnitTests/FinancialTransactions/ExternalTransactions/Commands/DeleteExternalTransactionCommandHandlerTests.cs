@@ -5,25 +5,20 @@ using System.Threading.Tasks;
 using FluentAssertions;
 
 using MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Commands.DeleteExternalTransaction;
+using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Domain.Enums;
 using MakeMeRich.Infrastructure.Persistance;
-
-using Microsoft.EntityFrameworkCore;
 
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransactions.Commands
 {
-    public class DeleteExternalTransactionCommandHandlerTests
+    public class DeleteExternalTransactionCommandHandlerTests : CommandHandlerTestBase
     {
         [Fact]
         public async Task ShouldDeleteExternalTransaction()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: nameof(ShouldDeleteExternalTransaction))
-                .Options;
-
             var entity = new ExternalTransaction
             {
                 Id = 2,
@@ -35,7 +30,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
                 // TODO :Categories
             };
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 context.ExternalTransactions.Add(entity);
                 context.SaveChanges();
@@ -46,7 +41,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
                 Id = entity.Id
             };
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var commandHandler =
                     new DeleteExternalTransactionCommandHandler(context);
@@ -54,7 +49,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
                 await commandHandler.Handle(command, new CancellationToken());
             }
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var externalTransaction = await context.FindAsync<ExternalTransaction>(entity.Id);
 

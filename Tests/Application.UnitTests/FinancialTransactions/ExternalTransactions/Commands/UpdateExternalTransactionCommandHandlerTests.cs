@@ -6,33 +6,28 @@ using FluentAssertions;
 
 using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Commands.UpdateExternalTransaction;
+using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Domain.Enums;
 using MakeMeRich.Infrastructure.Persistance;
 
-using Microsoft.EntityFrameworkCore;
-
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransactions.Commands
 {
-    public class UpdateExternalTransactionCommandHandlerTests
+    public class UpdateExternalTransactionCommandHandlerTests : CommandHandlerTestBase
     {
         [Fact]
         public void ShouldRequireValidExternalTransactionId()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: nameof(ShouldRequireValidExternalTransactionId))
-                .Options;
-
             var command = new UpdateExternalTransactionCommand
             {
                 Id = 99,
                 TransactionSideName = "Lidl"
             };
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var commandHandler = new UpdateExternalTransactionCommandHandler(context);
 
@@ -45,10 +40,6 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
         [Fact]
         public async Task ShouldUpdateExternalTransaction()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: nameof(ShouldUpdateExternalTransaction))
-                .Options;
-
             var entity = new ExternalTransaction
             {
                 Id = 2,
@@ -67,7 +58,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
                 }
             };
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 context.Add(entity);
                 context.SaveChanges();
@@ -84,15 +75,15 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
                 FinancialAccountId = 1,
             };
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var commandHandler =
                     new UpdateExternalTransactionCommandHandler(context);
 
-                await commandHandler.Handle(command, new CancellationToken());
+                await commandHandler.Handle(command, CancellationToken.None);
             }
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var externalTransaction = await context.FindAsync<ExternalTransaction>(command.Id);
 

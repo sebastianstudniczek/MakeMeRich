@@ -5,31 +5,26 @@ using FluentAssertions;
 
 using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.FinancialAccounts.Commands.UpdateFinancialAccount;
+using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Infrastructure.Persistance;
-
-using Microsoft.EntityFrameworkCore;
 
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
 {
-    public class UpdateFinancialAccountCommandHandlerTests
+    public class UpdateFinancialAccountCommandHandlerTests : CommandHandlerTestBase
     {
         [Fact]
         public void ShouldRequireValidFinancialAccountId()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: nameof(ShouldRequireValidFinancialAccountId))
-                .Options;
-
             var command = new UpdateFinancialAccountCommand
             {
                 Id = 99,
                 Title = "Reifeizen"
             };
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var commandHandler =
                     new UpdateFinancialAccountCommandHandler(context);
@@ -43,10 +38,6 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
         [Fact]
         public async Task ShouldUpdateFinancialAccount()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: nameof(ShouldUpdateFinancialAccount))
-                .Options;
-
             var entity = new FinancialAccount
             {
                 Id = 3,
@@ -54,7 +45,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
                 CurrentBalance = 500
             };
 
-            using(var context = new ApplicationDbContext(options))
+            using(var context = new ApplicationDbContext(DbContextOptions))
             {
                 context.Add(entity);
                 context.SaveChanges();
@@ -67,7 +58,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
                 CurrentBalance = 1500
             };
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var command =
                     new UpdateFinancialAccountCommandHandler(context);
@@ -75,7 +66,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
                 await command.Handle(updateCommand, CancellationToken.None);
             }
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var financialAccount = await context.FindAsync<FinancialAccount>(entity.Id);
 

@@ -21,6 +21,7 @@ namespace MakeMeRich.Application.UnitTests.Helper
                 new FinancialAccount {Id = 2, Title = "Getin", CurrentBalance = 200},
                 new FinancialAccount {Id = 3, Title = "PKO", CurrentBalance = 300}
             };
+
             context.FinancialAccounts.AddRange(financialAccounts);
             context.SaveChanges();
         }

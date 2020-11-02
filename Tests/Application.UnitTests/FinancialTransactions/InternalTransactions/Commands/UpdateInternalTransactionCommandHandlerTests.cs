@@ -6,31 +6,26 @@ using FluentAssertions;
 
 using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.FinancialTransactions.InternalTransactions.Commands.UpdateInternalTransaction;
+using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Infrastructure.Persistance;
-
-using Microsoft.EntityFrameworkCore;
 
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransactions.Commands
 {
-    public class UpdateInternalTransactionCommandHandlerTests
+    public class UpdateInternalTransactionCommandHandlerTests : CommandHandlerTestBase
     {
         [Fact]
         public void ShouldRequireValidInternalTransactionId()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: nameof(ShouldRequireValidInternalTransactionId))
-                .Options;
-
             var command = new UpdateInternalTransactionCommand
             {
                 Id = 99,
                 TotalAmount = 100,
             };
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var commandHandler = new UpdateInternalTransactionCommandHandler(context);
 
@@ -43,10 +38,6 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
         [Fact]
         public async Task ShouldUpdateInternalTransaction()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: nameof(ShouldUpdateInternalTransaction))
-                .Options;
-
             var entity = new InternalTransaction
             {
                 TotalAmount = 100,
@@ -56,7 +47,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
                 ReceivingAccountId = 5
             };
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 context.Add(entity);
                 context.SaveChanges();
@@ -72,14 +63,14 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
                 ReceivingAccountId = 2
             };
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var commandHandler = new UpdateInternalTransactionCommandHandler(context);
 
                 await commandHandler.Handle(command, CancellationToken.None);
             }
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var internalTransaction = await context.FindAsync<InternalTransaction>(entity.Id);
 

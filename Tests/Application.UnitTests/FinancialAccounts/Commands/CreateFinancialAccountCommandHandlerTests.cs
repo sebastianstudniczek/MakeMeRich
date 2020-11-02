@@ -4,26 +4,21 @@ using System.Threading.Tasks;
 using FluentAssertions;
 
 using MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccount;
+using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Domain.Enums;
 using MakeMeRich.Infrastructure.Persistance;
-
-using Microsoft.EntityFrameworkCore;
 
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
 {
-    public class CreateFinancialAccountCommandHandlerTests
+    public class CreateFinancialAccountCommandHandlerTests : CommandHandlerTestBase
     {
         [Fact]
         public async Task ShouldCreateFinancialAccount()
         {
             int id;
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: nameof(ShouldCreateFinancialAccount))
-                .Options;
-
             var command = new CreateFinancialAccountCommand
             {
                 Title = "BNP Private",
@@ -31,7 +26,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
                 Type = FinancialAccountType.Banking
             };
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var commandHandler =
                     new CreateFinancialAccountCommandHandler(context);
@@ -39,7 +34,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
                 id = await commandHandler.Handle(command, CancellationToken.None);
             }
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var financialAccount = await context.FindAsync<FinancialAccount>(id);
 

@@ -4,25 +4,20 @@ using System.Threading.Tasks;
 
 using FluentAssertions;
 
+using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Infrastructure.Persistance;
-
-using Microsoft.EntityFrameworkCore;
 
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransactions.Commands
 {
-    public class CreateInternalTransactionCommandHandlerTests
+    public class CreateInternalTransactionCommandHandlerTests : CommandHandlerTestBase
     {
         [Fact]
         public async Task ShouldCreateInternalTransaction()
         {
             int id;
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: nameof(ShouldCreateInternalTransaction))
-                .Options;
-
             var command = new CreateInternalTransactionCommand
             {
                 TotalAmount = 255,
@@ -33,14 +28,14 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
                 // TODO: Categories
             };
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var commandHandler = new CreateInternalTransactionCommandHandler(context);
 
                 id = await commandHandler.Handle(command, CancellationToken.None);
             }
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var internalTransaction = await context.FindAsync<InternalTransaction>(id);
 

@@ -4,30 +4,25 @@ using System.Threading.Tasks;
 using FluentAssertions;
 
 using MakeMeRich.Application.FinancialCategories.Commands.UpdateFinancialCategory;
+using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Infrastructure.Persistance;
-
-using Microsoft.EntityFrameworkCore;
 
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialCategories.Commands
 {
-    public class UpdateFinancialCategoryCommandHandlerTests
+    public class UpdateFinancialCategoryCommandHandlerTests : CommandHandlerTestBase
     {
         [Fact]
         public async Task ShouldUpdateFinancialCategory()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: nameof(ShouldUpdateFinancialCategory))
-                .Options;
-
             var entity = new FinancialCategory
             {
                 Name = "House"
             };
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 context.Add(entity);
                 context.SaveChanges();
@@ -39,14 +34,14 @@ namespace MakeMeRich.Application.UnitTests.FinancialCategories.Commands
                 Name = "Gear"
             };
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var commandHandler = new UpdateFinancialCategoryCommandHandler(context);
 
                 await commandHandler.Handle(command, CancellationToken.None);
             }
 
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var financialTransaction = await context.FindAsync<FinancialCategory>(entity.Id);
 
