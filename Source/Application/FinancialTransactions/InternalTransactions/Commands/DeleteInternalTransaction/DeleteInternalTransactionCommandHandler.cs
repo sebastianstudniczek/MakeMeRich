@@ -1,10 +1,14 @@
-﻿using System;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.Common.Interfaces;
+using MakeMeRich.Domain.Entities.FinancialTransactions;
 
 using MediatR;
+
+using Microsoft.EntityFrameworkCore;
 
 namespace MakeMeRich.Application.FinancialTransactions.InternalTransactions.Commands.DeleteInternalTransaction
 {
@@ -17,9 +21,21 @@ namespace MakeMeRich.Application.FinancialTransactions.InternalTransactions.Comm
             _context = context;
         }
 
-        public Task<Unit> Handle(DeleteInternalTransactionCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteInternalTransactionCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var entity = await _context.InternalTransactions
+                .Where(transaction => transaction.Id == request.Id)
+                .SingleOrDefaultAsync(cancellationToken);
+
+            if (entity == null)
+            {
+                throw new NotFoundException(nameof(InternalTransaction), request.Id);
+            }
+
+            _context.InternalTransactions.Remove(entity);
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return Unit.Value;
         }
     }
 }
