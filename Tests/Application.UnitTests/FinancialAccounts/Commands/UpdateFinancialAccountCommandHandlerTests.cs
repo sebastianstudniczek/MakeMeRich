@@ -35,7 +35,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
                     new UpdateFinancialAccountCommandHandler(context);
 
                 FluentActions.Invoking(() =>
-                    commandHandler.Handle(command, new CancellationToken()))
+                    commandHandler.Handle(command, CancellationToken.None))
                     .Should().Throw<NotFoundException>();
             }
         }
@@ -69,10 +69,10 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
 
             using (var context = new ApplicationDbContext(options))
             {
-                var commandHandler =
+                var command =
                     new UpdateFinancialAccountCommandHandler(context);
 
-                await commandHandler.Handle(updateCommand, new CancellationToken());
+                await command.Handle(updateCommand, CancellationToken.None);
             }
 
             using (var context = new ApplicationDbContext(options))

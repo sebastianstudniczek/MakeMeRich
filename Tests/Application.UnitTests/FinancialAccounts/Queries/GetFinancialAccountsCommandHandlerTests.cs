@@ -35,7 +35,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
                 .UseInMemoryDatabase(databaseName: nameof(ShouldReturnAllFinancialAccountsAndTransactions))
                 .Options;
 
-            DataSeeder.Seed(options);
+            DataSeeder.SeedSampleData(options);
             var query = new GetFinancialAccountsQuery();
 
             using (var context = new ApplicationDbContext(options))

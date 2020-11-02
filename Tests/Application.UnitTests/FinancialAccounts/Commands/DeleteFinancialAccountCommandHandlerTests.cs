@@ -23,7 +23,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
                 .UseInMemoryDatabase(databaseName: nameof(ShouldDeleteFinancialAccount))
                 .Options;
 
-            DataSeeder.Seed(options);
+            DataSeeder.SeedSampleData(options);
 
             var command = new DeleteFinancialAccountCommand
             {

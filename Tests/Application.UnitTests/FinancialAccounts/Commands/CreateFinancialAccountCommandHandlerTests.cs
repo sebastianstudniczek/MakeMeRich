@@ -36,7 +36,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
                 var commandHandler =
                     new CreateFinancialAccountCommandHandler(context);
 
-                id = await commandHandler.Handle(command, new CancellationToken());
+                id = await commandHandler.Handle(command, CancellationToken.None);
             }
 
             using (var context = new ApplicationDbContext(options))
