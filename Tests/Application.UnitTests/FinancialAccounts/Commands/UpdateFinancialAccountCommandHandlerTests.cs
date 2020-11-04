@@ -6,6 +6,7 @@ using FluentAssertions;
 using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.FinancialAccounts.Commands.UpdateFinancialAccount;
 using MakeMeRich.Application.UnitTests.Common;
+using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Infrastructure.Persistance;
 
@@ -26,11 +27,9 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
 
             using (var context = new ApplicationDbContext(DbContextOptions))
             {
-                var commandHandler =
-                    new UpdateFinancialAccountCommandHandler(context);
+                var commandHandler = new UpdateFinancialAccountCommandHandler(context);
 
-                FluentActions.Invoking(() =>
-                    commandHandler.Handle(command, CancellationToken.None))
+                FluentActions.Invoking(() => commandHandler.Handle(command, CancellationToken.None))
                     .Should().Throw<NotFoundException>();
             }
         }
@@ -38,20 +37,8 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
         [Fact]
         public async Task ShouldUpdateFinancialAccount()
         {
-            var entity = new FinancialAccount
-            {
-                Id = 3,
-                Title = "ING Bank",
-                CurrentBalance = 500
-            };
-
-            using(var context = new ApplicationDbContext(DbContextOptions))
-            {
-                context.Add(entity);
-                context.SaveChanges();
-            }
-
-            var updateCommand = new UpdateFinancialAccountCommand
+            DataSeeder.SeedSampleData(DbContextOptions);
+            var command = new UpdateFinancialAccountCommand
             {
                 Id = 3,
                 Title = "ING Bank Śląski",
@@ -60,18 +47,16 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
 
             using (var context = new ApplicationDbContext(DbContextOptions))
             {
-                var command =
-                    new UpdateFinancialAccountCommandHandler(context);
-
-                await command.Handle(updateCommand, CancellationToken.None);
+                var commandHandler = new UpdateFinancialAccountCommandHandler(context);
+                await commandHandler.Handle(command, CancellationToken.None);
             }
 
             using (var context = new ApplicationDbContext(DbContextOptions))
             {
-                var financialAccount = await context.FindAsync<FinancialAccount>(entity.Id);
+                var financialAccount = await context.FindAsync<FinancialAccount>(command.Id);
 
-                financialAccount.Title.Should().Be(updateCommand.Title);
-                financialAccount.CurrentBalance.Should().Be(updateCommand.CurrentBalance);
+                financialAccount.Title.Should().Be(command.Title);
+                financialAccount.CurrentBalance.Should().Be(command.CurrentBalance);
             }
         }
     }

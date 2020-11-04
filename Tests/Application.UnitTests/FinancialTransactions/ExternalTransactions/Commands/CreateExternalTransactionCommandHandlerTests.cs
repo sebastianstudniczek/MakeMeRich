@@ -33,7 +33,6 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
             using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var commandHandler = new CreateExternalTransactionCommandHandler(context);
-
                 id = await commandHandler.Handle(command, CancellationToken.None);
             }
 

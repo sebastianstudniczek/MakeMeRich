@@ -5,6 +5,7 @@ using FluentAssertions;
 
 using MakeMeRich.Application.FinancialCategories.Commands.UpdateFinancialCategory;
 using MakeMeRich.Application.UnitTests.Common;
+using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Infrastructure.Persistance;
 
@@ -17,33 +18,22 @@ namespace MakeMeRich.Application.UnitTests.FinancialCategories.Commands
         [Fact]
         public async Task ShouldUpdateFinancialCategory()
         {
-            var entity = new FinancialCategory
-            {
-                Name = "House"
-            };
-
-            using (var context = new ApplicationDbContext(DbContextOptions))
-            {
-                context.Add(entity);
-                context.SaveChanges();
-            }
-
+            DataSeeder.SeedSampleData(DbContextOptions);
             var command = new UpdateFinancialCategoryCommand
             {
-                Id = entity.Id,
+                Id = 1,
                 Name = "Gear"
             };
 
             using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var commandHandler = new UpdateFinancialCategoryCommandHandler(context);
-
                 await commandHandler.Handle(command, CancellationToken.None);
             }
 
             using (var context = new ApplicationDbContext(DbContextOptions))
             {
-                var financialTransaction = await context.FindAsync<FinancialCategory>(entity.Id);
+                var financialTransaction = await context.FindAsync<FinancialCategory>(command.Id);
 
                 financialTransaction.Name.Should().Be(command.Name);
             }

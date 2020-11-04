@@ -28,9 +28,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
 
             using (var context = new ApplicationDbContext(DbContextOptions))
             {
-                var commandHandler =
-                    new CreateFinancialAccountCommandHandler(context);
-
+                var commandHandler = new CreateFinancialAccountCommandHandler(context);
                 id = await commandHandler.Handle(command, CancellationToken.None);
             }
 

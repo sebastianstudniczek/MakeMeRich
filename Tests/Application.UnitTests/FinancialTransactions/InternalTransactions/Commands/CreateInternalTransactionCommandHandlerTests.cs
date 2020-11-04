@@ -31,7 +31,6 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
             using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var commandHandler = new CreateInternalTransactionCommandHandler(context);
-
                 id = await commandHandler.Handle(command, CancellationToken.None);
             }
 

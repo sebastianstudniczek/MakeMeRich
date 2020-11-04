@@ -7,6 +7,7 @@ using FluentAssertions;
 using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.FinancialTransactions.InternalTransactions.Commands.UpdateInternalTransaction;
 using MakeMeRich.Application.UnitTests.Common;
+using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Infrastructure.Persistance;
 
@@ -29,8 +30,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
             {
                 var commandHandler = new UpdateInternalTransactionCommandHandler(context);
 
-                FluentActions.Invoking(() =>
-                    commandHandler.Handle(command, CancellationToken.None))
+                FluentActions.Invoking(() => commandHandler.Handle(command, CancellationToken.None))
                     .Should().Throw<NotFoundException>();
             }
         }
@@ -38,24 +38,10 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
         [Fact]
         public async Task ShouldUpdateInternalTransaction()
         {
-            var entity = new InternalTransaction
-            {
-                TotalAmount = 100,
-                DueDate = new DateTime(2017, 3, 3),
-                Description = "Base internal transaction",
-                FinancialAccountId = 2,
-                ReceivingAccountId = 5
-            };
-
-            using (var context = new ApplicationDbContext(DbContextOptions))
-            {
-                context.Add(entity);
-                context.SaveChanges();
-            }
-
+            DataSeeder.SeedSampleData(DbContextOptions);
             var command = new UpdateInternalTransactionCommand
             {
-                Id = entity.Id,
+                Id = 1,
                 TotalAmount = 300,
                 DueDate = new DateTime(2018, 4, 3),
                 Description = "Updated internal transaction",
@@ -66,13 +52,12 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
             using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var commandHandler = new UpdateInternalTransactionCommandHandler(context);
-
                 await commandHandler.Handle(command, CancellationToken.None);
             }
 
             using (var context = new ApplicationDbContext(DbContextOptions))
             {
-                var internalTransaction = await context.FindAsync<InternalTransaction>(entity.Id);
+                var internalTransaction = await context.FindAsync<InternalTransaction>(command.Id);
 
                 internalTransaction.TotalAmount.Should().Be(command.TotalAmount);
                 internalTransaction.DueDate.Should().Be(command.DueDate);

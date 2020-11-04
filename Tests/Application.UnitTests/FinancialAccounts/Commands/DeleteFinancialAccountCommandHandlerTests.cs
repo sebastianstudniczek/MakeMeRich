@@ -19,17 +19,12 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
         public async Task ShouldDeleteFinancialAccount()
         {
             DataSeeder.SeedSampleData(DbContextOptions);
-            var command = new DeleteFinancialAccountCommand
-            {
-                Id = 1
-            };
+            var command = new DeleteFinancialAccountCommand { Id = 1 };
 
             using (var context = new ApplicationDbContext(DbContextOptions))
             {
-                var commandHandler =
-                    new DeleteFinancialAccountCommandHandler(context);
-
-                await commandHandler.Handle(command, new CancellationToken());
+                var commandHandler = new DeleteFinancialAccountCommandHandler(context);
+                await commandHandler.Handle(command, CancellationToken.None);
             }
 
             using (var context = new ApplicationDbContext(DbContextOptions))

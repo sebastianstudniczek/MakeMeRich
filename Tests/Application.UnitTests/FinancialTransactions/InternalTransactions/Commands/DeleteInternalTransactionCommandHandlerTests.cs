@@ -6,6 +6,7 @@ using FluentAssertions;
 using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.FinancialTransactions.InternalTransactions.Commands.DeleteInternalTransaction;
 using MakeMeRich.Application.UnitTests.Common;
+using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Infrastructure.Persistance;
 
@@ -27,8 +28,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
             {
                 var commandHandler = new DeleteInternalTransactionCommandHandler(context);
 
-                FluentActions.Invoking(() =>
-                    commandHandler.Handle(command, CancellationToken.None))
+                FluentActions.Invoking(() => commandHandler.Handle(command, CancellationToken.None))
                     .Should().Throw<NotFoundException>();
             }
         }
@@ -36,34 +36,21 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
         [Fact]
         public async Task ShouldDeleteInternalTransaction()
         {
-            var entity = new InternalTransaction
-            {
-                Id = 3,
-                TotalAmount = 567
-            };
-
-            using (var context = new ApplicationDbContext(DbContextOptions))
-            {
-                context.InternalTransactions.Add(entity);
-                context.SaveChanges();
-            }
-
+            DataSeeder.SeedSampleData(DbContextOptions);
             var command = new DeleteInternalTransactionCommand
             {
-                Id = entity.Id
+                Id = 2
             };
 
             using (var context = new ApplicationDbContext(DbContextOptions))
             {
-                var commandHandler =
-                    new DeleteInternalTransactionCommandHandler(context);
-
+                var commandHandler = new DeleteInternalTransactionCommandHandler(context);
                 await commandHandler.Handle(command, CancellationToken.None);
             }
 
             using (var context = new ApplicationDbContext(DbContextOptions))
             {
-                var internalTransaction = await context.FindAsync<InternalTransaction>(entity.Id);
+                var internalTransaction = await context.FindAsync<InternalTransaction>(command.Id);
 
                 internalTransaction.Should().BeNull();
             }
