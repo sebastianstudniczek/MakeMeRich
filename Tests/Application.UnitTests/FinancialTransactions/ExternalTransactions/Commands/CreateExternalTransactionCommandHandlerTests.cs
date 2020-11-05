@@ -26,7 +26,8 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
                 TotalAmount = 526,
                 DueDate = new DateTime(2019, 10, 26),
                 Description = "Sample shopping",
-                Type = ExternalFinancialTransactionType.Expense
+                Type = ExternalFinancialTransactionType.Expense,
+                FinancialAccountId = 1
                 // TODO: Categories
             };
 
