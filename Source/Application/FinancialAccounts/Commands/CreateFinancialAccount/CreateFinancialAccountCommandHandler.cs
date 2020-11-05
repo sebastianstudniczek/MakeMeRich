@@ -26,7 +26,7 @@ namespace MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccou
             };
 
             _context.FinancialAccounts.Add(entity);
-            await _context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
             return entity.Id;
         }

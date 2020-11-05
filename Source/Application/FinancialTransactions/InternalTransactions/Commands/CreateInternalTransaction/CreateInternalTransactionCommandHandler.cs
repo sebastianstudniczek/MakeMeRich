@@ -28,7 +28,7 @@ namespace MakeMeRich.Application
             };
 
             _context.InternalTransactions.Add(entity);
-            await _context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
             return entity.Id;
         }

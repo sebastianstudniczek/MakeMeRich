@@ -7,7 +7,6 @@ using FluentValidation;
 
 using MediatR;
 
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 
 namespace MakeMeRich.Application.Common.Behaviours
@@ -45,7 +44,7 @@ namespace MakeMeRich.Application.Common.Behaviours
                 }
             }
 
-            return await next();
+            return await next().ConfigureAwait(false);
         }
     }
 }

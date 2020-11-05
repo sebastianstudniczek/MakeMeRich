@@ -25,7 +25,7 @@ namespace MakeMeRich.Application.FinancialCategories.Commands.CreateFinancialCat
             };
 
             _context.FinancialCategories.Add(entity);
-            await _context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
             return entity.Id;
         }

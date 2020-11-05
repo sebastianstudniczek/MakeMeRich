@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 using MakeMeRich.Application.Common.Interfaces;
@@ -30,7 +29,7 @@ namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Comm
             };
 
             _context.ExternalTransactions.Add(entity);
-            await _context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
             return entity.Id;
         }

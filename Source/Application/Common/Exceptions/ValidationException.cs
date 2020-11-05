@@ -22,7 +22,7 @@ namespace MakeMeRich.Application.Common.Exceptions
 
             foreach (var failureGroup in failureGroups)
             {
-                var propertyName = failureGroup.Key;
+                string propertyName = failureGroup.Key;
                 var propertyFailures = failureGroup.ToArray();
 
                 Errors.Add(propertyName, propertyFailures);

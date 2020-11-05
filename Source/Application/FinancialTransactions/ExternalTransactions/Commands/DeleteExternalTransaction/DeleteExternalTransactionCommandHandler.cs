@@ -24,7 +24,8 @@ namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Comm
         {
             var entity = await _context.ExternalTransactions
                 .Where(transaction => transaction.Id == request.Id)
-                .SingleOrDefaultAsync(cancellationToken);
+                .SingleOrDefaultAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             if (entity == null)
             {
@@ -32,7 +33,7 @@ namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Comm
             }
 
             _context.ExternalTransactions.Remove(entity);
-            await _context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
             return Unit.Value;
         }

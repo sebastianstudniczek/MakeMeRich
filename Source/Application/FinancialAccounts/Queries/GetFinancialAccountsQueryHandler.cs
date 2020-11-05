@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -35,6 +32,7 @@ namespace MakeMeRich.Application.FinancialAccounts.Queries
                     .ProjectTo<FinancialAccountDto>(_mapper.ConfigurationProvider)
                     .OrderBy(account => account.Title)
                     .ToListAsync(cancellationToken)
+                    .ConfigureAwait(false)
             };
         }
     }

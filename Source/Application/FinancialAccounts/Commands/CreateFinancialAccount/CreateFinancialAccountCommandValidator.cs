@@ -23,10 +23,9 @@ namespace MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccou
                 .MustAsync(BeUniqueTitle).WithMessage("The specified title already exists.");
         }
 
-        public async Task<bool> BeUniqueTitle(string title, CancellationToken cancellationToken)
+        public Task<bool> BeUniqueTitle(string title, CancellationToken cancellationToken)
         {
-            return await _context.FinancialAccounts
-                .AllAsync(account => account.Title != title);
+            return _context.FinancialAccounts.AllAsync(account => account.Title != title);
         }
     }
 }

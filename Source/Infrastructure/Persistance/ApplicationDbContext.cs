@@ -21,9 +21,9 @@ namespace MakeMeRich.Infrastructure.Persistance
         public DbSet<InternalTransaction> InternalTransactions { get; set; }
         public DbSet<FinancialCategory> FinancialCategories { get ; set ; }
 
-        public async Task<int> SaveChangesAsync()
+        public Task<int> SaveChangesAsync()
         {
-            return await base.SaveChangesAsync();
+            return base.SaveChangesAsync();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace MakeMeRich.Application.FinancialCategories.Commands.UpdateFinancialCat
 
         public async Task<Unit> Handle(UpdateFinancialCategoryCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.FinancialCategories.FindAsync(request.Id);
+            var entity = await _context.FinancialCategories.FindAsync(request.Id).ConfigureAwait(false);
 
             if (entity == null)
             {
@@ -28,8 +28,7 @@ namespace MakeMeRich.Application.FinancialCategories.Commands.UpdateFinancialCat
             }
 
             entity.Name = request.Name;
-
-            await _context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
             return Unit.Value;
         }

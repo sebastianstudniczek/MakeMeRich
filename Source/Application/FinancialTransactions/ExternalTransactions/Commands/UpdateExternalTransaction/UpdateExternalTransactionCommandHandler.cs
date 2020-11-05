@@ -20,7 +20,7 @@ namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Comm
 
         public async Task<Unit> Handle(UpdateExternalTransactionCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.ExternalTransactions.FindAsync(request.Id);
+            var entity = await _context.ExternalTransactions.FindAsync(request.Id).ConfigureAwait(false);
 
             if (entity == null)
             {
@@ -35,7 +35,7 @@ namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Comm
             entity.FinancialAccountId = request.FinancialAccountId;
             entity.FinancialAccount = await _context.FinancialAccounts.FindAsync(request.FinancialAccountId);
 
-            await _context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
             return Unit.Value;
         }

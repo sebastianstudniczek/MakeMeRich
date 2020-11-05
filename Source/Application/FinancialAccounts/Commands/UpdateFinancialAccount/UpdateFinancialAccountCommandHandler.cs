@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 using MakeMeRich.Application.Common.Exceptions;
@@ -23,7 +20,7 @@ namespace MakeMeRich.Application.FinancialAccounts.Commands.UpdateFinancialAccou
 
         public async Task<Unit> Handle(UpdateFinancialAccountCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.FinancialAccounts.FindAsync(request.Id);
+            var entity = await _context.FinancialAccounts.FindAsync(request.Id).ConfigureAwait(false);
 
             if (entity == null)
             {
@@ -34,7 +31,7 @@ namespace MakeMeRich.Application.FinancialAccounts.Commands.UpdateFinancialAccou
             entity.CurrentBalance = request.CurrentBalance;
             entity.Type = request.Type;
 
-            await _context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
             return Unit.Value;
         }

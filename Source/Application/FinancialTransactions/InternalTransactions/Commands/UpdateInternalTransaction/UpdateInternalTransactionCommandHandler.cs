@@ -21,7 +21,7 @@ namespace MakeMeRich.Application
 
         public async Task<Unit> Handle(UpdateInternalTransactionCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.InternalTransactions.FindAsync(request.Id);
+            var entity = await _context.InternalTransactions.FindAsync(request.Id).ConfigureAwait(false);
 
             if (entity == null)
             {
@@ -34,7 +34,7 @@ namespace MakeMeRich.Application
             entity.FinancialAccountId = request.FinancialAccountId;
             entity.ReceivingAccountId = request.ReceivingAccountId;
 
-            await _context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
             return Unit.Value;
         }

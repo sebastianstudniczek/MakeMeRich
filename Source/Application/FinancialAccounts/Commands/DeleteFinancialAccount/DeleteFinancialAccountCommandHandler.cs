@@ -32,7 +32,7 @@ namespace MakeMeRich.Application.FinancialAccounts.Commands.DeleteFinancialAccou
             }
 
             _context.FinancialAccounts.Remove(entity);
-            await _context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
             return Unit.Value;
         }
