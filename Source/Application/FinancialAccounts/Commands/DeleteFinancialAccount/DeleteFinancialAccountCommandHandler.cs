@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 using MakeMeRich.Application.Common.Exceptions;
@@ -7,8 +6,6 @@ using MakeMeRich.Application.Common.Interfaces;
 using MakeMeRich.Domain.Entities;
 
 using MediatR;
-
-using Microsoft.EntityFrameworkCore;
 
 namespace MakeMeRich.Application.FinancialAccounts.Commands.DeleteFinancialAccount
 {
@@ -22,9 +19,7 @@ namespace MakeMeRich.Application.FinancialAccounts.Commands.DeleteFinancialAccou
 
         public async Task<Unit> Handle(DeleteFinancialAccountCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.FinancialAccounts
-                .Where(account => account.Id == request.Id)
-                .SingleOrDefaultAsync(cancellationToken);
+            var entity = await _context.FinancialAccounts.FindAsync(request.Id).ConfigureAwait(false);
 
             if (entity == null)
             {

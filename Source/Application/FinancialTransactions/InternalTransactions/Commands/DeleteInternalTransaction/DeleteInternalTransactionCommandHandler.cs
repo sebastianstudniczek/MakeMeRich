@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 using MakeMeRich.Application.Common.Exceptions;
@@ -7,8 +6,6 @@ using MakeMeRich.Application.Common.Interfaces;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 
 using MediatR;
-
-using Microsoft.EntityFrameworkCore;
 
 namespace MakeMeRich.Application.FinancialTransactions.InternalTransactions.Commands.DeleteInternalTransaction
 {
@@ -23,10 +20,7 @@ namespace MakeMeRich.Application.FinancialTransactions.InternalTransactions.Comm
 
         public async Task<Unit> Handle(DeleteInternalTransactionCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.InternalTransactions
-                .Where(transaction => transaction.Id == request.Id)
-                .SingleOrDefaultAsync(cancellationToken)
-                .ConfigureAwait(false);
+            var entity = await _context.InternalTransactions.FindAsync(request.Id).ConfigureAwait(false);
 
             if (entity == null)
             {
