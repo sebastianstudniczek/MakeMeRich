@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 using FluentAssertions;
 
+using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.FinancialAccounts.Commands.DeleteFinancialAccount;
 using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Application.UnitTests.Helper;
@@ -15,6 +16,20 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
 {
     public class DeleteFinancialAccountCommandHandlerTests : CommandHandlerTestBase
     {
+        [Fact]
+        public void ShouldRequireValidFinancialAccountId()
+        {
+            var command = new DeleteFinancialAccountCommand { Id = 99 };
+
+            using (var context = new ApplicationDbContext(DbContextOptions))
+            {
+                var commandHandler = new DeleteFinancialAccountCommandHandler(context);
+
+                FluentActions.Invoking(() => commandHandler.Handle(command, CancellationToken.None))
+                    .Should().Throw<NotFoundException>();
+            }
+        }
+
         [Fact]
         public async Task ShouldDeleteFinancialAccount()
         {

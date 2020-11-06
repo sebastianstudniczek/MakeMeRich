@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 using FluentAssertions;
 
+using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Commands.DeleteExternalTransaction;
 using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Application.UnitTests.Helper;
@@ -15,6 +16,20 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
 {
     public class DeleteExternalTransactionCommandHandlerTests : CommandHandlerTestBase
     {
+        [Fact]
+        public void ShouldRequireValidExternalTransactionId()
+        {
+            var command = new DeleteExternalTransactionCommand { Id = 99 };
+
+            using (var context = new ApplicationDbContext(DbContextOptions))
+            {
+                var commandHandler = new DeleteExternalTransactionCommandHandler(context);
+
+                FluentActions.Invoking(() => commandHandler.Handle(command, CancellationToken.None))
+                    .Should().Throw<NotFoundException>();
+            }
+        }
+
         [Fact]
         public async Task ShouldDeleteExternalTransaction()
         {
