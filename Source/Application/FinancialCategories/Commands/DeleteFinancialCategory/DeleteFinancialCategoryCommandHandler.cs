@@ -1,8 +1,9 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
+using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.Common.Interfaces;
+using MakeMeRich.Domain.Entities;
 
 using MediatR;
 
@@ -17,9 +18,19 @@ namespace MakeMeRich.Application.FinancialCategories.Commands.DeleteFinancialCat
             _context = context;
         }
 
-        public Task<Unit> Handle(DeleteFinancialCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteFinancialCategoryCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var entity = await _context.FinancialCategories.FindAsync(request.Id).ConfigureAwait(false);
+
+            if (entity == null)
+            {
+                throw new NotFoundException(nameof(FinancialCategory), request.Id);
+            }
+
+            _context.FinancialCategories.Remove(entity);
+            await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+
+            return Unit.Value;
         }
     }
 }

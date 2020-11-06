@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using FluentAssertions;
 
-using MakeMeRich.Application.FinancialCategories.Commands.CreateFinancialCategories;
+using MakeMeRich.Application.FinancialCategories.Commands.CreateFinancialCategory;
 using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Infrastructure.Persistance;
