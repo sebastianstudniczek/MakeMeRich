@@ -47,7 +47,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
                 TotalAmount = 350,
                 DueDate = new DateTime(2016, 4, 12),
                 Description = "Shopping",
-                Type = ExternalFinancialTransactionType.Income,
+                Type = ExternalTransactionType.Income,
                 FinancialAccountId = 1,
             };
 

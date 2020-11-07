@@ -1,6 +1,6 @@
 ﻿namespace MakeMeRich.Domain.Enums
 {
-    public enum ExternalFinancialTransactionType
+    public enum ExternalTransactionType
     {
         Expense,
         Income

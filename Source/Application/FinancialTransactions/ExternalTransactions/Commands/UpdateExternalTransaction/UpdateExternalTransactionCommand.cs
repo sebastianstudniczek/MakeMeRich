@@ -6,7 +6,7 @@ namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Comm
     public class UpdateExternalTransactionCommand : UpdateFinancialTransactionCommand
     {
         public string TransactionSideName { get; set; }
-        public ExternalFinancialTransactionType Type { get; set; }
+        public ExternalTransactionType Type { get; set; }
         public int FinancialAccountId { get; set; }
     }
 }
