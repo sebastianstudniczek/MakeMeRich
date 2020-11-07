@@ -13,7 +13,7 @@ namespace MakeMeRich.Infrastructure.Persistance.Configurations
         public void Configure(EntityTypeBuilder<FinancialAccount> builder)
         {
             builder.Property(property => property.Title)
-                .HasMaxLength(150)
+                .HasMaxLength(80)
                 .IsUnicode()
                 .IsRequired();
 
