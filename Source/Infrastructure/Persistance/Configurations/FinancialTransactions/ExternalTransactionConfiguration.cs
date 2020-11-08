@@ -28,7 +28,7 @@ namespace MakeMeRich.Infrastructure.Persistance.Configurations.FinancialTransact
                 .IsUnicode()
                 .IsRequired();
 
-            builder.Property(property => property.Type)
+            builder.Property(property => property.TransactionType)
                 .HasConversion(
                     value => value.ToString(),
                     value => (ExternalTransactionType)Enum.Parse(typeof(ExternalTransactionType), value))

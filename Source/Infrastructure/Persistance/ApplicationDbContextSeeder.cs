@@ -27,7 +27,7 @@ namespace MakeMeRich.Infrastructure.Persistance
                         new ExternalTransaction
                         {
                             TransactionSideName = "Biedronka",
-                            Type = ExternalTransactionType.Expense,
+                            TransactionType = ExternalTransactionType.Expense,
                             TotalAmount = 152.67,
                             DueDate = new DateTime(2018, 10, 1),
                             Description = "For breakfast",
@@ -35,7 +35,7 @@ namespace MakeMeRich.Infrastructure.Persistance
                         new ExternalTransaction
                         {
                             TransactionSideName = "Lidl",
-                            Type = ExternalTransactionType.Expense,
+                            TransactionType = ExternalTransactionType.Expense,
                             TotalAmount = 152.67,
                             DueDate = new DateTime(2018, 10, 1),
                             Description = "For dinner",

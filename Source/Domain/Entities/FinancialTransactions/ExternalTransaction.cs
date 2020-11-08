@@ -8,7 +8,7 @@ namespace MakeMeRich.Domain.Entities.FinancialTransactions
     public class ExternalTransaction : FinancialTransaction
     {
         public string TransactionSideName { get; set; }
-        public ExternalTransactionType Type { get; set; }
+        public ExternalTransactionType TransactionType { get; set; }
         public ICollection<ExternalTransactionCategory> TransactionCategories { get; set; }
             = new HashSet<ExternalTransactionCategory>();
     }

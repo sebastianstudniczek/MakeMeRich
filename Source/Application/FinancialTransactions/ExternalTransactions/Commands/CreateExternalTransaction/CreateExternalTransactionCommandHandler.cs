@@ -22,7 +22,7 @@ namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Comm
             var entity = new ExternalTransaction
             {
                 TransactionSideName = request.TransactionSideName,
-                Type = request.Type,
+                TransactionType = request.Type,
                 TotalAmount = request.TotalAmount,
                 DueDate = request.DueDate,
                 Description = request.Description

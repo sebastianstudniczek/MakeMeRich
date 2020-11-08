@@ -65,7 +65,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
                 externalTransaction.TotalAmount.Should().Be(command.TotalAmount);
                 externalTransaction.DueDate.Should().Be(command.DueDate);
                 externalTransaction.Description.Should().Be(command.Description);
-                externalTransaction.Type.Should().Be(command.Type);
+                externalTransaction.TransactionType.Should().Be(command.Type);
                 externalTransaction.FinancialAccountId.Should().Be(command.FinancialAccountId);
             }
         }

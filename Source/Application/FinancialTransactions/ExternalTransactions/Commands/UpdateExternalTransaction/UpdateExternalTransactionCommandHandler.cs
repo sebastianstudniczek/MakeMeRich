@@ -31,7 +31,7 @@ namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Comm
             entity.TotalAmount = request.TotalAmount;
             entity.DueDate = request.DueDate;
             entity.Description = request.Description;
-            entity.Type = request.Type;
+            entity.TransactionType = request.Type;
             entity.FinancialAccountId = request.FinancialAccountId;
             entity.FinancialAccount = await _context.FinancialAccounts.FindAsync(request.FinancialAccountId);
 

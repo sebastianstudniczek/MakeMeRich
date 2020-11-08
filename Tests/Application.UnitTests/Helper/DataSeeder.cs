@@ -42,7 +42,7 @@ namespace MakeMeRich.Application.UnitTests.Helper
                     Id = 1,
                     TransactionSideName = "Biedronka",
                     TotalAmount = 250,
-                    Type = ExternalTransactionType.Expense,
+                    TransactionType = ExternalTransactionType.Expense,
                     DueDate = new DateTime(2019, 11, 12),
                     Description = "First external transaction",
 
@@ -53,7 +53,7 @@ namespace MakeMeRich.Application.UnitTests.Helper
                     Id = 2,
                     TransactionSideName = "Lidl",
                     TotalAmount = 300.67,
-                    Type = ExternalTransactionType.Income,
+                    TransactionType = ExternalTransactionType.Income,
                     DueDate = new DateTime(2011, 11, 12),
                     Description = "Second external transaction",
 
@@ -64,7 +64,7 @@ namespace MakeMeRich.Application.UnitTests.Helper
                     Id = 3,
                     TransactionSideName = "Żabka",
                     TotalAmount = 150.67,
-                    Type = ExternalTransactionType.Expense,
+                    TransactionType = ExternalTransactionType.Expense,
                     DueDate = new DateTime(2013, 11, 12),
                     Description = "Third external transaction",
 
