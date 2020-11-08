@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using MakeMeRich.Domain.Entities.FinancialTransactionCategories;
+
 namespace MakeMeRich.Domain.Entities.FinancialTransactions
 {
     public abstract class FinancialTransaction : BaseEntity
@@ -11,7 +13,7 @@ namespace MakeMeRich.Domain.Entities.FinancialTransactions
 
         public int FinancialAccountId { get; set; }
         public FinancialAccount FinancialAccount { get; set; }
-        public ICollection<TransactionCategory> TransactionCategories { get; private set; }
-            = new HashSet<TransactionCategory>();
+        public ICollection<FinancialTransactionCategory> TransactionCategories { get; private set; }
+            = new HashSet<FinancialTransactionCategory>();
     }
 }
