@@ -22,7 +22,7 @@ namespace MakeMeRich.Infrastructure.Persistance
                     Title = "BNP Paribas ROR",
                     CurrentBalance = 300.45,
                     AccountType = FinancialAccountType.Banking,
-                    Transactions =
+                    ExternalTransactions =
                     {
                         new ExternalTransaction
                         {
@@ -39,13 +39,23 @@ namespace MakeMeRich.Infrastructure.Persistance
                             TotalAmount = 152.67,
                             DueDate = new DateTime(2018, 10, 1),
                             Description = "For dinner",
-                        },
+                        }
+                    },
+                    InternalTransactions =
+                    {
                         new InternalTransaction
                         {
                             TotalAmount = 152.67,
                             DueDate = new DateTime(2018, 10, 1),
                             Description = "For breakfast",
                             ReceivingAccountId = 2,
+                        },
+                        new InternalTransaction
+                        {
+                            TotalAmount = 360.67,
+                            DueDate = new DateTime(2019, 10, 1),
+                            Description = "For lunch",
+                            ReceivingAccountId = 1,
                         }
                     }
                 });
