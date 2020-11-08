@@ -9,7 +9,10 @@ namespace MakeMeRich.Domain.Entities.FinancialTransactions
     {
         public string TransactionSideName { get; set; }
         public ExternalTransactionType TransactionType { get; set; }
-        public ICollection<ExternalTransactionCategory> TransactionCategories { get; set; }
+
+        public int FinancialAccountId { get; set; }
+        public FinancialAccount FinancialAccount { get; set; }
+        public ICollection<ExternalTransactionCategory> TransactionCategories { get; private set; }
             = new HashSet<ExternalTransactionCategory>();
     }
 }

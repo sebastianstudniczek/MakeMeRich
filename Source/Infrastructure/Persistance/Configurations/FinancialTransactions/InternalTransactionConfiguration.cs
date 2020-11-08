@@ -9,12 +9,12 @@ namespace MakeMeRich.Infrastructure.Persistance.Configurations.FinancialTransact
     {
         public void Configure(EntityTypeBuilder<InternalTransaction> builder)
         {
-            builder.HasOne(transaction => transaction.FinancialAccount)
-                .WithMany(account => account.InternalTransactions)
-                .HasForeignKey(transaction => transaction.FinancialAccountId);
+            builder.HasOne(transaction => transaction.SendingAccount)
+                .WithMany(account => account.SendedInternalTransactions)
+                .HasForeignKey(transaction => transaction.SendingAccountId);
 
             builder.HasOne(transaction => transaction.ReceivingAccount)
-                .WithMany(account => account.InternalTransactions)
+                .WithMany(account => account.ReceivedInternalTransactions)
                 .HasForeignKey(transaction => transaction.ReceivingAccountId);
 
             builder.Property(property => property.TotalAmount)
