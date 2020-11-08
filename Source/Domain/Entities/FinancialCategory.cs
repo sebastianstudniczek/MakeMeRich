@@ -8,7 +8,9 @@ namespace MakeMeRich.Domain.Entities
     {
         public string Name { get; set; }
 
-        public ICollection<FinancialTransactionCategory> CategoryTransactions { get; private set; }
-            = new HashSet<FinancialTransactionCategory>();
+        public ICollection<ExternalTransactionCategory> ExternalTransactionCategories { get; set; }
+            = new HashSet<ExternalTransactionCategory>();
+        public ICollection<InternalTransactionCategory> InternalTransactionCategories { get; set; }
+            = new HashSet<InternalTransactionCategory>();
     }
 }

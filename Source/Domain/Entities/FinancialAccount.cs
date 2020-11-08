@@ -10,6 +10,7 @@ namespace MakeMeRich.Domain.Entities
         public string Title { get; set; }
         public double CurrentBalance { get; set; }
         public FinancialAccountType AccountType { get; set; }
+
         public ICollection<ExternalTransaction> ExternalTransactions { get; private set; }
             = new HashSet<ExternalTransaction>();
         public ICollection<InternalTransaction> ReceivedInternalTransactions { get; private set; }
