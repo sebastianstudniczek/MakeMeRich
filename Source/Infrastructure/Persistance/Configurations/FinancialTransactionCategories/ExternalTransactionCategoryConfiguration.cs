@@ -1,18 +1,19 @@
-﻿using MakeMeRich.Domain.Entities.FinancialTransactionCategories;
+﻿
+using MakeMeRich.Domain.Entities.FinancialTransactionCategories;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace MakeMeRich.Infrastructure.Persistance.Configurations
+namespace MakeMeRich.Infrastructure.Persistance.Configurations.FinancialTransactionCategories
 {
-    public class TransactionCategoryConfiguration : IEntityTypeConfiguration<FinancialTransactionCategory>
+    public class ExternalTransactionCategoryConfiguration : IEntityTypeConfiguration<ExternalTransactionCategory>
     {
-        public void Configure(EntityTypeBuilder<FinancialTransactionCategory> builder)
+        public void Configure(EntityTypeBuilder<ExternalTransactionCategory> builder)
         {
             builder.HasKey(
                 key => new
                 {
-                    key.FinancialTransactionId,
+                    key.ExternalTransactionId,
                     key.FinancialCategoryId
                 });
 
