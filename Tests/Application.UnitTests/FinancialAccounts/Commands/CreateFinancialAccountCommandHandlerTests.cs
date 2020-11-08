@@ -39,7 +39,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
                 financialAccount.Should().NotBeNull();
                 financialAccount.Title.Should().Be(command.Title);
                 financialAccount.CurrentBalance.Should().Be(command.CurrentBalance);
-                financialAccount.Type.Should().Be(command.Type);
+                financialAccount.AccountType.Should().Be(command.Type);
             }
         }
     }

@@ -21,7 +21,7 @@ namespace MakeMeRich.Infrastructure.Persistance.Configurations
                 .HasColumnType("decimal(10,2)")
                 .IsRequired();
 
-            builder.Property(prop => prop.Type)
+            builder.Property(prop => prop.AccountType)
                 .HasConversion(
                     value => value.ToString(),
                     value => (FinancialAccountType)Enum.Parse(typeof(FinancialAccountType), value));

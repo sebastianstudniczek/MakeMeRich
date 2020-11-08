@@ -22,7 +22,7 @@ namespace MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccou
             {
                 Title = request.Title,
                 CurrentBalance = request.CurrentBalance,
-                Type = request.Type
+                AccountType = request.Type
             };
 
             _context.FinancialAccounts.Add(entity);

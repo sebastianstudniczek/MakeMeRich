@@ -21,7 +21,7 @@ namespace MakeMeRich.Infrastructure.Persistance
                 {
                     Title = "BNP Paribas ROR",
                     CurrentBalance = 300.45,
-                    Type = FinancialAccountType.Banking,
+                    AccountType = FinancialAccountType.Banking,
                     Transactions =
                     {
                         new ExternalTransaction
