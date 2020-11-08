@@ -41,7 +41,7 @@ namespace MakeMeRich.Infrastructure.Persistance
                             Description = "For dinner",
                         }
                     },
-                    InternalTransactions =
+                    ReceivedInternalTransactions =
                     {
                         new InternalTransaction
                         {
@@ -57,7 +57,15 @@ namespace MakeMeRich.Infrastructure.Persistance
                             Description = "For lunch",
                             ReceivingAccountId = 1,
                         }
+                    },
+                    SendedInternalTransactions =
+                    {
+                        new InternalTransaction
+                        {
+
+                        }
                     }
+                    
                 });
             }
 

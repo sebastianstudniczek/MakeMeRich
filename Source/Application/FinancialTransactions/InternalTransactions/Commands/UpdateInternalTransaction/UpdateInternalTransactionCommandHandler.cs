@@ -31,7 +31,7 @@ namespace MakeMeRich.Application
             entity.TotalAmount = request.TotalAmount;
             entity.DueDate = request.DueDate;
             entity.Description = request.Description;
-            entity.FinancialAccountId = request.FinancialAccountId;
+            entity.SendingAccountId = request.SendingAccountId;
             entity.ReceivingAccountId = request.ReceivingAccountId;
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);

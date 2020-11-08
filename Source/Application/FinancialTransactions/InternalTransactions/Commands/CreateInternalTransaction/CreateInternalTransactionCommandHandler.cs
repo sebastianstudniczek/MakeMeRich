@@ -22,7 +22,7 @@ namespace MakeMeRich.Application
                 TotalAmount = request.TotalAmount,
                 DueDate = request.DueDate,
                 Description = request.Description,
-                FinancialAccountId = request.FinancialAccountId,
+                SendingAccountId = request.SendingAccountId,
                 ReceivingAccountId = request.ReceivingAccountId
                 // TODO: Categories
             };

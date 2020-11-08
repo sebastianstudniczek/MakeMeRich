@@ -89,7 +89,7 @@ namespace MakeMeRich.Application.UnitTests.Helper
                     DueDate = new DateTime(2011, 5, 12),
                     Description = "First internal transaction",
 
-                    FinancialAccountId = 1,
+                    SendingAccountId = 1,
                     ReceivingAccountId = 2
                 },
 
@@ -100,7 +100,7 @@ namespace MakeMeRich.Application.UnitTests.Helper
                     DueDate = new DateTime(2016, 5, 12),
                     Description = "Second internal transaction",
 
-                    FinancialAccountId = 2,
+                    SendingAccountId = 2,
                     ReceivingAccountId = 1
                 },
 
@@ -111,7 +111,7 @@ namespace MakeMeRich.Application.UnitTests.Helper
                     DueDate = new DateTime(2014, 5, 12),
                     Description = "Third internal transaction",
 
-                    FinancialAccountId = 3,
+                    SendingAccountId = 3,
                     ReceivingAccountId = 2
                 },
             };

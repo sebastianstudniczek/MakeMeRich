@@ -23,7 +23,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
                 TotalAmount = 255,
                 Description = "Some internal transaction",
                 DueDate = new DateTime(2016, 7, 12),
-                FinancialAccountId = 1,
+                SendingAccountId = 1,
                 ReceivingAccountId = 2
                 // TODO: Categories
             };
@@ -42,7 +42,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
                 internalTransaction.TotalAmount.Should().Be(command.TotalAmount);
                 internalTransaction.Description.Should().Be(command.Description);
                 internalTransaction.DueDate.Should().Be(command.DueDate);
-                internalTransaction.FinancialAccountId.Should().Be(command.FinancialAccountId);
+                internalTransaction.SendingAccountId.Should().Be(command.SendingAccountId);
                 internalTransaction.ReceivingAccountId.Should().Be(command.ReceivingAccountId);
             }
         }
