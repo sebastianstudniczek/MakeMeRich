@@ -9,6 +9,14 @@ namespace MakeMeRich.Infrastructure.Persistance.Configurations.FinancialTransact
     {
         public void Configure(EntityTypeBuilder<InternalTransaction> builder)
         {
+            builder.HasOne(transaction => transaction.FinancialAccount)
+                .WithMany(account => account.InternalTransactions)
+                .HasForeignKey(transaction => transaction.FinancialAccountId);
+
+            builder.HasOne(transaction => transaction.ReceivingAccount)
+                .WithMany(account => account.InternalTransactions)
+                .HasForeignKey(transaction => transaction.ReceivingAccountId);
+
             builder.Property(property => property.TotalAmount)
                 .HasColumnType("decimal(10,2)")
                 .IsRequired();
