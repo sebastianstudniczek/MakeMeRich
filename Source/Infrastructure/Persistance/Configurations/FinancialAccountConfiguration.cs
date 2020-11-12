@@ -24,7 +24,9 @@ namespace MakeMeRich.Infrastructure.Persistance.Configurations
             builder.Property(prop => prop.AccountType)
                 .HasConversion(
                     value => value.ToString(),
-                    value => (FinancialAccountType)Enum.Parse(typeof(FinancialAccountType), value));
+                    value => (FinancialAccountType)Enum.Parse(typeof(FinancialAccountType), value))
+                .HasColumnType("varchar(30)")
+                .IsRequired();
         }
     }
 }
