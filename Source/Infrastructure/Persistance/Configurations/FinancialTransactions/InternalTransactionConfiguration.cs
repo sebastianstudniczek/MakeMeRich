@@ -9,6 +9,8 @@ namespace MakeMeRich.Infrastructure.Persistance.Configurations.FinancialTransact
     {
         public void Configure(EntityTypeBuilder<InternalTransaction> builder)
         {
+            builder.HasKey(transaction => transaction.Id);
+
             builder.HasOne(transaction => transaction.SendingAccount)
                 .WithMany(account => account.SendedInternalTransactions)
                 .HasForeignKey(transaction => transaction.SendingAccountId);
@@ -27,6 +29,9 @@ namespace MakeMeRich.Infrastructure.Persistance.Configurations.FinancialTransact
 
             builder.Property(property => property.Description)
                 .HasMaxLength(150);
+
+            builder.HasCheckConstraint("CHK_InternalTransactions_SendingAccountId", "SendingAccountId != ReceivingAccountId");
+            builder.HasCheckConstraint("CHK_InternalTransactions_ReceivingAccountId", "ReceivingAccountId != SendingAccountId");
         }
     }
 }
