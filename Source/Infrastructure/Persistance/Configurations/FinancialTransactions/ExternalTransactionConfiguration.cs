@@ -34,6 +34,10 @@ namespace MakeMeRich.Infrastructure.Persistance.Configurations.FinancialTransact
                     value => (ExternalTransactionType)Enum.Parse(typeof(ExternalTransactionType), value))
                 .IsRequired();
 
+            builder
+                .HasOne(transaction => transaction.FinancialAccount)
+                .WithMany(account => account.ExternalTransactions)
+                .HasForeignKey(transaction => transaction.FinancialAccountId);
         }
     }
 }
