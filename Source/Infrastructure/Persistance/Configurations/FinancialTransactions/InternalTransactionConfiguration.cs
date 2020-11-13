@@ -13,11 +13,13 @@ namespace MakeMeRich.Infrastructure.Persistance.Configurations.FinancialTransact
 
             builder.HasOne(transaction => transaction.SendingAccount)
                 .WithMany(account => account.SendedInternalTransactions)
-                .HasForeignKey(transaction => transaction.SendingAccountId);
+                .HasForeignKey(transaction => transaction.SendingAccountId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(transaction => transaction.ReceivingAccount)
                 .WithMany(account => account.ReceivedInternalTransactions)
-                .HasForeignKey(transaction => transaction.ReceivingAccountId);
+                .HasForeignKey(transaction => transaction.ReceivingAccountId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(property => property.TotalAmount)
                 .HasColumnType("decimal(10,2)")
