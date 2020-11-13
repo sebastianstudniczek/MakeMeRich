@@ -10,12 +10,15 @@ namespace MakeMeRich.Infrastructure.Persistance.Configurations.FinancialTransact
     {
         public void Configure(EntityTypeBuilder<ExternalTransactionCategory> builder)
         {
-            builder.HasKey(
-                key => new
-                {
-                    key.ExternalTransactionId,
-                    key.FinancialCategoryId
-                });
+            builder
+                .HasOne(transactionCategory => transactionCategory.ExternalTransaction)
+                .WithMany(category => category.TransactionCategories)
+                .HasForeignKey(transactionCategory => transactionCategory.ExternalTransactionId);
+
+            builder
+                .HasOne(transactionCategory => transactionCategory.FinancialCategory)
+                .WithMany(category => category.ExternalTransactionCategories)
+                .HasForeignKey(transactionCategory => transactionCategory.FinancialCategoryId);
 
             builder.Property(property => property.Amount)
                 .HasColumnType("decimal(10,2)")
@@ -23,6 +26,13 @@ namespace MakeMeRich.Infrastructure.Persistance.Configurations.FinancialTransact
 
             builder.Property(property => property.Description)
                 .HasMaxLength(150);
+
+            builder.HasKey(
+                key => new
+                {
+                    key.ExternalTransactionId,
+                    key.FinancialCategoryId
+                });
         }
     }
 }
