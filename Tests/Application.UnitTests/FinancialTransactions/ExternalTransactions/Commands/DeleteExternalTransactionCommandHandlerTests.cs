@@ -18,7 +18,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
         [Fact]
         public async Task ShouldDeleteExternalTransaction()
         {
-            DataSeeder.SeedSampleData(DbContextOptions);
+            DataSeeder.GetSampleExternalTransactions(DbContextOptions);
             var command = new DeleteExternalTransactionCommand { Id = 1 };
 
             using (var context = new ApplicationDbContext(DbContextOptions))

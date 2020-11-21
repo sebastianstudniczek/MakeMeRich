@@ -18,7 +18,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialCategories.Commands
         [Fact]
         public async Task ShouldUpdateFinancialCategory()
         {
-            DataSeeder.SeedSampleData(DbContextOptions);
+            DataSeeder.GetSampleFinancialCategories(DbContextOptions);
             var command = new UpdateFinancialCategoryCommand
             {
                 Id = 1,

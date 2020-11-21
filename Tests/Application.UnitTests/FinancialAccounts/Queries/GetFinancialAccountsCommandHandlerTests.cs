@@ -29,7 +29,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
         [Fact]
         public async Task ShouldReturnAllFinancialAccountsAndTransactions()
         {
-            DataSeeder.SeedSampleData(DbContextOptions);
+            DataSeeder.GetSampleFinancialAccounts(DbContextOptions);
             var query = new GetFinancialAccountsQuery();
 
             using (var context = new ApplicationDbContext(DbContextOptions))

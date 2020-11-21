@@ -12,6 +12,8 @@ namespace MakeMeRich.Application.UnitTests.Helper
         {
             var options = new DbContextOptionsBuilder<TContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .EnableSensitiveDataLogging()
+                .EnableDetailedErrors()
                 .Options;
 
             return options;

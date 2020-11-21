@@ -19,10 +19,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
         [Fact]
         public void ShouldRequireValidInternalTransactionId()
         {
-            var command = new DeleteInternalTransactionCommand
-            {
-                Id = 99
-            };
+            var command = new DeleteInternalTransactionCommand { Id = 99 };
 
             using (var context = new ApplicationDbContext(DbContextOptions))
             {
@@ -36,11 +33,8 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
         [Fact]
         public async Task ShouldDeleteInternalTransaction()
         {
-            DataSeeder.SeedSampleData(DbContextOptions);
-            var command = new DeleteInternalTransactionCommand
-            {
-                Id = 2
-            };
+            DataSeeder.GetSampleInternalTransactions(DbContextOptions);
+            var command = new DeleteInternalTransactionCommand{ Id = 2 };
 
             using (var context = new ApplicationDbContext(DbContextOptions))
             {

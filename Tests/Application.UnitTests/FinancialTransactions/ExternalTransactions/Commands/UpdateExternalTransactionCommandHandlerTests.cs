@@ -39,7 +39,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
         [Fact]
         public async Task ShouldUpdateExternalTransaction()
         {
-            DataSeeder.SeedSampleData(DbContextOptions);
+            DataSeeder.GetSampleExternalTransactions(DbContextOptions);
             var command = new UpdateExternalTransactionCommand
             {
                 Id = 2,

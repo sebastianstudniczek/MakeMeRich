@@ -37,7 +37,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
         [Fact]
         public async Task ShouldUpdateFinancialAccount()
         {
-            DataSeeder.SeedSampleData(DbContextOptions);
+            DataSeeder.GetSampleFinancialAccounts(DbContextOptions);
             var command = new UpdateFinancialAccountCommand
             {
                 Id = 3,

@@ -38,10 +38,10 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransac
         [Fact]
         public async Task ShouldUpdateInternalTransaction()
         {
-            DataSeeder.SeedSampleData(DbContextOptions);
+            DataSeeder.GetSampleInternalTransactions(DbContextOptions);
             var command = new UpdateInternalTransactionCommand
             {
-                Id = 1,
+                Id = 2,
                 TotalAmount = 300,
                 DueDate = new DateTime(2018, 4, 3),
                 Description = "Updated internal transaction",

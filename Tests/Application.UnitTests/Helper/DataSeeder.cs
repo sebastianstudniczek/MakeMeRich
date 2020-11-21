@@ -12,16 +12,16 @@ namespace MakeMeRich.Application.UnitTests.Helper
 {
     internal static class DataSeeder
     {
-        internal static void SeedSampleData(DbContextOptions<ApplicationDbContext> options)
+        internal static void GetSampleFinancialAccounts(DbContextOptions<ApplicationDbContext> options)
         {
             var context = new ApplicationDbContext(options);
 
-            context.Database.EnsureCreated();
-
-            var financialAccounts = GetSampleFinancialAccounts();
-            var externalTransactions = GetSampleExternalTransactions();
-            var internalTransactions = GetSampleInternalTransactions();
-            var financialCategories = GetSampleFinancialCategories();
+            var financialAccounts =  new List<FinancialAccount>
+            {
+                new FinancialAccount { Id = 1, Title = "BNP", CurrentBalance = 100},
+                new FinancialAccount { Id = 2, Title = "Getin", CurrentBalance = 200},
+                new FinancialAccount { Id = 3, Title = "PKO", CurrentBalance = 300}
+            };
 
             context.FinancialAccounts.AddRange(financialAccounts);
             context.ExternalTransactions.AddRange(externalTransactions);
@@ -31,20 +31,10 @@ namespace MakeMeRich.Application.UnitTests.Helper
             context.SaveChanges();
         }
 
-        private static List<FinancialAccount> GetSampleFinancialAccounts()
+        internal static void GetSampleExternalTransactions(DbContextOptions<ApplicationDbContext> options)
         {
-            var financialAccounts =  new List<FinancialAccount>
-            {
-                new FinancialAccount { Id = 1, Title = "BNP", CurrentBalance = 100},
-                new FinancialAccount { Id = 2, Title = "Getin", CurrentBalance = 200},
-                new FinancialAccount { Id = 3, Title = "PKO", CurrentBalance = 300}
-            };
+            var context = new ApplicationDbContext(options);
 
-            return financialAccounts;
-        }
-
-        private static List<ExternalTransaction> GetSampleExternalTransactions()
-        {
             var externalTransactions = new List<ExternalTransaction>
             {
                 new ExternalTransaction
@@ -82,11 +72,14 @@ namespace MakeMeRich.Application.UnitTests.Helper
                 },
             };
 
-            return externalTransactions;
+            context.ExternalTransactions.AddRange(externalTransactions);
+            context.SaveChanges();
         }
 
-        private static List<InternalTransaction> GetSampleInternalTransactions()
+        internal static void GetSampleInternalTransactions(DbContextOptions<ApplicationDbContext> options)
         {
+            var context = new ApplicationDbContext(options);
+
             var internalTransactions = new List<InternalTransaction>
             {
                 new InternalTransaction
@@ -105,7 +98,7 @@ namespace MakeMeRich.Application.UnitTests.Helper
                     Id = 2,
                     TotalAmount = 115.87,
                     DueDate = new DateTime(2016, 5, 12),
-                    Description = "First internal transaction",
+                    Description = "Second internal transaction",
 
                     FinancialAccountId = 2,
                     ReceivingAccountId = 1
@@ -113,21 +106,24 @@ namespace MakeMeRich.Application.UnitTests.Helper
 
                 new InternalTransaction
                 {
-                    Id = 2,
-                    TotalAmount = 115.87,
-                    DueDate = new DateTime(2016, 5, 12),
-                    Description = "First internal transaction",
+                    Id = 3,
+                    TotalAmount = 85.87,
+                    DueDate = new DateTime(2014, 5, 12),
+                    Description = "Third internal transaction",
 
                     FinancialAccountId = 3,
                     ReceivingAccountId = 2
                 },
             };
 
-            return internalTransactions;
+            context.InternalTransactions.AddRange(internalTransactions);
+            context.SaveChanges();
         }
 
-        private static List<FinancialCategory> GetSampleFinancialCategories()
+        internal static void GetSampleFinancialCategories(DbContextOptions<ApplicationDbContext> options)
         {
+            var context = new ApplicationDbContext(options);
+
             var financialCategories = new List<FinancialCategory>
             {
                 new FinancialCategory { Id = 1, Name = "House" },
@@ -135,7 +131,8 @@ namespace MakeMeRich.Application.UnitTests.Helper
                 new FinancialCategory { Id = 3, Name = "Food"}
             };
 
-            return financialCategories;
+            context.FinancialCategories.AddRange(financialCategories);
+            context.SaveChanges();
         }
     }
 }
