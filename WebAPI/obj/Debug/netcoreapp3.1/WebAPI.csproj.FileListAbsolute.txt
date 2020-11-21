@@ -1,9 +1,0 @@
-C:\Users\sebas\source\repos\MakeMeRich\WebAPI\bin\Debug\netcoreapp3.1\appsettings.Development.json
-C:\Users\sebas\source\repos\MakeMeRich\WebAPI\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\sebas\source\repos\MakeMeRich\WebAPI\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
-C:\Users\sebas\source\repos\MakeMeRich\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.csprojAssemblyReference.cache
-C:\Users\sebas\source\repos\MakeMeRich\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.AssemblyInfoInputs.cache
-C:\Users\sebas\source\repos\MakeMeRich\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.AssemblyInfo.cs
-C:\Users\sebas\source\repos\MakeMeRich\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.RazorTargetAssemblyInfo.cache
-C:\Users\sebas\source\repos\MakeMeRich\WebAPI\obj\Debug\netcoreapp3.1\staticwebassets\WebAPI.StaticWebAssets.Manifest.cache
-C:\Users\sebas\source\repos\MakeMeRich\WebAPI\obj\Debug\netcoreapp3.1\staticwebassets\WebAPI.StaticWebAssets.xml
