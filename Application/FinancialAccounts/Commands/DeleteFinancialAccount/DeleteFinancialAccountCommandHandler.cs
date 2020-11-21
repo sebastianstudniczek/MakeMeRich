@@ -1,9 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.Common.Interfaces;
+using MakeMeRich.Domain.Entities;
 
 using MediatR;
 
@@ -27,8 +28,14 @@ namespace MakeMeRich.Application.FinancialAccounts.Commands.DeleteFinancialAccou
 
             if (entity == null)
             {
-
+                throw new NotFoundException(nameof(FinancialAccount), request.Id);
             }
+
+            _context.FinancialAccounts.Remove(entity);
+
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return Unit.Value;
         }
     }
 }

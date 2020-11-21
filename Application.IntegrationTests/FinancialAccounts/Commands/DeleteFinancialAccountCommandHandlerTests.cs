@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 using FluentAssertions;
 
 using MakeMeRich.Application.FinancialAccounts.Commands.DeleteFinancialAccount;
+using MakeMeRich.Application.IntegrationTests.Helper;
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Infrastructure.Persistance;
 
@@ -23,6 +21,8 @@ namespace MakeMeRich.Application.IntegrationTests.FinancialAccounts.Commands
             ContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "deleteFinancialAccountCommandHandlerTest")
                 .Options;
+
+            DataSeeder.Seed(ContextOptions);
         }
         public DbContextOptions<ApplicationDbContext> ContextOptions { get; set; }
 
@@ -31,7 +31,7 @@ namespace MakeMeRich.Application.IntegrationTests.FinancialAccounts.Commands
         {
             var command = new DeleteFinancialAccountCommand
             {
-                Id = 3
+                Id = 1
             };
 
             using (var context = new ApplicationDbContext(ContextOptions))

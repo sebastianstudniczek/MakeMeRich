@@ -15,25 +15,20 @@ namespace MakeMeRich.Application.IntegrationTests.FinancialAccounts.Commands
 {
     public class CreateFinancialAccountCommandHandlerTests
     {
-        public CreateFinancialAccountCommandHandlerTests()
-        {
-            ContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "createFinancialAccountCommandHandlerTest")
-                .Options ;
-        }
-
-        public DbContextOptions<ApplicationDbContext> ContextOptions { get; set; }
-
         [Fact]
         public async Task ShouldCreateFinancialAccount()
         {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "createFinancialAccountCommandHandlerTest")
+                .Options;
+
             var command = new CreateFinancialAccountCommand
             {
                 Title = "BNP Private",
                 CurrentBalance = 250
             };
 
-            using (var context = new ApplicationDbContext(ContextOptions))
+            using (var context = new ApplicationDbContext(options))
             {
                 var commandHandler =
                     new CreateFinancialAccountCommandHandler(context);
