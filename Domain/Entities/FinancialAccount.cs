@@ -6,10 +6,10 @@ namespace MakeMeRich.Domain.Entities
     {
         public FinancialAccount()
         {
-            Transactions = new List<Transaction>();
+            Transactions = new List<FinancialTransaction>();
         }
         public string Title { get; set; }
         public double CurrentBalance { get; set; }
-        public IList<Transaction> Transactions { get; set; }
+        public IList<FinancialTransaction> Transactions { get; set; }
     }
 }
