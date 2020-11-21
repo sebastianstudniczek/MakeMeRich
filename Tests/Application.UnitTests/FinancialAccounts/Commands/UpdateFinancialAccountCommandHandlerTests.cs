@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 using FluentAssertions;
 
+using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccount;
 using MakeMeRich.Application.FinancialAccounts.Commands.UpdateFinancialAccount;
 using MakeMeRich.Domain.Entities;
@@ -20,31 +18,52 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
     public class UpdateFinancialAccountCommandHandlerTests
     {
         [Fact]
+        public void ShouldRequireValidFinancialAccountId()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "ShouldRequireValidFinancialAccountId")
+                .Options;
+
+            var command = new UpdateFinancialAccountCommand
+            {
+                Id = 99,
+                Title = "Reifeizen"
+            };
+
+            using (var context = new ApplicationDbContext(options))
+            {
+                var commandHandler =
+                    new UpdateFinancialAccountCommandHandler(context);
+
+                FluentActions.Invoking(() =>
+                    commandHandler.Handle(command, new CancellationToken()))
+                    .Should().Throw<NotFoundException>();
+            }
+        }
+
+        [Fact]
         public async Task ShouldUpdateFinancialAccount()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "updateFinancialAccountCommandHandler")
+                .UseInMemoryDatabase(databaseName: "ShouldUpdateFinancialAccount")
                 .Options;
 
-            var createCommand = new CreateFinancialAccountCommand
+            var entity = new FinancialAccount
             {
+                Id = 3,
                 Title = "ING Bank",
                 CurrentBalance = 500
             };
 
-            int financialAccountId;
-
             using(var context = new ApplicationDbContext(options))
             {
-                var commandHandler =
-                    new CreateFinancialAccountCommandHandler(context);
-
-                financialAccountId = await commandHandler.Handle(createCommand, new CancellationToken());
+                context.Add(entity);
+                context.SaveChanges();
             }
 
             var updateCommand = new UpdateFinancialAccountCommand
             {
-                Id = financialAccountId,
+                Id = 3,
                 Title = "ING Bank Śląski",
                 CurrentBalance = 1500
             };
@@ -55,7 +74,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
                     new UpdateFinancialAccountCommandHandler(context);
 
                 await commandHandler.Handle(updateCommand, new CancellationToken());
-                var financialAccount = await context.FindAsync<FinancialAccount>(financialAccountId);
+                var financialAccount = await context.FindAsync<FinancialAccount>(entity.Id);
 
                 financialAccount.Title.Should().Be(updateCommand.Title);
                 financialAccount.CurrentBalance.Should().Be(updateCommand.CurrentBalance);

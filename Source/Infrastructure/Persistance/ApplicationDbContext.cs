@@ -1,5 +1,4 @@
-﻿
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using MakeMeRich.Application.Common.Interfaces;
 using MakeMeRich.Domain.Entities;
