@@ -6,8 +6,6 @@ using MakeMeRich.Domain.Entities;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Domain.Enums;
 
-using Microsoft.EntityFrameworkCore.Internal;
-
 namespace MakeMeRich.Infrastructure.Persistance
 {
     public static class ApplicationDbContextSeeder
@@ -62,10 +60,19 @@ namespace MakeMeRich.Infrastructure.Persistance
                     {
                         new InternalTransaction
                         {
-
+                            TotalAmount = 52.67,
+                            DueDate = new DateTime(2020, 1, 1),
+                            Description = "For lunch",
+                            ReceivingAccountId = 2,
+                        },
+                        new InternalTransaction
+                        {
+                            TotalAmount = 60.67,
+                            DueDate = new DateTime(2020, 10, 1),
+                            Description = "For dinner",
+                            ReceivingAccountId = 1,
                         }
                     }
-                    
                 });
             }
 
