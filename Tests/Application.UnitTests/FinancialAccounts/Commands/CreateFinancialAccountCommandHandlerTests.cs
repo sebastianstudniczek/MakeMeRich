@@ -5,6 +5,7 @@ using FluentAssertions;
 
 using MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccount;
 using MakeMeRich.Domain.Entities;
+using MakeMeRich.Domain.Enums;
 using MakeMeRich.Infrastructure.Persistance;
 
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,8 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
             var command = new CreateFinancialAccountCommand
             {
                 Title = "BNP Private",
-                CurrentBalance = 250
+                CurrentBalance = 250,
+                Type = FinancialAccountType.Banking
             };
 
             using (var context = new ApplicationDbContext(options))

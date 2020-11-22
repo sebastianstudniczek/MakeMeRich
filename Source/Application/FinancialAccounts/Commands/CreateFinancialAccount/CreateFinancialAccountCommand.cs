@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using MakeMeRich.Domain.Enums;
+
+using MediatR;
 
 namespace MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccount
 {
@@ -6,5 +8,6 @@ namespace MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccou
     {
         public string Title { get; set; }
         public double CurrentBalance { get; set; }
+        public FinancialAccountType Type { get; set; }
     }
 }
