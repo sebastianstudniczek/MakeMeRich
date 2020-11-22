@@ -7,8 +7,6 @@ using FluentValidation;
 
 using MediatR;
 
-using Microsoft.EntityFrameworkCore.Internal;
-
 namespace MakeMeRich.Application.Common.Behaviours
 {
     public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
