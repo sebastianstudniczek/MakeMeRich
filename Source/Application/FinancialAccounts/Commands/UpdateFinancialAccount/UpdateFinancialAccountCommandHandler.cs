@@ -32,6 +32,7 @@ namespace MakeMeRich.Application.FinancialAccounts.Commands.UpdateFinancialAccou
 
             entity.Title = request.Title;
             entity.CurrentBalance = request.CurrentBalance;
+            entity.Type = request.Type;
 
             await _context.SaveChangesAsync(cancellationToken);
 
