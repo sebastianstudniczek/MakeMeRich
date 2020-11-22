@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 using MakeMeRich.Application.Common.Interfaces;
 
 using MediatR;
+
+using Microsoft.EntityFrameworkCore;
 
 namespace MakeMeRich.Application.FinancialAccounts.Queries
 {
@@ -22,9 +26,16 @@ namespace MakeMeRich.Application.FinancialAccounts.Queries
             _context = context;
             _mapper = mapper;
         }
-        public Task<FinancialAccountsVm> Handle(GetFinancialAccountsQuery request, CancellationToken cancellationToken)
+
+        public async Task<FinancialAccountsVm> Handle(GetFinancialAccountsQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return new FinancialAccountsVm
+            {
+                FinancialAccounts = await _context.FinancialAccounts
+                    .ProjectTo<FinancialAccountDto>(_mapper.ConfigurationProvider)
+                    .OrderBy(account => account.Title)
+                    .ToListAsync(cancellationToken)
+            };
         }
     }
 }

@@ -5,8 +5,8 @@ using AutoMapper;
 
 using FluentAssertions;
 
+using MakeMeRich.Application.Common.Mappings;
 using MakeMeRich.Application.FinancialAccounts.Queries;
-using MakeMeRich.Application.Mappings;
 using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Infrastructure.Persistance;
 
@@ -40,8 +40,8 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
 
             using (var context = new ApplicationDbContext(options))
             {
-                var commandHandler = new GetFinancialAccountsQueryHandler(context, _mapper);
-                var result = await commandHandler.Handle(query, new CancellationToken());
+                var queryHandler = new GetFinancialAccountsQueryHandler(context, _mapper);
+                var result = await queryHandler.Handle(query, new CancellationToken());
 
                 result.FinancialAccounts.Should().HaveCount(3);
             }

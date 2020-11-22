@@ -9,6 +9,6 @@ namespace MakeMeRich.Application.FinancialAccounts.Queries
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public IList<FinancialTransaction> Transactions { get; set; } = new List<FinancialTransaction>();
+        public IList<FinancialTransactionDto> Transactions { get; set; } = new List<FinancialTransactionDto>();
     }
 }
