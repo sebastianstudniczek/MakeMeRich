@@ -24,10 +24,6 @@ namespace MakeMeRich.Application.UnitTests.Helper
             };
 
             context.FinancialAccounts.AddRange(financialAccounts);
-            context.ExternalTransactions.AddRange(externalTransactions);
-            context.InternalTransactions.AddRange(internalTransactions);
-            context.FinancialCategories.AddRange(financialCategories);
-
             context.SaveChanges();
         }
 
