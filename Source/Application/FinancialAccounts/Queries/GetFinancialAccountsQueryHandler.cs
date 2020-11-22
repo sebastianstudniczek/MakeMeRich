@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MakeMeRich.Application.FinancialAccounts.Queries
 {
-    public class GetFinancialAccountsQueryHandler : IRequestHandler<GetFinancialAccountsQuery, FinancialAccountsVm>
+    public class GetFinancialAccountsQueryHandler : IRequestHandler<GetFinancialAccountsQuery, List<FinancialAccountDto>>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -24,16 +25,12 @@ namespace MakeMeRich.Application.FinancialAccounts.Queries
             _mapper = mapper;
         }
 
-        public async Task<FinancialAccountsVm> Handle(GetFinancialAccountsQuery request, CancellationToken cancellationToken)
+        public Task<List<FinancialAccountDto>> Handle(GetFinancialAccountsQuery request, CancellationToken cancellationToken)
         {
-            return new FinancialAccountsVm
-            {
-                FinancialAccounts = await _context.FinancialAccounts
+            return _context.FinancialAccounts
                     .ProjectTo<FinancialAccountDto>(_mapper.ConfigurationProvider)
                     .OrderBy(account => account.Title)
-                    .ToListAsync(cancellationToken)
-                    .ConfigureAwait(false)
-            };
+                    .ToListAsync(cancellationToken);
         }
     }
 }

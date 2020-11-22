@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using MakeMeRich.Application.Common.Interfaces;
-
+﻿using System.Collections.Generic;
 using MediatR;
 
 namespace MakeMeRich.Application.FinancialAccounts.Queries
 {
-    public class GetFinancialAccountsQuery : IRequest<FinancialAccountsVm>
+    public class GetFinancialAccountsQuery : IRequest<List<FinancialAccountDto>>
     {
-        
+
     }
 }
