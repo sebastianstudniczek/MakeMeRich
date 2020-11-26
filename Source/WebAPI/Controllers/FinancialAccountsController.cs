@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccount;
 using MakeMeRich.Application.FinancialAccounts.Queries;
 using MakeMeRich.Application.FinancialAccounts.Queries.Dtos;
 
@@ -18,6 +19,14 @@ namespace MakeMeRich.WebAPI.Controllers
         public async Task<ActionResult<List<FinancialAccountDto>>> GetAll()
         {
             return await Mediator.Send(new GetFinancialAccountsQuery());
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<int>> Create(CreateFinancialAccountCommand command)
+        {
+            return await Mediator.Send(command);
         }
     }
 }
