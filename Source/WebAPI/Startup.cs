@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using MakeMeRich.Application;
 using MakeMeRich.Infrastructure;
+using MakeMeRich.WebAPI.Filters;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,7 +31,12 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(options =>
+                options.Filters.Add(new ApiExceptionFilter()));
+
+            services.Configure<ApiBehaviorOptions>(options =>
+                options.SuppressModelStateInvalidFilter = true);
+
             services.AddRouting(options => options.LowercaseUrls = true);
 
             services.AddInfrastructure(Configuration);
