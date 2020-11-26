@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 using MakeMeRich.Application.Common.Mappings;
 using MakeMeRich.Application.FinancialAccounts.Queries.Dtos.FinancialTransactionCategories;
@@ -13,6 +14,8 @@ namespace MakeMeRich.Application.FinancialAccounts.Queries.Dtos.FinancialTransac
         public int FinancialAccountId { get; set; }
         public string TransactionSideName { get; set; }
         public double TotalAmount { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime DueDate { get; set; }
         public string Description { get; set; }
         public IList<ExternalTransactionCategoryDto> TransactionCategories { get; set; }
