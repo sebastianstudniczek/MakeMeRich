@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 
 using MakeMeRich.Application.Common.Interfaces;
@@ -12,6 +7,10 @@ using MakeMeRich.Application.FinancialAccounts.Queries.Dtos;
 using MediatR;
 
 using Microsoft.EntityFrameworkCore;
+
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MakeMeRich.Application.FinancialAccounts.Queries
 {
@@ -30,7 +29,6 @@ namespace MakeMeRich.Application.FinancialAccounts.Queries
         {
             return _context.FinancialAccounts
                     .ProjectTo<FinancialAccountDto>(_mapper.ConfigurationProvider)
-                    .OrderBy(account => account.Title)
                     .ToListAsync(cancellationToken);
         }
     }
