@@ -29,7 +29,7 @@ namespace WebAPI
                         context.Database.Migrate();
                     }
 
-                    await ApplicationDbContextSeeder.SeedSampleData(context);
+                    await ApplicationDbContextSeeder.SeedSampleDataAsync(context);
                 }
                 catch (Exception)
                 {
