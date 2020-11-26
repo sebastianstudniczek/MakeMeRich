@@ -1,10 +1,12 @@
-﻿using MakeMeRich.Application.Common.Mappings;
+﻿using MakeMeRich.Application.Common.CustomConverters;
+using MakeMeRich.Application.Common.Mappings;
 using MakeMeRich.Application.FinancialAccounts.Queries.Dtos.FinancialTransactionCategories;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace MakeMeRich.Application.FinancialAccounts.Queries.Dtos.FinancialTransactions
 {
@@ -16,6 +18,7 @@ namespace MakeMeRich.Application.FinancialAccounts.Queries.Dtos.FinancialTransac
         public double TotalAmount { get; set; }
 
         [DataType(DataType.Date)]
+        [JsonConverter(typeof(JsonDateTimeConverter))]
         public DateTime DueDate { get; set; }
         public string Description { get; set; }
         public IList<InternalTransactionCategoryDto> TransactionCategories { get; set; }
