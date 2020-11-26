@@ -37,7 +37,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
                 var queryHandler = new GetFinancialAccountsQueryHandler(context, _mapper);
                 var result = await queryHandler.Handle(query, CancellationToken.None);
 
-                result.FinancialAccounts.Should().HaveCount(3);
+                result.Should().HaveCount(3);
             }
         }
     }
