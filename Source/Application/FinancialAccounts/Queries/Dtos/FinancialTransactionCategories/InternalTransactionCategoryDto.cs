@@ -7,9 +7,9 @@ namespace MakeMeRich.Application.FinancialAccounts.Queries.Dtos.FinancialTransac
     {
         public int InternalTransactionId { get; set; }
         public int FinancialCategoryId { get; set; }
+        public string FinancialCategoryName { get; set; }
         public double Amount { get; set; }
         public string Description { get; set; }
-        public string FinancialCategoryName { get; set; }
 
         public void Mapping(MappingProfile profile)
         {
