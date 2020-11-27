@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 
+using MakeMeRich.Application.Common.Dtos;
 using MakeMeRich.Application.Common.Interfaces;
-using MakeMeRich.Application.FinancialAccounts.Queries.Dtos;
 
 using MediatR;
 

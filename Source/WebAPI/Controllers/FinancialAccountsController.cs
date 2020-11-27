@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using MakeMeRich.Application.Common.Dtos;
 using MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccount;
 using MakeMeRich.Application.FinancialAccounts.Queries;
-using MakeMeRich.Application.FinancialAccounts.Queries.Dtos;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

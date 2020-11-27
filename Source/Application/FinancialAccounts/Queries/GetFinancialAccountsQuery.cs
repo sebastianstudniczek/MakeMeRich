@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-using MakeMeRich.Application.FinancialAccounts.Queries.Dtos;
+using MakeMeRich.Application.Common.Dtos;
 
 using MediatR;
 
