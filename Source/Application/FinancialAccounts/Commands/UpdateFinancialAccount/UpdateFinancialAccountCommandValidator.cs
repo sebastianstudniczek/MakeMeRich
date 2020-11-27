@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 using FluentValidation;
@@ -23,10 +24,12 @@ namespace MakeMeRich.Application.FinancialAccounts.Commands.UpdateFinancialAccou
                   .MustAsync(BeUniqueTitle).WithMessage("The specified title already exists.");
         }
 
-        public async Task<bool> BeUniqueTitle(string title, CancellationToken cancellationToken)
+        public async Task<bool> BeUniqueTitle(UpdateFinancialAccountCommand command, string title, CancellationToken cancellationToken)
         {
             return await _context.FinancialAccounts
-                .AllAsync(account => account.Title != title);
+                .Where(account => account.Id != command.Id)
+                .AllAsync(account => account.Title != title)
+                .ConfigureAwait(false);
         }
     }
 }

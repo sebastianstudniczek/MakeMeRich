@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MakeMeRich.Application.Common.Dtos;
 using MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccount;
 using MakeMeRich.Application.FinancialAccounts.Commands.DeleteFinancialAccount;
+using MakeMeRich.Application.FinancialAccounts.Commands.UpdateFinancialAccount;
 using MakeMeRich.Application.FinancialAccounts.Queries;
 
 using Microsoft.AspNetCore.Http;
@@ -30,8 +31,22 @@ namespace MakeMeRich.WebAPI.Controllers
             return await Mediator.Send(command);
         }
 
-        [HttpDelete]
-        [Route("{id}")]
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> Update(int id, UpdateFinancialAccountCommand command)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest();
+            }
+
+            await Mediator.Send(command);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> Delete(int id)
