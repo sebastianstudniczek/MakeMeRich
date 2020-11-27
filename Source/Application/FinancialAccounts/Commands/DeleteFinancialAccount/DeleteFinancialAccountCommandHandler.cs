@@ -21,7 +21,7 @@ namespace MakeMeRich.Application.FinancialAccounts.Commands.DeleteFinancialAccou
         {
             var entity = await _context.FinancialAccounts.FindAsync(request.Id).ConfigureAwait(false);
 
-            if (entity == null)
+            if (entity is null)
             {
                 throw new NotFoundException(nameof(FinancialAccount), request.Id);
             }
