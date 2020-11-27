@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 using FluentValidation.AspNetCore;
@@ -41,7 +42,9 @@ namespace WebAPI
                 .AddControllers(options =>
                     options.Filters.Add(new ApiExceptionFilter()))
                 .AddFluentValidation(config =>
-                    config.ValidatorFactoryType = typeof(HttpContextServiceProviderValidatorFactory));
+                    config.ValidatorFactoryType = typeof(HttpContextServiceProviderValidatorFactory))
+                .AddJsonOptions(options =>
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
             services.Configure<ApiBehaviorOptions>(options =>
                 options.SuppressModelStateInvalidFilter = true);

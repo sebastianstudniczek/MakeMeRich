@@ -24,7 +24,7 @@ namespace MakeMeRich.WebAPI.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<int>> Create(CreateFinancialAccountCommand command)
+        public async Task<ActionResult<FinancialAccountDto>> Create(CreateFinancialAccountCommand command)
         {
             return await Mediator.Send(command);
         }

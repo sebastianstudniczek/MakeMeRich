@@ -10,6 +10,8 @@ namespace MakeMeRich.Application.Common.Dtos
     {
         public int Id { get; init; }
         public string Title { get; set; }
+        public double CurrentBalance { get; set; }
+        public string AccountType { get; set; }
         public IList<ExternalTransactionDto> ExternalTransactions { get; set; }
             = new List<ExternalTransactionDto>();
         public IList<InternalTransactionDto> ReceivedInternalTransactions { get; set; }
