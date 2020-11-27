@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using MakeMeRich.Application.Common.Dtos;
 using MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccount;
+using MakeMeRich.Application.FinancialAccounts.Commands.DeleteFinancialAccount;
 using MakeMeRich.Application.FinancialAccounts.Queries;
 
 using Microsoft.AspNetCore.Http;
@@ -27,6 +28,17 @@ namespace MakeMeRich.WebAPI.Controllers
         public async Task<ActionResult<FinancialAccountDto>> Create(CreateFinancialAccountCommand command)
         {
             return await Mediator.Send(command);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await Mediator.Send(new DeleteFinancialAccountCommand { Id = id });
+
+            return NoContent();
         }
     }
 }
