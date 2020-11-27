@@ -1,5 +1,4 @@
 ﻿using MakeMeRich.Domain.Enums;
-
 using MediatR;
 
 namespace MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccount
