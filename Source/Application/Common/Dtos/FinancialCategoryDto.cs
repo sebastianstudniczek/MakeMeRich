@@ -1,10 +1,10 @@
-﻿using MakeMeRich.Application.Common.Mappings;
-using MakeMeRich.Application.FinancialAccounts.Queries.Dtos.FinancialTransactionCategories;
+﻿using MakeMeRich.Application.Common.Dtos.FinancialTransactionCategories;
+using MakeMeRich.Application.Common.Mappings;
 using MakeMeRich.Domain.Entities;
 
 using System.Collections.Generic;
 
-namespace MakeMeRich.Application.FinancialAccounts.Queries.Dtos
+namespace MakeMeRich.Application.Common.Dtos
 {
     public class FinancialCategoryDto : IMapFrom<FinancialCategory>
     {

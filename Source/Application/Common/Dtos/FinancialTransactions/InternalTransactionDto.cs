@@ -1,6 +1,6 @@
 ﻿using MakeMeRich.Application.Common.CustomConverters;
+using MakeMeRich.Application.Common.Dtos.FinancialTransactionCategories;
 using MakeMeRich.Application.Common.Mappings;
-using MakeMeRich.Application.FinancialAccounts.Queries.Dtos.FinancialTransactionCategories;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 
 using System;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace MakeMeRich.Application.FinancialAccounts.Queries.Dtos.FinancialTransactions
+namespace MakeMeRich.Application.Common.Dtos.FinancialTransactions
 {
     public class InternalTransactionDto : IMapFrom<InternalTransaction>
     {

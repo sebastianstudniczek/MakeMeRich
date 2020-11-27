@@ -1,10 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+
+using FluentValidation.AspNetCore;
 
 using MakeMeRich.Application;
 using MakeMeRich.Infrastructure;
+using MakeMeRich.WebAPI.Filters;
+
+using MicroElements.Swashbuckle.FluentValidation;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +21,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace WebAPI
 {
@@ -30,7 +38,17 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services
+                .AddControllers(options =>
+                    options.Filters.Add(new ApiExceptionFilter()))
+                .AddFluentValidation(config =>
+                    config.ValidatorFactoryType = typeof(HttpContextServiceProviderValidatorFactory))
+                .AddJsonOptions(options =>
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
+            services.Configure<ApiBehaviorOptions>(options =>
+                options.SuppressModelStateInvalidFilter = true);
+
             services.AddRouting(options => options.LowercaseUrls = true);
 
             services.AddInfrastructure(Configuration);
@@ -48,6 +66,7 @@ namespace WebAPI
                         Name = "Sebastian Studniczek",
                     }
                 });
+                config.AddFluentValidationRules();
             });
         }
 
