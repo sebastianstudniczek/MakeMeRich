@@ -15,7 +15,7 @@ using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
 {
-    public class GetFinancialAccountsCommandHandlerTests : CommandHandlerTestBase
+    public class GetFinancialAccountsCommandHandlerTests : HandlerTest
     {
         private readonly IMapper _mapper;
         private readonly IConfigurationProvider _configuration;

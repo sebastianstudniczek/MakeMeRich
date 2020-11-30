@@ -12,7 +12,7 @@ using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransactions.Commands
 {
-    public class CreateInternalTransactionCommandHandlerTests : CommandHandlerTestBase
+    public class CreateInternalTransactionCommandHandlerTests : HandlerTest
     {
         [Fact]
         public async Task ShouldCreateInternalTransaction()

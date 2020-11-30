@@ -14,7 +14,7 @@ using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransactions.Commands
 {
-    public class DeleteExternalTransactionCommandHandlerTests : CommandHandlerTestBase
+    public class DeleteExternalTransactionCommandHandlerTests : HandlerTest
     {
         [Fact]
         public void ShouldRequireValidExternalTransactionId()

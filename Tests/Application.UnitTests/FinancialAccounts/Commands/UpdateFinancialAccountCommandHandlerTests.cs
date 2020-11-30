@@ -14,7 +14,7 @@ using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
 {
-    public class UpdateFinancialAccountCommandHandlerTests : CommandHandlerTestBase
+    public class UpdateFinancialAccountCommandHandlerTests : HandlerTest
     {
         [Fact]
         public void ShouldRequireValidFinancialAccountId()
