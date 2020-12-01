@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 
 using MakeMeRich.Application.Common.Dtos;
+using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.Common.Interfaces;
+using MakeMeRich.Domain.Entities;
 
 using MediatR;
 
@@ -26,6 +28,11 @@ namespace MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccountBy
             var entity = await _context.FinancialAccounts
                 .FindAsync(new object[] { request.Id }, cancellationToken)
                 .ConfigureAwait(false);
+
+            if (entity is null)
+            {
+                throw new NotFoundException(nameof(FinancialAccount), request.Id);
+            }
 
             return _mapper.Map<FinancialAccountDto>(entity);
         }

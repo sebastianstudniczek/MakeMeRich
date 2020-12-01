@@ -3,6 +3,7 @@
 using FluentAssertions;
 
 using MakeMeRich.Application.Common.Dtos;
+using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.Common.Mappings;
 using MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccountById;
 using MakeMeRich.Application.UnitTests.Common;
@@ -25,6 +26,20 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
         {
             _configuration = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>());
             _mapper = _configuration.CreateMapper();
+        }
+
+        [Fact]
+        public void ShouldRequireValidFinancialAccountId()
+        {
+            var query = new GetFinancialAccountByIdQuery { Id = 99 };
+
+            using (var context = new ApplicationDbContext(DbContextOptions))
+            {
+                var queryHandler = new GetFinancialAccountByIdQueryHandler(context, _mapper);
+
+                FluentActions.Invoking(() => queryHandler.Handle(query, CancellationToken.None))
+                    .Should().Throw<NotFoundException>();
+            }
         }
 
         [Fact]
