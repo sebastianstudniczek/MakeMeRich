@@ -1,15 +1,15 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-
-using AutoMapper;
+﻿using AutoMapper;
 
 using FluentAssertions;
 
 using MakeMeRich.Application.Common.Mappings;
-using MakeMeRich.Application.FinancialAccounts.Queries;
+using MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccounts;
 using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Infrastructure.Persistance;
+
+using System.Threading;
+using System.Threading.Tasks;
 
 using Xunit;
 

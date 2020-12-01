@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MakeMeRich.Application.FinancialAccounts.Queries
+namespace MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccounts
 {
     public class GetFinancialAccountsQueryHandler : IRequestHandler<GetFinancialAccountsQuery, List<FinancialAccountDto>>
     {

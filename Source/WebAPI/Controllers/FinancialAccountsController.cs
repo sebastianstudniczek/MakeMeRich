@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using MakeMeRich.Application.Common.Dtos;
+﻿using MakeMeRich.Application.Common.Dtos;
 using MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccount;
 using MakeMeRich.Application.FinancialAccounts.Commands.DeleteFinancialAccount;
 using MakeMeRich.Application.FinancialAccounts.Commands.UpdateFinancialAccount;
-using MakeMeRich.Application.FinancialAccounts.Queries;
 using MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccountById;
+using MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccounts;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MakeMeRich.WebAPI.Controllers
 {
