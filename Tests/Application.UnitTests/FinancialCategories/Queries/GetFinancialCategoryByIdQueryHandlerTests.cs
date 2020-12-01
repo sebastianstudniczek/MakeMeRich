@@ -56,10 +56,10 @@ namespace MakeMeRich.Application.UnitTests.FinancialCategories.Queries
             using (var context = new ApplicationDbContext(DbContextOptions))
             {
                 var queryHandler = new GetFinancialCategoryByIdQueryHandler(context, _mapper);
-                var result = await queryHandler.Handle(query, CancellationToken.None);
+                var dto = await queryHandler.Handle(query, CancellationToken.None);
 
-                result.Should().NotBeNull();
-                result.Id.Should().Be(query.Id);
+                dto.Should().NotBeNull();
+                dto.Id.Should().Be(query.Id);
             }
         }
     }
