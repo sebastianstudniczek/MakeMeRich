@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MakeMeRich.Application.Common.Dtos;
+using MediatR;
 
 namespace MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccountById
 {
-    public class GetFinancialAccountByIdQuery
+    public class GetFinancialAccountByIdQuery : IRequest<FinancialAccountDto>
     {
         public int Id { get; set; }
     }
