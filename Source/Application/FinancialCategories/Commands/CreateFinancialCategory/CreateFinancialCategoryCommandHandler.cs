@@ -1,6 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
+using AutoMapper;
+
+using MakeMeRich.Application.Common.Dtos;
 using MakeMeRich.Application.Common.Interfaces;
 using MakeMeRich.Domain.Entities;
 
@@ -8,16 +11,18 @@ using MediatR;
 
 namespace MakeMeRich.Application.FinancialCategories.Commands.CreateFinancialCategory
 {
-    public class CreateFinancialCategoryCommandHandler : IRequestHandler<CreateFinancialCategoryCommand, int>
+    public class CreateFinancialCategoryCommandHandler : IRequestHandler<CreateFinancialCategoryCommand, FinancialCategoryDto>
     {
         private readonly IApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public CreateFinancialCategoryCommandHandler(IApplicationDbContext context)
+        public CreateFinancialCategoryCommandHandler(IApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<int> Handle(CreateFinancialCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<FinancialCategoryDto> Handle(CreateFinancialCategoryCommand request, CancellationToken cancellationToken)
         {
             var entity = new FinancialCategory
             {
@@ -25,9 +30,9 @@ namespace MakeMeRich.Application.FinancialCategories.Commands.CreateFinancialCat
             };
 
             _context.FinancialCategories.Add(entity);
-            await _context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
-            return entity.Id;
+            return _mapper.Map<FinancialCategoryDto>(entity);
         }
     }
 }
