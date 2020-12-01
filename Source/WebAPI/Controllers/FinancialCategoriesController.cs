@@ -1,5 +1,6 @@
 ﻿using MakeMeRich.Application;
 using MakeMeRich.Application.Common.Dtos;
+using MakeMeRich.Application.FinancialCategories.Queries.GetFinancialCategoryById;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,5 +21,12 @@ namespace MakeMeRich.WebAPI.Controllers
             return await Mediator.Send(new GetFinancialCategoriesQuery());
         }
 
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<FinancialCategoryDto> GetById(int id)
+        {
+            return await Mediator.Send(new GetFinancialCategoryByIdQuery { Id = id });
+        }
     }
 }
