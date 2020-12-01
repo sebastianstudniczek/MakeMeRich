@@ -2,27 +2,30 @@
 
 using FluentAssertions;
 
-using MakeMeRich.Application.Common.Dtos;
 using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.Common.Mappings;
-using MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccountById;
+using MakeMeRich.Application.FinancialCategories.Queries.GetFinancialCategoryById;
 using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Infrastructure.Persistance;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 using Xunit;
 
-namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
+namespace MakeMeRich.Application.UnitTests.FinancialCategories.Queries
 {
-    public class GetFinancialAccountByIdCommandHandlerTests : HandlerTest
+    public class GetFinancialCategoryByIdQueryHandlerTests : HandlerTest
     {
         private readonly IConfigurationProvider _configuration;
         private readonly IMapper _mapper;
 
-        public GetFinancialAccountByIdCommandHandlerTests()
+        public GetFinancialCategoryByIdQueryHandlerTests()
         {
             _configuration = new MapperConfiguration(
                 config => config.AddProfile<MappingProfile>());
@@ -31,13 +34,13 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
         }
 
         [Fact]
-        public void ShouldRequireValidFinancialAccountId()
+        public void ShouldRequireValidFinancialCategoryId()
         {
-            var query = new GetFinancialAccountByIdQuery { Id = 99 };
+            var query = new GetFinancialCategoryByIdQuery { Id = 99 };
 
             using (var context = new ApplicationDbContext(DbContextOptions))
             {
-                var queryHandler = new GetFinancialAccountByIdQueryHandler(context, _mapper);
+                var queryHandler = new GetFinancialCategoryByIdQueryHandler(context, _mapper);
 
                 FluentActions.Invoking(() => queryHandler.Handle(query, CancellationToken.None))
                     .Should().Throw<NotFoundException>();
@@ -45,18 +48,17 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
         }
 
         [Fact]
-        public async Task ShouldReturnFinancialAccount()
+        public async Task ShouldReturnFinancialCategory()
         {
-            DataSeeder.GetSampleFinancialAccounts(DbContextOptions);
-            var query = new GetFinancialAccountByIdQuery { Id = 2 };
+            DataSeeder.GetSampleFinancialCategories(DbContextOptions);
+            var query = new GetFinancialCategoryByIdQuery { Id = 2 };
 
             using (var context = new ApplicationDbContext(DbContextOptions))
             {
-                var queryHandler = new GetFinancialAccountByIdQueryHandler(context, _mapper);
+                var queryHandler = new GetFinancialCategoryByIdQueryHandler(context, _mapper);
                 var result = await queryHandler.Handle(query, CancellationToken.None);
 
                 result.Should().NotBeNull();
-                result.Should().BeOfType<FinancialAccountDto>();
                 result.Id.Should().Be(query.Id);
             }
         }
