@@ -24,7 +24,9 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
 
         public GetFinancialAccountByIdCommandHandlerTests()
         {
-            _configuration = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>());
+            _configuration = new MapperConfiguration(
+                config => config.AddProfile<MappingProfile>());
+
             _mapper = _configuration.CreateMapper();
         }
 
