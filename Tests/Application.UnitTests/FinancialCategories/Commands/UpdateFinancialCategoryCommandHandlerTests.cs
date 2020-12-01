@@ -13,7 +13,7 @@ using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialCategories.Commands
 {
-    public class UpdateFinancialCategoryCommandHandlerTests : CommandHandlerTestBase
+    public class UpdateFinancialCategoryCommandHandlerTests : HandlerTest
     {
         [Fact]
         public async Task ShouldUpdateFinancialCategory()

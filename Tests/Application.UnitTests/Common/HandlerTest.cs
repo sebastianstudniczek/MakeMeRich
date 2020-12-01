@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MakeMeRich.Application.UnitTests.Common
 {
-    public abstract class CommandHandlerTestBase
+    public abstract class HandlerTest
     {
-        protected CommandHandlerTestBase()
+        protected HandlerTest()
         {
             DbContextOptions =
                 ApplicationDbContextOptionsFactory<ApplicationDbContext>.Create();

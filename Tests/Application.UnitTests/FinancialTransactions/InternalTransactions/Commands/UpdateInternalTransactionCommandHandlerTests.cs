@@ -15,7 +15,7 @@ using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransactions.Commands
 {
-    public class UpdateInternalTransactionCommandHandlerTests : CommandHandlerTestBase
+    public class UpdateInternalTransactionCommandHandlerTests : HandlerTest
     {
         [Fact]
         public void ShouldRequireValidInternalTransactionId()

@@ -14,7 +14,7 @@ using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialCategories.Commands
 {
-    public class DeleteFinancialCategoryCommandHalderTests : CommandHandlerTestBase
+    public class DeleteFinancialCategoryCommandHalderTests : HandlerTest
     {
         [Fact]
         public void ShouldRequireValidFinancialTransactionId()

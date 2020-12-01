@@ -1,33 +1,35 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-
-using AutoMapper;
+﻿using AutoMapper;
 
 using FluentAssertions;
 
 using MakeMeRich.Application.Common.Mappings;
-using MakeMeRich.Application.FinancialAccounts.Queries;
+using MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccounts;
 using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Infrastructure.Persistance;
+
+using System.Threading;
+using System.Threading.Tasks;
 
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
 {
-    public class GetFinancialAccountsCommandHandlerTests : CommandHandlerTestBase
+    public class GetFinancialAccountsCommandHandlerTests : HandlerTest
     {
         private readonly IMapper _mapper;
         private readonly IConfigurationProvider _configuration;
 
         public GetFinancialAccountsCommandHandlerTests()
         {
-            _configuration = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>());
+            _configuration = new MapperConfiguration(
+                config => config.AddProfile<MappingProfile>());
+
             _mapper = _configuration.CreateMapper();
         }
 
         [Fact]
-        public async Task ShouldReturnAllFinancialAccountsAndTransactions()
+        public async Task ShouldReturnAllFinancialAccounts()
         {
             DataSeeder.GetSampleFinancialAccounts(DbContextOptions);
             var query = new GetFinancialAccountsQuery();

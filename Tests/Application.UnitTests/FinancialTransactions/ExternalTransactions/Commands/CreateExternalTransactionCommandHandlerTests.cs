@@ -14,7 +14,7 @@ using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransactions.Commands
 {
-    public class CreateExternalTransactionCommandHandlerTests : CommandHandlerTestBase
+    public class CreateExternalTransactionCommandHandlerTests : HandlerTest
     {
         [Fact]
         public async Task ShouldCreateExpense()
