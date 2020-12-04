@@ -1,15 +1,12 @@
-﻿using MakeMeRich.Application;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using MakeMeRich.Application;
 using MakeMeRich.Application.Common.Dtos;
 using MakeMeRich.Application.FinancialCategories.Commands.CreateFinancialCategory;
+using MakeMeRich.Application.FinancialCategories.Commands.UpdateFinancialCategory;
 using MakeMeRich.Application.FinancialCategories.Queries.GetFinancialCategoryById;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MakeMeRich.WebAPI.Controllers
 {
@@ -38,6 +35,22 @@ namespace MakeMeRich.WebAPI.Controllers
             var dto = await Mediator.Send(command);
 
             return CreatedAtAction(nameof(GetById), new { dto.Id }, dto);
+        }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> Update(int id, UpdateFinancialCategoryCommand command)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest();
+            }
+
+            await Mediator.Send(command);
+
+            return NoContent();
         }
     }
 }
