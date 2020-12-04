@@ -146,6 +146,10 @@ namespace MakeMeRich.Infrastructure.Persistance
                 };
 
                 context.FinancialAccounts.AddRange(financialAccounts);
+                context.FinancialCategories.AddRange(financialCategories);
+                context.ExternalTransactions.AddRange(externalTransactions);
+                context.InternalTransactions.AddRange(receivedInternalTransactions);
+                context.InternalTransactions.AddRange(sendedInternalTransactions);
                 context.ExternalTransactionCategories.AddRange(externalTransactionCategories);
                 context.InternalTransactionCategories.AddRange(internalTransactionCategories);
 
