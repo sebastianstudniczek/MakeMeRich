@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MakeMeRich.Application;
 using MakeMeRich.Application.Common.Dtos;
 using MakeMeRich.Application.FinancialCategories.Commands.CreateFinancialCategory;
+using MakeMeRich.Application.FinancialCategories.Commands.DeleteFinancialCategory;
 using MakeMeRich.Application.FinancialCategories.Commands.UpdateFinancialCategory;
 using MakeMeRich.Application.FinancialCategories.Queries.GetFinancialCategoryById;
 using Microsoft.AspNetCore.Http;
@@ -52,5 +53,16 @@ namespace MakeMeRich.WebAPI.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await Mediator.Send(new DeleteFinancialCategoryCommand { Id = id });
+
+            return NoContent();
+        }
+
     }
 }
