@@ -1,14 +1,11 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-
 using FluentAssertions;
-
 using MakeMeRich.Application.FinancialCategories.Commands.UpdateFinancialCategory;
 using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Infrastructure.Persistance;
-
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialCategories.Commands

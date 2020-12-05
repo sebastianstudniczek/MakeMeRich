@@ -1,16 +1,11 @@
-﻿using AutoMapper;
-
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using FluentAssertions;
-
-using MakeMeRich.Application.Common.Mappings;
 using MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccounts;
 using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Infrastructure.Persistance;
-
-using System.Threading;
-using System.Threading.Tasks;
-
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
@@ -18,14 +13,10 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
     public class GetFinancialAccountsCommandHandlerTests : HandlerTest
     {
         private readonly IMapper _mapper;
-        private readonly IConfigurationProvider _configuration;
 
-        public GetFinancialAccountsCommandHandlerTests()
+        public GetFinancialAccountsCommandHandlerTests(DtoResponseHandlerTestFixture fixture)
         {
-            _configuration = new MapperConfiguration(
-                config => config.AddProfile<MappingProfile>());
-
-            _mapper = _configuration.CreateMapper();
+            _mapper = fixture.Mapper;
         }
 
         [Fact]

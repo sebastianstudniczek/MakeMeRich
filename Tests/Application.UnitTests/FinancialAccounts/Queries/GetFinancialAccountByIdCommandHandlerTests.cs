@@ -1,33 +1,24 @@
-﻿using AutoMapper;
-
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using FluentAssertions;
-
 using MakeMeRich.Application.Common.Dtos;
 using MakeMeRich.Application.Common.Exceptions;
-using MakeMeRich.Application.Common.Mappings;
 using MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccountById;
 using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Infrastructure.Persistance;
-
-using System.Threading;
-using System.Threading.Tasks;
-
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
 {
     public class GetFinancialAccountByIdCommandHandlerTests : HandlerTest
     {
-        private readonly IConfigurationProvider _configuration;
         private readonly IMapper _mapper;
 
-        public GetFinancialAccountByIdCommandHandlerTests()
+        public GetFinancialAccountByIdCommandHandlerTests(DtoResponseHandlerTestFixture fixture)
         {
-            _configuration = new MapperConfiguration(
-                config => config.AddProfile<MappingProfile>());
-
-            _mapper = _configuration.CreateMapper();
+            _mapper = fixture.Mapper;
         }
 
         [Fact]
