@@ -1,5 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
+using MakeMeRich.Application.Common.Dtos.FinancialTransactions;
 using MakeMeRich.Application.Common.Interfaces;
 using MakeMeRich.Application.FinancialTransactions.Common.Commands;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
@@ -8,22 +10,24 @@ using MediatR;
 
 namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Commands.CreateExternalTransaction
 {
-    public class CreateExternalTransactionCommand : CreateFinancialTransactionCommand
+    public class CreateExternalTransactionCommand : CreateFinancialTransactionCommand, IRequest<ExternalTransactionDto>
     {
         public string TransactionSideName { get; set; }
         public ExternalTransactionType Type { get; set; }
     }
 
-    public class CreateExternalTransactionCommandHandler : IRequestHandler<CreateExternalTransactionCommand, int>
+    public class CreateExternalTransactionCommandHandler : IRequestHandler<CreateExternalTransactionCommand, ExternalTransactionDto>
     {
         private readonly IApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public CreateExternalTransactionCommandHandler(IApplicationDbContext context)
+        public CreateExternalTransactionCommandHandler(IApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<int> Handle(CreateExternalTransactionCommand request, CancellationToken cancellationToken)
+        public async Task<ExternalTransactionDto> Handle(CreateExternalTransactionCommand request, CancellationToken cancellationToken)
         {
             var entity = new ExternalTransaction
             {
@@ -37,7 +41,7 @@ namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Comm
             _context.ExternalTransactions.Add(entity);
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
-            return entity.Id;
+            return _mapper.Map<ExternalTransactionDto>(entity);
         }
     }
 }

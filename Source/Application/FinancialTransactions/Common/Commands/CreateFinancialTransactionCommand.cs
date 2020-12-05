@@ -1,10 +1,8 @@
 ﻿using System;
 
-using MediatR;
-
 namespace MakeMeRich.Application.FinancialTransactions.Common.Commands
 {
-    public abstract class CreateFinancialTransactionCommand : IRequest<int>
+    public abstract class CreateFinancialTransactionCommand
     {
         public double TotalAmount { get; set; }
         public DateTime DueDate { get; set; }

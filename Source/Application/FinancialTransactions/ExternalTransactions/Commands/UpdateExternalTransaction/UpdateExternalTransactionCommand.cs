@@ -9,7 +9,7 @@ using MediatR;
 
 namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Commands.UpdateExternalTransaction
 {
-    public class UpdateExternalTransactionCommand : UpdateFinancialTransactionCommand
+    public class UpdateExternalTransactionCommand : UpdateFinancialTransactionCommand, IRequest
     {
         public string TransactionSideName { get; set; }
         public ExternalTransactionType Type { get; set; }

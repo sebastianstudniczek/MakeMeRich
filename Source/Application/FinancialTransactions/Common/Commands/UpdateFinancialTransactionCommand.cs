@@ -1,10 +1,8 @@
 ﻿using System;
 
-using MediatR;
-
 namespace MakeMeRich.Application.FinancialTransactions.Common.Commands
 {
-    public class UpdateFinancialTransactionCommand : IRequest
+    public class UpdateFinancialTransactionCommand
     {
         public int Id { get; set; }
         public int TotalAmount { get; set; }

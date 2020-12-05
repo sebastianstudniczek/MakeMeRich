@@ -8,7 +8,7 @@ using MediatR;
 
 namespace MakeMeRich.Application.FinancialTransactions.InternalTransactions.Commands.UpdateInternalTransaction
 {
-    public class UpdateInternalTransactionCommand : UpdateFinancialTransactionCommand
+    public class UpdateInternalTransactionCommand : UpdateFinancialTransactionCommand, IRequest
     {
         public int SendingAccountId { get; set; }
         public int ReceivingAccountId { get; set; }
