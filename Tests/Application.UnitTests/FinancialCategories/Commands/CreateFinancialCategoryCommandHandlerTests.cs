@@ -11,7 +11,7 @@ using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialCategories.Commands
 {
-    public class CreateFinancialCategoryCommandHandlerTests : HandlerTest
+    public class CreateFinancialCategoryCommandHandlerTests : HandlerTest, IClassFixture<DtoResponseHandlerTestFixture>
     {
         private readonly IMapper _mapper;
 

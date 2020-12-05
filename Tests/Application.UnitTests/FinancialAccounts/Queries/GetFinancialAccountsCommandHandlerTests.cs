@@ -4,13 +4,12 @@ using AutoMapper;
 using FluentAssertions;
 using MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccounts;
 using MakeMeRich.Application.UnitTests.Common;
-using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Infrastructure.Persistance;
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
 {
-    public class GetFinancialAccountsCommandHandlerTests : HandlerTest
+    public class GetFinancialAccountsCommandHandlerTests : HandlerTest, IClassFixture<DtoResponseHandlerTestFixture>
     {
         private readonly IMapper _mapper;
 
@@ -30,7 +29,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
                 var queryHandler = new GetFinancialAccountsQueryHandler(context, _mapper);
                 var result = await queryHandler.Handle(query, CancellationToken.None);
 
-                result.Should().HaveCount(3);
+                result.Should().HaveCount(DataSeeder.FinancialAccountsCount);
             }
         }
     }

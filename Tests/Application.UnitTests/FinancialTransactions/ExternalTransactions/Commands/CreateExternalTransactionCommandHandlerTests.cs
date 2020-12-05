@@ -13,7 +13,7 @@ using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransactions.Commands
 {
-    public class CreateExternalTransactionCommandHandlerTests : HandlerTest
+    public class CreateExternalTransactionCommandHandlerTests : HandlerTest, IClassFixture<DtoResponseHandlerTestFixture>
     {
         private readonly IMapper _mapper;
 

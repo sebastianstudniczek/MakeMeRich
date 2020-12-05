@@ -5,7 +5,6 @@ using FluentAssertions;
 using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.FinancialTransactions.InternalTransactions.Commands.UpdateInternalTransaction;
 using MakeMeRich.Application.UnitTests.Common;
-using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Infrastructure.Persistance;
 using Xunit;

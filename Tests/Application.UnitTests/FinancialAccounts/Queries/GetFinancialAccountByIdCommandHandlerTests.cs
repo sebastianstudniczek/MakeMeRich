@@ -6,13 +6,12 @@ using MakeMeRich.Application.Common.Dtos;
 using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccountById;
 using MakeMeRich.Application.UnitTests.Common;
-using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Infrastructure.Persistance;
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
 {
-    public class GetFinancialAccountByIdCommandHandlerTests : HandlerTest
+    public class GetFinancialAccountByIdCommandHandlerTests : HandlerTest, IClassFixture<DtoResponseHandlerTestFixture>
     {
         private readonly IMapper _mapper;
 

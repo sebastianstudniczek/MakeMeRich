@@ -11,7 +11,7 @@ using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialTransactions.InternalTransactions.Commands
 {
-    public class CreateInternalTransactionCommandHandlerTests : HandlerTest
+    public class CreateInternalTransactionCommandHandlerTests : HandlerTest, IClassFixture<DtoResponseHandlerTestFixture>
     {
         private readonly IMapper _mapper;
 

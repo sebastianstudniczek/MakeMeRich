@@ -12,7 +12,7 @@ using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Commands
 {
-    public class CreateFinancialAccountCommandHandlerTests : HandlerTest
+    public class CreateFinancialAccountCommandHandlerTests : HandlerTest, IClassFixture<DtoResponseHandlerTestFixture>
     {
         private readonly IMapper _mapper;
 

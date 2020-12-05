@@ -5,7 +5,6 @@ using FluentAssertions;
 using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Commands.UpdateExternalTransaction;
 using MakeMeRich.Application.UnitTests.Common;
-using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Domain.Enums;
 using MakeMeRich.Infrastructure.Persistance;

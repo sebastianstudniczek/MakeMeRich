@@ -6,13 +6,12 @@ using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.Common.Mappings;
 using MakeMeRich.Application.FinancialCategories.Queries.GetFinancialCategoryById;
 using MakeMeRich.Application.UnitTests.Common;
-using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Infrastructure.Persistance;
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialCategories.Queries
 {
-    public class GetFinancialCategoryByIdQueryHandlerTests : HandlerTest
+    public class GetFinancialCategoryByIdQueryHandlerTests : HandlerTest, IClassFixture<DtoResponseHandlerTestFixture>
     {
         private readonly IMapper _mapper;
 
