@@ -67,6 +67,17 @@ namespace MakeMeRich.Application.UnitTests.Common
 
                     FinancialAccountId = 2,
                 },
+                new ExternalTransaction
+                {
+                    Id = 4,
+                    TransactionSideName = "Żabka",
+                    TotalAmount = 1600.67,
+                    TransactionType = ExternalTransactionType.Expense,
+                    DueDate = new DateTime(2013, 11, 12),
+                    Description = "Fourth external transaction",
+
+                    FinancialAccountId = 2,
+                },
             };
 
             context.ExternalTransactions.AddRange(externalTransactions);

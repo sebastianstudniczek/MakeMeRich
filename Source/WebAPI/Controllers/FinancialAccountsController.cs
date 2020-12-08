@@ -1,10 +1,13 @@
-﻿using MakeMeRich.Application.Common.Dtos;
+﻿using MakeMeRich.Application;
+using MakeMeRich.Application.Common.Dtos;
+using MakeMeRich.Application.Common.Dtos.FinancialTransactions;
 using MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccount;
 using MakeMeRich.Application.FinancialAccounts.Commands.DeleteFinancialAccount;
 using MakeMeRich.Application.FinancialAccounts.Commands.UpdateFinancialAccount;
 using MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccountById;
 using MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccounts;
-
+using MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Commands.CreateExternalTransaction;
+using MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -62,5 +65,44 @@ namespace MakeMeRich.WebAPI.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("{id}/externaltransactions")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<ExternalTransactionDto>>> GetExternalTransactions(int id)
+        {
+            return await Mediator.Send(
+                new GetExternalTransactionsForFinancialAccountQuery
+                {
+                    FinancialAccountId = id
+                });
+        }
+
+        [HttpPost("{id}/externaltransactions")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<ExternalTransactionDto>> CreateExternalTransaction(int id, CreateExternalTransactionCommand command)
+        {
+            if (id != command.SendingAccountId)
+            {
+                return BadRequest();
+            }
+
+            return await Mediator.Send(command);
+        }
+
+        [HttpPost("{id}/internaltransactions")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<InternalTransactionDto>> CreateInternalTransaction(int id, CreateInternalTransactionCommand command)
+        {
+            if (id != command.SendingAccountId)
+            {
+                return BadRequest();
+            }
+
+            return await Mediator.Send(command);
+        }
+
+
     }
 }

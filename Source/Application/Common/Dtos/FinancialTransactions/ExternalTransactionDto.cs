@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-
 using MakeMeRich.Application.Common.CustomConverters;
 using MakeMeRich.Application.Common.Dtos.FinancialTransactionCategories;
 using MakeMeRich.Application.Common.Mappings;
@@ -15,6 +14,7 @@ namespace MakeMeRich.Application.Common.Dtos.FinancialTransactions
         public int Id { get; init; }
         public int FinancialAccountId { get; set; }
         public string TransactionSideName { get; set; }
+        public string TransactionType { get; set; }
         public double TotalAmount { get; set; }
 
         [DataType(DataType.Date)]
