@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using MakeMeRich.Domain.Entities;
-using MakeMeRich.Domain.Entities.FinancialTransactionCategories;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Domain.Enums;
 
@@ -127,31 +126,12 @@ namespace MakeMeRich.Infrastructure.Persistance
                     }
                 };
 
-                var internalTransactionCategories = new List<InternalTransactionCategory>
-                {
-                    new InternalTransactionCategory
-                    {
-                        Amount = 0,
-                        Description = "Some internal category description",
-                        InternalTransaction = receivedInternalTransactions[0],
-                        FinancialCategory = financialCategories[0]
-                    },
-                    new InternalTransactionCategory
-                    {
-                        Amount = 0,
-                        Description = "Some other internal category description",
-                        InternalTransaction = receivedInternalTransactions[0],
-                        FinancialCategory = financialCategories[1]
-                    }
-                };
-
                 context.FinancialAccounts.AddRange(financialAccounts);
                 context.FinancialCategories.AddRange(financialCategories);
                 context.ExternalTransactions.AddRange(externalTransactions);
                 context.InternalTransactions.AddRange(receivedInternalTransactions);
                 context.InternalTransactions.AddRange(sendedInternalTransactions);
                 context.ExternalTransactionCategories.AddRange(externalTransactionCategories);
-                context.InternalTransactionCategories.AddRange(internalTransactionCategories);
 
                 await context
                     .SaveChangesAsync()

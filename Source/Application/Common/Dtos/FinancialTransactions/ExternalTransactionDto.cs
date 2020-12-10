@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using MakeMeRich.Application.Common.CustomConverters;
-using MakeMeRich.Application.Common.Dtos.FinancialTransactionCategories;
 using MakeMeRich.Application.Common.Mappings;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 

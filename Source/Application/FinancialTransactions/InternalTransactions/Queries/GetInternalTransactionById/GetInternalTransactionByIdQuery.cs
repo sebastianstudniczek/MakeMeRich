@@ -6,7 +6,6 @@ using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.Common.Interfaces;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace MakeMeRich.Application.FinancialTransactions.InternalTransactions.Queries.GetInternalTransactionById
 {
@@ -29,9 +28,7 @@ namespace MakeMeRich.Application.FinancialTransactions.InternalTransactions.Quer
         public async Task<InternalTransactionDto> Handle(GetInternalTransactionByIdQuery request, CancellationToken cancellationToken)
         {
             var entity = await _context.InternalTransactions
-                .Include(transaction => transaction.TransactionCategories)
-                    .ThenInclude(transactionCategory => transactionCategory.FinancialCategory)
-                .FirstOrDefaultAsync(transaction => transaction.Id == request.Id)
+                .FindAsync(new object[] { request.Id }, cancellationToken)
                 .ConfigureAwait(false);
 
             if (entity is null)

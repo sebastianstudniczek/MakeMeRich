@@ -1,15 +1,14 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using AutoMapper;
 using MakeMeRich.Application.Common.Dtos.FinancialTransactions;
 using MakeMeRich.Application.Common.Interfaces;
 using MakeMeRich.Application.FinancialTransactions.Common.Commands;
+using MakeMeRich.Domain.Entities;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Domain.Enums;
 using MediatR;
-using MakeMeRich.Domain.Entities.FinancialTransactionCategories;
-using System.ComponentModel.DataAnnotations;
 
 namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Commands.CreateExternalTransaction
 {

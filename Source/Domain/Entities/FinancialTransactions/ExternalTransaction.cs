@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using MakeMeRich.Domain.Entities.FinancialTransactionCategories;
 using MakeMeRich.Domain.Enums;
 
 namespace MakeMeRich.Domain.Entities.FinancialTransactions

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Domain.Enums;
 
