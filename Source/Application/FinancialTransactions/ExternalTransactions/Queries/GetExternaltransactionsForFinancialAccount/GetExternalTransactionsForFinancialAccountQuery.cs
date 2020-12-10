@@ -9,7 +9,7 @@ using MakeMeRich.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Queries
+namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Queries.GetExternaltransactionsForFinancialAccountQuery
 {
     public class GetExternalTransactionsForFinancialAccountQuery : IRequest<List<ExternalTransactionDto>>
     {

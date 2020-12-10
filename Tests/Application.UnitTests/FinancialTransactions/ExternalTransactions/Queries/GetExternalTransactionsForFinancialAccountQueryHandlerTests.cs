@@ -2,24 +2,24 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentAssertions;
-using MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Queries;
+using MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Queries.GetExternaltransactionsForFinancialAccountQuery;
 using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Infrastructure.Persistance;
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransactions.Queries
 {
-    public class GetFinancialTransactionsForFinancialAccountQueryHandlerTests : HandlerTest, IClassFixture<DtoResponseHandlerTestFixture>
+    public class GetExternalTransactionsForFinancialAccountQueryHandlerTests : HandlerTest, IClassFixture<DtoResponseHandlerTestFixture>
     {
         private readonly IMapper _mapper;
 
-        public GetFinancialTransactionsForFinancialAccountQueryHandlerTests(DtoResponseHandlerTestFixture fixture)
+        public GetExternalTransactionsForFinancialAccountQueryHandlerTests(DtoResponseHandlerTestFixture fixture)
         {
             _mapper = fixture.Mapper;
         }
 
         [Fact]
-        public async Task ShouldResturnExternalTransactionsForFinancialAccount()
+        public async Task ShouldReturnExternalTransactionsForFinancialAccount()
         {
             DataSeeder.GetSampleExternalTransactions(DbContextOptions);
             var query = new GetExternalTransactionsForFinancialAccountQuery
@@ -36,7 +36,6 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
                 result.ForEach(dto => dto.FinancialAccountId.Should().Be(2));
                 result.Count.Should().Be(2);
             }
-
         }
     }
 }

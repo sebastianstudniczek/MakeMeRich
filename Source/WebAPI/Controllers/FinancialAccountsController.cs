@@ -1,4 +1,6 @@
-﻿using MakeMeRich.Application;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using MakeMeRich.Application;
 using MakeMeRich.Application.Common.Dtos;
 using MakeMeRich.Application.Common.Dtos.FinancialTransactions;
 using MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccount;
@@ -7,17 +9,17 @@ using MakeMeRich.Application.FinancialAccounts.Commands.UpdateFinancialAccount;
 using MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccountById;
 using MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccounts;
 using MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Commands.CreateExternalTransaction;
-using MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Queries;
+using MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Queries.GetExternaltransactionsForFinancialAccountQuery;
+using MakeMeRich.Application.FinancialTransactions.InternalTransactions.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace MakeMeRich.WebAPI.Controllers
 {
     public class FinancialAccountsController : ApiController
     {
+        #region FinancialAccounts
+
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<FinancialAccountDto>>> GetAll()
@@ -65,6 +67,9 @@ namespace MakeMeRich.WebAPI.Controllers
 
             return NoContent();
         }
+        #endregion
+
+        #region ExternalTransactions
 
         [HttpGet("{id}/externaltransactions")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -78,16 +83,34 @@ namespace MakeMeRich.WebAPI.Controllers
         }
 
         [HttpPost("{id}/externaltransactions")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ExternalTransactionDto>> CreateExternalTransaction(int id, CreateExternalTransactionCommand command)
         {
-            if (id != command.SendingAccountId)
+            if (id != command.FinancialAccountId)
             {
                 return BadRequest();
             }
 
-            return await Mediator.Send(command);
+            var dto = await Mediator.Send(command);
+
+            return CreatedAtRoute(
+                "GetExternalTransactionById",
+                new { dto.Id },
+                dto);
+        }
+        #endregion
+
+        #region InternalTransactions
+        [HttpGet("{id}/internaltransactions")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<InternalTransactionDto>>> GetInternalTransactions(int id)
+        {
+            return await Mediator.Send(
+                new GetInternalTransactionsForFinancialAccountQuery
+                {
+                    FinancialAccountId = id
+                });
         }
 
         [HttpPost("{id}/internaltransactions")]
@@ -95,14 +118,13 @@ namespace MakeMeRich.WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<InternalTransactionDto>> CreateInternalTransaction(int id, CreateInternalTransactionCommand command)
         {
-            if (id != command.SendingAccountId)
+            if (id != command.FinancialAccountId)
             {
                 return BadRequest();
             }
 
             return await Mediator.Send(command);
         }
-
-
+        #endregion
     }
 }
