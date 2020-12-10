@@ -4,7 +4,7 @@ using MakeMeRich.Application.FinancialTransactions.InternalTransactions.Queries.
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MakeMeRich.WebAPI.Controllers
+namespace MakeMeRich.WebAPI.Controllers.FinancialTransactions
 {
     public class InternalTransactionsController : ApiController
     {

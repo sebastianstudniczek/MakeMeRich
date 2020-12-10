@@ -32,7 +32,7 @@ namespace MakeMeRich.Application
                 TotalAmount = request.TotalAmount,
                 DueDate = request.DueDate,
                 Description = request.Description,
-                SendingAccountId = request.SendingAccountId,
+                SendingAccountId = request.FinancialAccountId,
                 ReceivingAccountId = request.ReceivingAccountId
                 // TODO: Categories
             };

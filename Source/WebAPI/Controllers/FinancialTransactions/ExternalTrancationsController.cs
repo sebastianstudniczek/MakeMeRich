@@ -4,7 +4,7 @@ using MakeMeRich.Application.Common.Dtos.FinancialTransactions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MakeMeRich.WebAPI.Controllers
+namespace MakeMeRich.WebAPI.Controllers.FinancialTransactions
 {
     public class ExternalTrancationsController : ApiController
     {
@@ -13,7 +13,7 @@ namespace MakeMeRich.WebAPI.Controllers
         public async Task<ActionResult<ExternalTransactionDto>> GetById(int id)
         {
             return await Mediator.Send(
-                new GetExternalTransactionByIdQuery {Id = id });
+                new GetExternalTransactionByIdQuery { Id = id });
         }
 
     }

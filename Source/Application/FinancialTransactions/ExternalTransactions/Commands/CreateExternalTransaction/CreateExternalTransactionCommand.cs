@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using AutoMapper;
 using MakeMeRich.Application.Common.Dtos.FinancialTransactions;
 using MakeMeRich.Application.Common.Interfaces;
@@ -7,6 +8,8 @@ using MakeMeRich.Application.FinancialTransactions.Common.Commands;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Domain.Enums;
 using MediatR;
+using MakeMeRich.Domain.Entities.FinancialTransactionCategories;
+using System.ComponentModel.DataAnnotations;
 
 namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Commands.CreateExternalTransaction
 {
@@ -14,6 +17,7 @@ namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Comm
     {
         public string TransactionSideName { get; set; }
         public ExternalTransactionType Type { get; set; }
+        public IEnumerable<ExternalTransactionCategoryCreateDto> TransactionCategories { get; set; }
     }
 
     public class CreateExternalTransactionCommandHandler : IRequestHandler<CreateExternalTransactionCommand, ExternalTransactionDto>
@@ -35,8 +39,20 @@ namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Comm
                 TransactionType = request.Type,
                 TotalAmount = request.TotalAmount,
                 DueDate = request.DueDate,
-                Description = request.Description
+                Description = request.Description,
+                FinancialAccountId = request.FinancialAccountId,
             };
+
+            foreach (var transactionCategory in request.TransactionCategories)
+            {
+                entity.TransactionCategories.Add(
+                    new ExternalTransactionCategory
+                    {
+                        FinancialCategoryId = transactionCategory.FinancialCategoryId,
+                        Amount = transactionCategory.Amount,
+                        Description = transactionCategory.Description
+                    });
+            }
 
             _context.ExternalTransactions.Add(entity);
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);

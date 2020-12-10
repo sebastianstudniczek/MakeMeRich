@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -33,8 +34,16 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
                 DueDate = new DateTime(2019, 10, 26),
                 Description = "Sample shopping",
                 Type = ExternalTransactionType.Expense,
-                SendingAccountId = 1
-                // TODO: Categories
+                FinancialAccountId = 1,
+                TransactionCategories = new List<ExternalTransactionCategoryCreateDto>()
+                {
+                    new ExternalTransactionCategoryCreateDto
+                    {
+                        FinancialCategoryId = 2,
+                        Amount = 520,
+                        Description = "Some basic shopping"
+                    }
+                }
             };
 
             using (var context = new ApplicationDbContext(DbContextOptions))
