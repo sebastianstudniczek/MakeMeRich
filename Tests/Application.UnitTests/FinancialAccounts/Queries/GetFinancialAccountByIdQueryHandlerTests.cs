@@ -11,11 +11,11 @@ using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
 {
-    public class GetFinancialAccountByIdCommandHandlerTests : HandlerTest, IClassFixture<DtoResponseHandlerTestFixture>
+    public class GetFinancialAccountByIdQueryHandlerTests : HandlerTest, IClassFixture<DtoResponseHandlerTestFixture>
     {
         private readonly IMapper _mapper;
 
-        public GetFinancialAccountByIdCommandHandlerTests(DtoResponseHandlerTestFixture fixture)
+        public GetFinancialAccountByIdQueryHandlerTests(DtoResponseHandlerTestFixture fixture)
         {
             _mapper = fixture.Mapper;
         }
