@@ -4,7 +4,6 @@ using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.Common.Interfaces;
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Domain.Enums;
-
 using MediatR;
 
 namespace MakeMeRich.Application.FinancialAccounts.Commands.UpdateFinancialAccount

@@ -1,8 +1,6 @@
 ﻿using System;
-
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Domain.Enums;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

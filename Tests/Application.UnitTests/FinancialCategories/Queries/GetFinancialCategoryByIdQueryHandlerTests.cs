@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FluentAssertions;
 using MakeMeRich.Application.Common.Exceptions;
-using MakeMeRich.Application.Common.Mappings;
 using MakeMeRich.Application.FinancialCategories.Queries.GetFinancialCategoryById;
 using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Infrastructure.Persistance;

@@ -1,14 +1,10 @@
 ﻿using System;
-
 using AutoMapper;
-
 using MakeMeRich.Application.Common.Dtos;
 using MakeMeRich.Application.Common.Dtos.FinancialTransactions;
 using MakeMeRich.Application.Common.Mappings;
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
-using MakeMeRich.Domain.Enums;
-
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.Common.Mappings

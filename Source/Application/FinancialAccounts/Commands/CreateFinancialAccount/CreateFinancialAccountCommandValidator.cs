@@ -1,10 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-
 using FluentValidation;
-
 using MakeMeRich.Application.Common.Interfaces;
-
 using Microsoft.EntityFrameworkCore;
 
 namespace MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccount

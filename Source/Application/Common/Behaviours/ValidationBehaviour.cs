@@ -2,11 +2,8 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-
 using FluentValidation;
-
 using MakeMeRich.Application.Common.Exceptions;
-
 using MediatR;
 
 namespace MakeMeRich.Application.Common.Behaviours

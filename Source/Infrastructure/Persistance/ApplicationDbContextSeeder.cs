@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Domain.Enums;
