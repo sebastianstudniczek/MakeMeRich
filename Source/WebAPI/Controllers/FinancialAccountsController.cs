@@ -114,7 +114,7 @@ namespace MakeMeRich.WebAPI.Controllers
         }
 
         [HttpPost("{id}/internaltransactions")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<InternalTransactionDto>> CreateInternalTransaction(int id, CreateInternalTransactionCommand command)
         {
@@ -123,7 +123,12 @@ namespace MakeMeRich.WebAPI.Controllers
                 return BadRequest();
             }
 
-            return await Mediator.Send(command);
+            var dto = await Mediator.Send(command);
+
+            return CreatedAtRoute(
+                "GetInternalTransactionById",
+                new { dto.Id },
+                dto);
         }
         #endregion
     }
