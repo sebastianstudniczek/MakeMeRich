@@ -9,7 +9,7 @@ namespace MakeMeRich.Application.Common.Dtos.FinancialTransactions
 {
     public class InternalTransactionDto : IMapFrom<InternalTransaction>
     {
-        public int Id { get; init; }
+        public int Id { get; set; }
         public int SendingAccountId { get; set; }
         public int ReceivingAccountId { get; set; }
         public double TotalAmount { get; set; }

@@ -10,7 +10,7 @@ namespace MakeMeRich.Application.Common.Dtos.FinancialTransactions
 {
     public class ExternalTransactionDto : IMapFrom<ExternalTransaction>
     {
-        public int Id { get; init; }
+        public int Id { get; set; }
         public int FinancialAccountId { get; set; }
         public string TransactionSideName { get; set; }
         public string TransactionType { get; set; }

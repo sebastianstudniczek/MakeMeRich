@@ -14,6 +14,7 @@ namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Comm
 {
     public class CreateExternalTransactionCommand : CreateFinancialTransactionCommand, IRequest<ExternalTransactionDto>
     {
+        public int FinancialAccountId { get; set; }
         public string TransactionSideName { get; set; }
         public ExternalTransactionType TransactionType { get; set; }
         public IEnumerable<ExternalTransactionCategoryCreateDto> TransactionCategories { get; set; }

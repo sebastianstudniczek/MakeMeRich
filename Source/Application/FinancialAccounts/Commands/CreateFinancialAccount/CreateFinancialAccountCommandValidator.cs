@@ -15,14 +15,15 @@ namespace MakeMeRich.Application.FinancialAccounts.Commands.CreateFinancialAccou
             _context = context;
 
             RuleFor(command => command.Title)
-                .NotEmpty().WithMessage("Title is required")
-                .MaximumLength(150).WithMessage("Title must not exceed 200 characters.")
-                .MustAsync(BeUniqueTitle).WithMessage("The specified title already exists.");
+                .NotEmpty().WithMessage("Title is required.")
+                .MaximumLength(150)
+                .MustAsync(BeUniqueTitle).WithMessage("Financial account with the specified title already exists.");
         }
 
         public Task<bool> BeUniqueTitle(string title, CancellationToken cancellationToken)
         {
-            return _context.FinancialAccounts.AllAsync(account => account.Title != title);
+            return _context.FinancialAccounts
+                .AllAsync(account => account.Title != title, cancellationToken);
         }
     }
 }

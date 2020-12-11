@@ -10,6 +10,5 @@ namespace MakeMeRich.Application.FinancialTransactions.Common.Commands
         [DataType(DataType.Date)]
         public DateTime DueDate { get; set; }
         public string Description { get; set; }
-        public int FinancialAccountId { get; set; }
     }
 }

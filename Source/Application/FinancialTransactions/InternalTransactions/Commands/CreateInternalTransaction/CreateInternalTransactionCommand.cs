@@ -11,6 +11,7 @@ namespace MakeMeRich.Application
 {
     public class CreateInternalTransactionCommand : CreateFinancialTransactionCommand, IRequest<InternalTransactionDto>
     {
+        public int SendingAccountId { get; set; }
         public int ReceivingAccountId { get; set; }
     }
 
@@ -32,9 +33,8 @@ namespace MakeMeRich.Application
                 TotalAmount = request.TotalAmount,
                 DueDate = request.DueDate,
                 Description = request.Description,
-                SendingAccountId = request.FinancialAccountId,
+                SendingAccountId = request.SendingAccountId,
                 ReceivingAccountId = request.ReceivingAccountId
-                // TODO: Categories
             };
 
             _context.InternalTransactions.Add(entity);

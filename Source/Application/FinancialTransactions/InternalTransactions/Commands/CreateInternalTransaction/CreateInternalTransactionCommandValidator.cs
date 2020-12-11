@@ -24,7 +24,7 @@ namespace MakeMeRich.Application.FinancialTransactions.InternalTransactions.Comm
             RuleFor(command => command.Description)
                 .MaximumLength(150);
 
-            RuleFor(command => command.FinancialAccountId)
+            RuleFor(command => command.SendingAccountId)
                 .NotEmpty().WithMessage("Financial account id is required.");
 
             RuleFor(command => command.ReceivingAccountId)
