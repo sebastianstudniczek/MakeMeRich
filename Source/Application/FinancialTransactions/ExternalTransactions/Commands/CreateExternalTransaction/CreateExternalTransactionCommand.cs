@@ -15,7 +15,7 @@ namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Comm
     public class CreateExternalTransactionCommand : CreateFinancialTransactionCommand, IRequest<ExternalTransactionDto>
     {
         public string TransactionSideName { get; set; }
-        public ExternalTransactionType Type { get; set; }
+        public ExternalTransactionType TransactionType { get; set; }
         public IEnumerable<ExternalTransactionCategoryCreateDto> TransactionCategories { get; set; }
     }
 
@@ -35,7 +35,7 @@ namespace MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Comm
             var entity = new ExternalTransaction
             {
                 TransactionSideName = request.TransactionSideName,
-                TransactionType = request.Type,
+                TransactionType = request.TransactionType,
                 TotalAmount = request.TotalAmount,
                 DueDate = request.DueDate,
                 Description = request.Description,

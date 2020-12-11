@@ -16,7 +16,7 @@ namespace MakeMeRich.Application.FinancialCategories.Commands.CreateFinancialCat
 
             RuleFor(command => command.Name)
                 .NotEmpty().WithMessage("Title is required")
-                .MaximumLength(75).WithMessage("Title must not exceed 75 characters.")
+                .MaximumLength(75).WithMessage("Title must not exceed 75 character")
                 .MustAsync(BeUniqueTitle).WithMessage("Financial category with given name already exists");
         }
 

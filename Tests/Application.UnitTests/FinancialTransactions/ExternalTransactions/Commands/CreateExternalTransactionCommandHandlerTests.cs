@@ -33,7 +33,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
                 TotalAmount = 526,
                 DueDate = new DateTime(2019, 10, 26),
                 Description = "Sample shopping",
-                Type = ExternalTransactionType.Expense,
+                TransactionType = ExternalTransactionType.Expense,
                 FinancialAccountId = 1,
                 TransactionCategories = new List<ExternalTransactionCategoryCreateDto>()
                 {
@@ -61,7 +61,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
                 externalTransaction.TotalAmount.Should().Be(command.TotalAmount);
                 externalTransaction.DueDate.Should().Be(command.DueDate);
                 externalTransaction.Description.Should().Be(command.Description);
-                externalTransaction.TransactionType.Should().Be(command.Type);
+                externalTransaction.TransactionType.Should().Be(command.TransactionType);
             }
         }
     }
