@@ -33,5 +33,21 @@ namespace MakeMeRich.WebAPI.Controllers.FinancialTransactions
 
             return NoContent();
         }
+
+        [HttpDelete("{id")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> Delete(int id, DeleteExternalTransactionCommand command)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest();
+            }
+
+            await Mediator.Send(command);
+
+            return NoContent();
+        }
     }
 }
