@@ -34,7 +34,7 @@ namespace MakeMeRich.WebAPI.Controllers.FinancialTransactions
             return NoContent();
         }
 
-        [HttpDelete("{id")]
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

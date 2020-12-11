@@ -6,7 +6,7 @@ namespace MakeMeRich.Domain.Entities
     {
         public string Name { get; set; }
 
-        public ICollection<ExternalTransactionCategory> ExternalTransactionCategories { get; set; }
+        public ICollection<ExternalTransactionCategory> ExternalTransactionCategories { get;}
             = new HashSet<ExternalTransactionCategory>();
     }
 }

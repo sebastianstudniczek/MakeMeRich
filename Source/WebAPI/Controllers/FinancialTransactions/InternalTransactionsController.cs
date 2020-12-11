@@ -18,7 +18,7 @@ namespace MakeMeRich.WebAPI.Controllers.FinancialTransactions
                 new GetInternalTransactionByIdQuery { Id = id });
         }
 
-        [HttpPut("{id")]
+        [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
