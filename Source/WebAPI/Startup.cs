@@ -1,13 +1,9 @@
 using System.Text.Json.Serialization;
-
 using FluentValidation.AspNetCore;
-
 using MakeMeRich.Application;
 using MakeMeRich.Infrastructure;
 using MakeMeRich.WebAPI.Filters;
-
 using MicroElements.Swashbuckle.FluentValidation;
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace WebAPI
+namespace MakeMeRich.WebAPI
 {
     public class Startup
     {
