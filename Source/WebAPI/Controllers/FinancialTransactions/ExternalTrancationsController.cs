@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using MakeMeRich.Application;
 using MakeMeRich.Application.Common.Dtos.FinancialTransactions;
+using MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Commands.DeleteExternalTransaction;
+using MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Commands.UpdateExternalTransaction;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,5 +18,20 @@ namespace MakeMeRich.WebAPI.Controllers.FinancialTransactions
                 new GetExternalTransactionByIdQuery { Id = id });
         }
 
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> Update(int id, UpdateExternalTransactionCommand command)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest();
+            }
+
+            await Mediator.Send(command);
+
+            return NoContent();
+        }
     }
 }

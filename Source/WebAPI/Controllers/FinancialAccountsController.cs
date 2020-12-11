@@ -118,7 +118,7 @@ namespace MakeMeRich.WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<InternalTransactionDto>> CreateInternalTransaction(int id, CreateInternalTransactionCommand command)
         {
-            if (id != command.FinancialAccountId)
+            if (id != command.SendingAccountId)
             {
                 return BadRequest();
             }

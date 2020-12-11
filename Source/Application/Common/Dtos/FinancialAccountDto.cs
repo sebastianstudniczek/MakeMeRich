@@ -5,7 +5,7 @@ namespace MakeMeRich.Application.Common.Dtos
 {
     public class FinancialAccountDto : IMapFrom<FinancialAccount>
     {
-        public int Id { get; init; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public double CurrentBalance { get; set; }
         public string AccountType { get; set; }
