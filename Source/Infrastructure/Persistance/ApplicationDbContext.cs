@@ -1,11 +1,8 @@
 ﻿using System.Reflection;
 using System.Threading.Tasks;
-
 using MakeMeRich.Application.Common.Interfaces;
 using MakeMeRich.Domain.Entities;
-using MakeMeRich.Domain.Entities.FinancialTransactionCategories;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
-
 using Microsoft.EntityFrameworkCore;
 
 namespace MakeMeRich.Infrastructure.Persistance
@@ -23,7 +20,6 @@ namespace MakeMeRich.Infrastructure.Persistance
         public DbSet<InternalTransaction> InternalTransactions { get; set; }
         public DbSet<FinancialCategory> FinancialCategories { get ; set ; }
         public DbSet<ExternalTransactionCategory> ExternalTransactionCategories { get; set; }
-        public DbSet<InternalTransactionCategory> InternalTransactionCategories { get; set; }
 
         public Task<int> SaveChangesAsync()
         {

@@ -1,17 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-
 using FluentAssertions;
-
 using MakeMeRich.Application.Common.Exceptions;
 using MakeMeRich.Application.FinancialTransactions.ExternalTransactions.Commands.UpdateExternalTransaction;
 using MakeMeRich.Application.UnitTests.Common;
-using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Domain.Enums;
 using MakeMeRich.Infrastructure.Persistance;
-
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransactions.Commands
@@ -47,8 +44,23 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
                 TotalAmount = 350,
                 DueDate = new DateTime(2016, 4, 12),
                 Description = "Shopping",
-                Type = ExternalTransactionType.Income,
+                TransactionType = ExternalTransactionType.Income,
                 FinancialAccountId = 1,
+                TransactionCategories = new List<ExternalTransactionCategoryUpdateDto>
+                {
+                    new ExternalTransactionCategoryUpdateDto
+                    {
+                        FinancialCategoryId = 3,
+                        Amount = 350,
+                        Description = "Some description"
+                    },
+                    new ExternalTransactionCategoryUpdateDto
+                    {
+                        FinancialCategoryId = 2,
+                        Amount = 150,
+                        Description = "Some other description"
+                    }
+                }
             };
 
             using (var context = new ApplicationDbContext(DbContextOptions))
@@ -65,7 +77,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialTransactions.ExternalTransac
                 externalTransaction.TotalAmount.Should().Be(command.TotalAmount);
                 externalTransaction.DueDate.Should().Be(command.DueDate);
                 externalTransaction.Description.Should().Be(command.Description);
-                externalTransaction.TransactionType.Should().Be(command.Type);
+                externalTransaction.TransactionType.Should().Be(command.TransactionType);
                 externalTransaction.FinancialAccountId.Should().Be(command.FinancialAccountId);
             }
         }

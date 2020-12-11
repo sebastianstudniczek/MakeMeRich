@@ -1,7 +1,7 @@
 ﻿using MakeMeRich.Application.Common.Mappings;
-using MakeMeRich.Domain.Entities.FinancialTransactionCategories;
+using MakeMeRich.Domain.Entities;
 
-namespace MakeMeRich.Application.Common.Dtos.FinancialTransactionCategories
+namespace MakeMeRich.Application.Common.Dtos
 {
     public class ExternalTransactionCategoryDto : IMapFrom<ExternalTransactionCategory>
     {

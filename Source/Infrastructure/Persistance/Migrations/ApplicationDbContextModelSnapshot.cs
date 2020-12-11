@@ -19,6 +19,28 @@ namespace MakeMeRich.Infrastructure.Persistance.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
+            modelBuilder.Entity("MakeMeRich.Domain.Entities.ExternalTransactionCategory", b =>
+                {
+                    b.Property<int>("ExternalTransactionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FinancialCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("ExternalTransactionId", "FinancialCategoryId");
+
+                    b.HasIndex("FinancialCategoryId");
+
+                    b.ToTable("ExternalTransactionCategories");
+                });
+
             modelBuilder.Entity("MakeMeRich.Domain.Entities.FinancialAccount", b =>
                 {
                     b.Property<int>("Id")
@@ -60,50 +82,6 @@ namespace MakeMeRich.Infrastructure.Persistance.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FinancialCategories");
-                });
-
-            modelBuilder.Entity("MakeMeRich.Domain.Entities.FinancialTransactionCategories.ExternalTransactionCategory", b =>
-                {
-                    b.Property<int>("ExternalTransactionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FinancialCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(10,2)");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.HasKey("ExternalTransactionId", "FinancialCategoryId");
-
-                    b.HasIndex("FinancialCategoryId");
-
-                    b.ToTable("ExternalTransactionCategories");
-                });
-
-            modelBuilder.Entity("MakeMeRich.Domain.Entities.FinancialTransactionCategories.InternalTransactionCategory", b =>
-                {
-                    b.Property<int>("InternalTransactionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FinancialCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(10,2)");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.HasKey("InternalTransactionId", "FinancialCategoryId");
-
-                    b.HasIndex("FinancialCategoryId");
-
-                    b.ToTable("InternalTransactionCategories");
                 });
 
             modelBuilder.Entity("MakeMeRich.Domain.Entities.FinancialTransactions.ExternalTransaction", b =>
@@ -179,7 +157,7 @@ namespace MakeMeRich.Infrastructure.Persistance.Migrations
                     b.HasCheckConstraint("CHK_InternalTransactions_ReceivingAccountId", "ReceivingAccountId != SendingAccountId");
                 });
 
-            modelBuilder.Entity("MakeMeRich.Domain.Entities.FinancialTransactionCategories.ExternalTransactionCategory", b =>
+            modelBuilder.Entity("MakeMeRich.Domain.Entities.ExternalTransactionCategory", b =>
                 {
                     b.HasOne("MakeMeRich.Domain.Entities.FinancialTransactions.ExternalTransaction", "ExternalTransaction")
                         .WithMany("TransactionCategories")
@@ -196,25 +174,6 @@ namespace MakeMeRich.Infrastructure.Persistance.Migrations
                     b.Navigation("ExternalTransaction");
 
                     b.Navigation("FinancialCategory");
-                });
-
-            modelBuilder.Entity("MakeMeRich.Domain.Entities.FinancialTransactionCategories.InternalTransactionCategory", b =>
-                {
-                    b.HasOne("MakeMeRich.Domain.Entities.FinancialCategory", "FinancialCategory")
-                        .WithMany("InternalTransactionCategories")
-                        .HasForeignKey("FinancialCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MakeMeRich.Domain.Entities.FinancialTransactions.InternalTransaction", "InternalTransaction")
-                        .WithMany("TransactionCategories")
-                        .HasForeignKey("InternalTransactionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("FinancialCategory");
-
-                    b.Navigation("InternalTransaction");
                 });
 
             modelBuilder.Entity("MakeMeRich.Domain.Entities.FinancialTransactions.ExternalTransaction", b =>
@@ -259,16 +218,9 @@ namespace MakeMeRich.Infrastructure.Persistance.Migrations
             modelBuilder.Entity("MakeMeRich.Domain.Entities.FinancialCategory", b =>
                 {
                     b.Navigation("ExternalTransactionCategories");
-
-                    b.Navigation("InternalTransactionCategories");
                 });
 
             modelBuilder.Entity("MakeMeRich.Domain.Entities.FinancialTransactions.ExternalTransaction", b =>
-                {
-                    b.Navigation("TransactionCategories");
-                });
-
-            modelBuilder.Entity("MakeMeRich.Domain.Entities.FinancialTransactions.InternalTransaction", b =>
                 {
                     b.Navigation("TransactionCategories");
                 });

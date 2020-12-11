@@ -1,10 +1,8 @@
-﻿
-using MakeMeRich.Domain.Entities.FinancialTransactionCategories;
-
+﻿using MakeMeRich.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace MakeMeRich.Infrastructure.Persistance.Configurations.FinancialTransactionCategories
+namespace MakeMeRich.Infrastructure.Persistance.Configurations
 {
     public class ExternalTransactionCategoryConfiguration : IEntityTypeConfiguration<ExternalTransactionCategory>
     {

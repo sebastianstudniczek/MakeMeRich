@@ -1,28 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Domain.Enums;
 using MakeMeRich.Infrastructure.Persistance;
-
 using Microsoft.EntityFrameworkCore;
 
-namespace MakeMeRich.Application.UnitTests.Helper
+namespace MakeMeRich.Application.UnitTests.Common
 {
     internal static class DataSeeder
     {
+        internal static int FinancialAccountsCount { get; private set; }
+        internal static int FinancialCategoriesCount { get; private set; }
         internal static void GetSampleFinancialAccounts(DbContextOptions<ApplicationDbContext> options)
         {
             var context = new ApplicationDbContext(options);
 
-            var financialAccounts =  new List<FinancialAccount>
+            var financialAccounts = new List<FinancialAccount>
             {
                 new FinancialAccount { Id = 1, Title = "BNP", CurrentBalance = 100},
                 new FinancialAccount { Id = 2, Title = "Getin", CurrentBalance = 200},
                 new FinancialAccount { Id = 3, Title = "PKO", CurrentBalance = 300}
             };
 
+            FinancialAccountsCount = financialAccounts.Count;
             context.FinancialAccounts.AddRange(financialAccounts);
             context.SaveChanges();
         }
@@ -63,6 +64,17 @@ namespace MakeMeRich.Application.UnitTests.Helper
                     TransactionType = ExternalTransactionType.Expense,
                     DueDate = new DateTime(2013, 11, 12),
                     Description = "Third external transaction",
+
+                    FinancialAccountId = 2,
+                },
+                new ExternalTransaction
+                {
+                    Id = 4,
+                    TransactionSideName = "Żabka",
+                    TotalAmount = 1600.67,
+                    TransactionType = ExternalTransactionType.Expense,
+                    DueDate = new DateTime(2013, 11, 12),
+                    Description = "Fourth external transaction",
 
                     FinancialAccountId = 2,
                 },
@@ -127,6 +139,7 @@ namespace MakeMeRich.Application.UnitTests.Helper
                 new FinancialCategory { Id = 3, Name = "Food"}
             };
 
+            FinancialCategoriesCount = financialCategories.Count;
             context.FinancialCategories.AddRange(financialCategories);
             context.SaveChanges();
         }

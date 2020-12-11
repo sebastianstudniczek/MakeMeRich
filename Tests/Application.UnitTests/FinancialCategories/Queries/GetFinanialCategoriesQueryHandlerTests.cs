@@ -1,30 +1,20 @@
-﻿using AutoMapper;
-
-using FluentAssertions;
-
-using MakeMeRich.Application.Common.Mappings;
-using MakeMeRich.Application.UnitTests.Common;
-using MakeMeRich.Application.UnitTests.Helper;
-using MakeMeRich.Infrastructure.Persistance;
-
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-
+using AutoMapper;
+using FluentAssertions;
+using MakeMeRich.Application.UnitTests.Common;
+using MakeMeRich.Infrastructure.Persistance;
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialCategories.Queries
 {
-    public class GetFinanialCategoriesQueryHandlerTests : HandlerTest
+    public class GetFinanialCategoriesQueryHandlerTests : HandlerTest, IClassFixture<DtoResponseHandlerTestFixture>
     {
         private readonly IMapper _mapper;
-        private readonly IConfigurationProvider _configuration;
 
-        public GetFinanialCategoriesQueryHandlerTests()
+        public GetFinanialCategoriesQueryHandlerTests(DtoResponseHandlerTestFixture fixture)
         {
-            _configuration = new MapperConfiguration(
-                config => config.AddProfile<MappingProfile>());
-
-            _mapper = _configuration.CreateMapper();
+            _mapper = fixture.Mapper;
         }
 
         [Fact]

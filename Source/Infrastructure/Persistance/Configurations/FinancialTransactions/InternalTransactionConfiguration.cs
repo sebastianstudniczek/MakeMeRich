@@ -1,5 +1,4 @@
 ﻿using MakeMeRich.Domain.Entities.FinancialTransactions;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

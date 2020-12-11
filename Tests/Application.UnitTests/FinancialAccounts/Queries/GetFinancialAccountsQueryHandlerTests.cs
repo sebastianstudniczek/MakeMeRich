@@ -1,31 +1,21 @@
-﻿using AutoMapper;
-
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using FluentAssertions;
-
-using MakeMeRich.Application.Common.Mappings;
 using MakeMeRich.Application.FinancialAccounts.Queries.GetFinancialAccounts;
 using MakeMeRich.Application.UnitTests.Common;
-using MakeMeRich.Application.UnitTests.Helper;
 using MakeMeRich.Infrastructure.Persistance;
-
-using System.Threading;
-using System.Threading.Tasks;
-
 using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
 {
-    public class GetFinancialAccountsCommandHandlerTests : HandlerTest
+    public class GetFinancialAccountsQueryHandlerTests : HandlerTest, IClassFixture<DtoResponseHandlerTestFixture>
     {
         private readonly IMapper _mapper;
-        private readonly IConfigurationProvider _configuration;
 
-        public GetFinancialAccountsCommandHandlerTests()
+        public GetFinancialAccountsQueryHandlerTests(DtoResponseHandlerTestFixture fixture)
         {
-            _configuration = new MapperConfiguration(
-                config => config.AddProfile<MappingProfile>());
-
-            _mapper = _configuration.CreateMapper();
+            _mapper = fixture.Mapper;
         }
 
         [Fact]
@@ -39,7 +29,7 @@ namespace MakeMeRich.Application.UnitTests.FinancialAccounts.Queries
                 var queryHandler = new GetFinancialAccountsQueryHandler(context, _mapper);
                 var result = await queryHandler.Handle(query, CancellationToken.None);
 
-                result.Should().HaveCount(3);
+                result.Should().HaveCount(DataSeeder.FinancialAccountsCount);
             }
         }
     }

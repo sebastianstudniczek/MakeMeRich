@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FluentAssertions;
 using MakeMeRich.Application.Common.Dtos;
-using MakeMeRich.Application.Common.Mappings;
 using MakeMeRich.Application.FinancialCategories.Commands.CreateFinancialCategory;
 using MakeMeRich.Application.UnitTests.Common;
 using MakeMeRich.Domain.Entities;
@@ -12,17 +11,13 @@ using Xunit;
 
 namespace MakeMeRich.Application.UnitTests.FinancialCategories.Commands
 {
-    public class CreateFinancialCategoryCommandHandlerTests : HandlerTest
+    public class CreateFinancialCategoryCommandHandlerTests : HandlerTest, IClassFixture<DtoResponseHandlerTestFixture>
     {
-        private readonly IConfigurationProvider _configuration;
         private readonly IMapper _mapper;
 
-        public CreateFinancialCategoryCommandHandlerTests()
+        public CreateFinancialCategoryCommandHandlerTests(DtoResponseHandlerTestFixture fixture)
         {
-            _configuration = new MapperConfiguration(
-              config => config.AddProfile<MappingProfile>());
-
-            _mapper = _configuration.CreateMapper();
+            _mapper = fixture.Mapper;
         }
 
         [Fact]
