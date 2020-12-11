@@ -3,11 +3,13 @@ using System.Threading.Tasks;
 using MakeMeRich.Application.Common.Interfaces;
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
+using MakeMeRich.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace MakeMeRich.Infrastructure.Persistance
 {
-    public class ApplicationDbContext : DbContext, IApplicationDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             :base(options)
