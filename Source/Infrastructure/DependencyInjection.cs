@@ -27,7 +27,8 @@ namespace MakeMeRich.Infrastructure
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+            services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+            services.AddTransient<IIdentityService, IdentityService>();
 
             return services;
         }

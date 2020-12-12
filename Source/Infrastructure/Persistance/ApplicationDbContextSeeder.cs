@@ -5,11 +5,23 @@ using System.Threading.Tasks;
 using MakeMeRich.Domain.Entities;
 using MakeMeRich.Domain.Entities.FinancialTransactions;
 using MakeMeRich.Domain.Enums;
+using MakeMeRich.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace MakeMeRich.Infrastructure.Persistance
 {
     public static class ApplicationDbContextSeeder
     {
+        public static async Task SeedDefaultUserAsync(UserManager<ApplicationUser> userManager)
+        {
+            var defaultUser = new ApplicationUser { UserName = "admin@localhost", Email = "admin@localhost" };
+
+            if (userManager.Users.All(user => user.UserName != defaultUser.UserName))
+            {
+                await userManager.CreateAsync(defaultUser, "Administrator1!")
+                    .ConfigureAwait(false);
+            }
+        }
         public static async Task SeedSampleDataAsync(ApplicationDbContext context)
         {
             // Seed, if necessary
