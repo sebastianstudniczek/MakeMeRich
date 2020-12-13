@@ -6,7 +6,7 @@ the Clean Architecture principles.
 The API was created mainly to satisfy personal needs as i want to create more personalised app than Microsoft Money 
 which i am currently using but also i wanted to learn how to use patterns like CQRS and Mediator.
 
-**Check current API definition** -> [SwaggerDoc](https://sebastianstudniczek.github.io/MakeMeRich/index.html)
+**Check current API definition** -> [SwaggerDoc](https://sebastianstudniczek.github.io/MakeMeRich/)
 
 ## Table of Contents
 * [Technologies](#Technologies)
@@ -43,7 +43,7 @@ To change this, you will need to update **WebAPI/appsettings.json** as follows:
 ```json
     "UseInMemoryDatabase": false,
 ```
-Verify that the **Default Connection** connection string within **appsettings.json** points to a valid SQL Server instance.
+Verify that the **DefaultConnection** connection string within **appsettings.json** points to a valid SQL Server instance.
 
 ## Project Status
 
@@ -66,7 +66,7 @@ Verify that the **Default Connection** connection string within **appsettings.js
 ## Sources
 
 The project architecture is mainly based on `Clean Architecture Solution Template`
-by [@jasontaylordev](#https://github.com/jasontaylordev/CleanArchitecture).
+by [@jasontaylordev](https://github.com/jasontaylordev/CleanArchitecture).
 
 
 
