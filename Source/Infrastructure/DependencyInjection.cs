@@ -1,4 +1,5 @@
 ﻿using MakeMeRich.Application.Common.Interfaces;
+using MakeMeRich.Infrastructure.Identity;
 using MakeMeRich.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +24,11 @@ namespace MakeMeRich.Infrastructure
                         options => options.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
             }
 
-            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+            services.AddDefaultIdentity<ApplicationUser>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+            services.AddTransient<IIdentityService, IdentityService>();
 
             return services;
         }

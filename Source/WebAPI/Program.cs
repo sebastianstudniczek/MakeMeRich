@@ -1,7 +1,9 @@
 using System;
 using System.Threading.Tasks;
+using MakeMeRich.Infrastructure.Identity;
 using MakeMeRich.Infrastructure.Persistance;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -33,6 +35,9 @@ namespace MakeMeRich.WebAPI
                         context.Database.Migrate();
                     }
 
+                    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+
+                    await ApplicationDbContextSeeder.SeedDefaultUserAsync(userManager);
                     await ApplicationDbContextSeeder.SeedSampleDataAsync(context);
                 }
                 catch (Exception)

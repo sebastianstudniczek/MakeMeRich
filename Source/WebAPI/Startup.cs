@@ -1,17 +1,21 @@
+using System.Text;
 using System.Text.Json.Serialization;
 using FluentValidation.AspNetCore;
 using MakeMeRich.Application;
 using MakeMeRich.Infrastructure;
 using MakeMeRich.WebAPI.Filters;
 using MicroElements.Swashbuckle.FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace MakeMeRich.WebAPI
 {
@@ -27,9 +31,7 @@ namespace MakeMeRich.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddControllers(options =>
-                    options.Filters.Add(new ApiExceptionFilter()))
+            services.AddControllers(options => options.Filters.Add(new ApiExceptionFilter()))
                 .AddFluentValidation(config =>
                     config.ValidatorFactoryType = typeof(HttpContextServiceProviderValidatorFactory))
                 .AddJsonOptions(options =>
@@ -39,9 +41,23 @@ namespace MakeMeRich.WebAPI
                 options.SuppressModelStateInvalidFilter = true);
 
             services.AddRouting(options => options.LowercaseUrls = true);
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.SaveToken = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["Jwt:Key"])),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidateLifetime = true,
+                        RequireExpirationTime = false,
+                    };
+                });
 
-            services.AddInfrastructure(Configuration);
             services.AddApplication();
+            services.AddInfrastructure(Configuration);
 
             services.AddSwaggerGen(config =>
             {
@@ -53,6 +69,29 @@ namespace MakeMeRich.WebAPI
                     Contact = new OpenApiContact
                     {
                         Name = "Sebastian Studniczek",
+                    }
+                });
+                config.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.ApiKey,
+                    Name = "Authorization",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Scheme = "bearer",
+                    Description = "Please insert JWT token into field."
+                });
+                config.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] {}
                     }
                 });
                 config.AddFluentValidationRules();
@@ -72,12 +111,13 @@ namespace MakeMeRich.WebAPI
             {
                 config.SwaggerEndpoint("/swagger/v1/swagger.json", "MakeMeRich API v1");
                 config.RoutePrefix = string.Empty;
+                config.DocExpansion(DocExpansion.None);
             });
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
