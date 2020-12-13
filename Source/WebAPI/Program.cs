@@ -37,8 +37,8 @@ namespace MakeMeRich.WebAPI
 
                     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
 
-                    await ApplicationDbContextSeeder.SeedDefaultUserAsync(userManager).ConfigureAwait(false);
-                    await ApplicationDbContextSeeder.SeedSampleDataAsync(context).ConfigureAwait(false);
+                    await ApplicationDbContextSeeder.SeedDefaultUserAsync(userManager);
+                    await ApplicationDbContextSeeder.SeedSampleDataAsync(context);
                 }
                 catch (Exception)
                 {
