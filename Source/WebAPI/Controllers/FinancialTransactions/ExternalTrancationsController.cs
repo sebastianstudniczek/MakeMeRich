@@ -10,6 +10,9 @@ namespace MakeMeRich.WebAPI.Controllers.FinancialTransactions
 {
     public class ExternalTrancationsController : ApiController
     {
+        /// <summary>
+        /// Get an external transacton by id with its transaction categories.
+        /// </summary>
         [HttpGet("{id}", Name = "GetExternalTransactionById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<ExternalTransactionDto>> GetById(int id)
@@ -18,6 +21,9 @@ namespace MakeMeRich.WebAPI.Controllers.FinancialTransactions
                 new GetExternalTransactionByIdQuery { Id = id });
         }
 
+        /// <summary>
+        /// Update an existing external transaction and its transaction categories.
+        /// </summary>
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -34,6 +40,9 @@ namespace MakeMeRich.WebAPI.Controllers.FinancialTransactions
             return NoContent();
         }
 
+        /// <summary>
+        /// Delete an existing external transaction by id with its transaction categories.
+        /// </summary>
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

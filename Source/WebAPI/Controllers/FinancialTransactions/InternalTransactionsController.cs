@@ -10,6 +10,9 @@ namespace MakeMeRich.WebAPI.Controllers.FinancialTransactions
 {
     public class InternalTransactionsController : ApiController
     {
+        /// <summary>
+        /// Get an internal transacton by id.
+        /// </summary>
         [HttpGet("{id}", Name = "GetInternalTransactionById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<InternalTransactionDto>> GetById(int id)
@@ -18,6 +21,9 @@ namespace MakeMeRich.WebAPI.Controllers.FinancialTransactions
                 new GetInternalTransactionByIdQuery { Id = id });
         }
 
+        /// <summary>
+        /// Update an existing internal transaction.
+        /// </summary>
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -34,6 +40,9 @@ namespace MakeMeRich.WebAPI.Controllers.FinancialTransactions
             return NoContent();
         }
 
+        /// <summary>
+        /// Delete an existing internal transaction by id.
+        /// </summary>
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

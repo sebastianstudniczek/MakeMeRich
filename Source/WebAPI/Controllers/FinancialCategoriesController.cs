@@ -13,6 +13,9 @@ namespace MakeMeRich.WebAPI.Controllers
 {
     public class FinancialCategoriesController : ApiController
     {
+        /// <summary>
+        /// Get all financial categories.
+        /// </summary>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<FinancialCategoryDto>>> GetAll()
@@ -20,6 +23,9 @@ namespace MakeMeRich.WebAPI.Controllers
             return await Mediator.Send(new GetFinancialCategoriesQuery());
         }
 
+        /// <summary>
+        /// Get a financial category by id.
+        /// </summary>
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -28,6 +34,9 @@ namespace MakeMeRich.WebAPI.Controllers
             return await Mediator.Send(new GetFinancialCategoryByIdQuery { Id = id });
         }
 
+        /// <summary>
+        /// Create a new financial category.
+        /// </summary>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -38,6 +47,9 @@ namespace MakeMeRich.WebAPI.Controllers
             return CreatedAtAction(nameof(GetById), new { dto.Id }, dto);
         }
 
+        /// <summary>
+        /// Update an existing financial category.
+        /// </summary>
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -54,6 +66,9 @@ namespace MakeMeRich.WebAPI.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Delete an existing financial category by id.
+        /// </summary>
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -63,6 +78,5 @@ namespace MakeMeRich.WebAPI.Controllers
 
             return NoContent();
         }
-
     }
 }

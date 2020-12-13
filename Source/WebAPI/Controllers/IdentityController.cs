@@ -17,6 +17,9 @@ namespace MakeMeRich.WebAPI.Controllers
             _identityService = identityService;
         }
 
+        /// <summary>
+        /// Register a new user.
+        /// </summary>
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -38,7 +41,9 @@ namespace MakeMeRich.WebAPI.Controllers
             });
         }
 
-
+        /// <summary>
+        /// Log in an existing user.
+        /// </summary>
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

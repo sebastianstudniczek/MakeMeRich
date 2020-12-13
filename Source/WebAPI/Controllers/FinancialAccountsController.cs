@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using MakeMeRich.Application;
 using MakeMeRich.Application.Common.Dtos;
@@ -19,7 +20,9 @@ namespace MakeMeRich.WebAPI.Controllers
     public class FinancialAccountsController : ApiController
     {
         #region FinancialAccounts
-
+        /// <summary>
+        /// Get all financial accounts.
+        /// </summary>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<FinancialAccountDto>>> GetAll()
@@ -27,6 +30,9 @@ namespace MakeMeRich.WebAPI.Controllers
             return await Mediator.Send(new GetFinancialAccountsQuery());
         }
 
+        /// <summary>
+        /// Get a financial account by id.
+        /// </summary>
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -35,6 +41,9 @@ namespace MakeMeRich.WebAPI.Controllers
             return await Mediator.Send(new GetFinancialAccountByIdQuery { Id = id });
         }
 
+        /// <summary>
+        /// Create a new financial account.
+        /// </summary>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -43,6 +52,9 @@ namespace MakeMeRich.WebAPI.Controllers
             return await Mediator.Send(command);
         }
 
+        /// <summary>
+        /// Update an existing financial account.
+        /// </summary>
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -58,6 +70,9 @@ namespace MakeMeRich.WebAPI.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Delete an existing financial account by id.
+        /// </summary>
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -71,6 +86,9 @@ namespace MakeMeRich.WebAPI.Controllers
 
         #region ExternalTransactions
 
+        /// <summary>
+        /// Get all external transactions for a specific financial account.
+        /// </summary>
         [HttpGet("{id}/externaltransactions")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<ExternalTransactionDto>>> GetExternalTransactions(int id)
@@ -82,6 +100,9 @@ namespace MakeMeRich.WebAPI.Controllers
                 });
         }
 
+        /// <summary>
+        /// Create a new external transaction for a specific financial account.
+        /// </summary>
         [HttpPost("{id}/externaltransactions")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -102,6 +123,10 @@ namespace MakeMeRich.WebAPI.Controllers
         #endregion
 
         #region InternalTransactions
+
+        /// <summary>
+        /// Get all internal transactions for a specific financial account.
+        /// </summary>
         [HttpGet("{id}/internaltransactions")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<InternalTransactionDto>>> GetInternalTransactions(int id)
@@ -113,6 +138,9 @@ namespace MakeMeRich.WebAPI.Controllers
                 });
         }
 
+        /// <summary>
+        /// Create a new internal transaction for a specific financial account.
+        /// </summary>
         [HttpPost("{id}/internaltransactions")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

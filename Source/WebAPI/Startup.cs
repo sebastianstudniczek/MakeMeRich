@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using System.Text;
 using System.Text.Json.Serialization;
 using FluentValidation.AspNetCore;
@@ -95,6 +97,8 @@ namespace MakeMeRich.WebAPI
                     }
                 });
                 config.AddFluentValidationRules();
+                var xmlFilePath = Path.Combine(AppContext.BaseDirectory, "MakeMeRich.WebAPI.xml");
+                config.IncludeXmlComments(xmlFilePath);
             });
         }
 
