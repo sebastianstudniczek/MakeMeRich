@@ -6,7 +6,7 @@ the Clean Architecture principles.
 The API was created mainly to satisfy personal needs as i want to create more personalised app than Microsoft Money 
 which i am currently using but also i wanted to learn how to use patterns like CQRS and Mediator.
 
-**Check current API definition** -> [SwaggerDoc](https://sebastianstudniczek.github.io/MakeMeRich/)
+**Check current API definition** -> [SwaggerDoc](https://sebastianstudniczek.github.io/MakeMeRich/index.html)
 
 ## Table of Contents
 * [Technologies](#Technologies)

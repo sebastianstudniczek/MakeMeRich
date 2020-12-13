@@ -1,5 +1,4 @@
-﻿<!-- HTML for static distribution bundle build -->
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -37,10 +36,10 @@
     <script src="dist/swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
     <script>
     window.onload = function() {
-      // Begin Swagger UI call region
       const ui = SwaggerUIBundle({
         url: "swagger.json",
         dom_id: '#swagger-ui',
+        docExpansion: 'none',
         deepLinking: true,
         presets: [
           SwaggerUIBundle.presets.apis,
@@ -51,8 +50,6 @@
         ],
         layout: "StandaloneLayout"
       })
-      // End Swagger UI call region
-
       window.ui = ui
     }
   </script>
